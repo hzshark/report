@@ -4,24 +4,26 @@
 <head>
     <meta charset="utf-8">
     <title>机器列表</title>
-    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css" media="all">
 </head>
 
 <body>
 
-    <table class="layui-table" lay-data="{height:315, url:'table.json', page:true, id:'machineItem',height: 'full-25'}" lay-filter="machineItem" id="machineItem">
+    <table class="layui-table" lay-data="{height:315, url:'/machine/list', page:true, id:'machineItem',height: 'full-25'}" lay-filter="machineItem" id="machineItem">
         <thead>
             <tr>
-                <th lay-data="{field:'machine_id', width:80, sort: true}">ID</th>
+                <th lay-data="{field:'machine_id', width:80, sort: true}">编号</th>
                 <th lay-data="{field:'machine_name', width:120}">机器名称</th>
-                <th lay-data="{field:'capacity', width:120, sort: true}">capacity</th>
-                <th lay-data="{field:'type', width:120}">type</th>
-                <th lay-data="{field:'describe', width:177}">describe</th>
+                <th lay-data="{field:'capacity', width:120, sort: true}">性能</th>
+                <th lay-data="{field:'type', width:120}">类型</th>
+                <th lay-data="{field:'describe', width:177}">描述</th>
             </tr>
         </thead>
+        <tbody id="content">
+        </tbody>
     </table>
 
-    <script src="./plugins/layui/layui.js"></script>
+    <script src="/plugins/layui/layui.js"></script>
     <script>
         layui.use('table', function() {
             var table = layui.table;

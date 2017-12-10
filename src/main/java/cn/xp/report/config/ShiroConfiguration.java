@@ -119,7 +119,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/vrifyCode", "anon");
 
         //登出拦截
-        filterChainDefinitionMap.put("/admin/user/logout", "logout");
+        filterChainDefinitionMap.put("/logout", "logout");
 
         //特殊权限
         //filterChainDefinitionMap.put("/add", "perms[权限添加]");

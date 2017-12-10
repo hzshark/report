@@ -1,6 +1,8 @@
 package cn.xp.report.controller.page;
 
+import cn.xp.report.common.annotation.SystemControllerLog;
 import cn.xp.report.controller.BaseController;
+import cn.xp.report.vo.ListVO;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,9 +93,9 @@ public class PageController extends BaseController{
     }
 
     @RequestMapping(value = "/machineItem",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/machineItem")
     public String toMachineItem(){
         return "machineItem";
     }
-
 
 }
