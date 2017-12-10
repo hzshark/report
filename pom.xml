@@ -37,10 +37,7 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -60,13 +57,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 
-        <!-- jwt  start-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<!-- jwt  start-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -83,17 +79,6 @@
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session</artifactId>
 			<version>1.0.2.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.12</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.5</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -114,16 +99,7 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.29</version>
 		</dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.3.0</version>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
         <dependency>
             <groupId>com.github.penggle</groupId>
@@ -152,6 +128,11 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
             <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
         </dependency>
 
     </dependencies>

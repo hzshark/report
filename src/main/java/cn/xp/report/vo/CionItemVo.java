@@ -1,17 +1,34 @@
 package cn.xp.report.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class CionItemVo extends BaseVO {
 
-    @Setter @Getter
-    public Integer id;
+    private Integer id;
 
-    @Setter @Getter
-    public String name = "";
+    private String name = "";
 
-    @Setter @Getter
-    public Integer enable = 0;
+    private Integer enable = 0;
 
+    public java.lang.Integer getId() {
+        return id;
+    }
+
+    public void setId(java.lang.Integer id) {
+        this.id = id;
+    }
+
+    public java.lang.String getName() {
+        return name;
+    }
+
+    public void setName(java.lang.String name) {
+        this.name = name;
+    }
+
+    public java.lang.Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(java.lang.Integer enable) {
+        this.enable = enable;
+    }
 }

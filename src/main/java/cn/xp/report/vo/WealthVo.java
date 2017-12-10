@@ -1,19 +1,14 @@
 package cn.xp.report.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class WealthVo extends BaseVO {
 
-    @Setter @Getter
-    public Integer id;
+    private Integer id;
 
-    @Setter @Getter
-    public Integer userid = 0;
+    private Integer userid = 0;
 
-    @Setter @Getter
-    public Integer coinid = 0;
+    private Integer coinid = 0;
 
-    @Setter @Getter
-    public String amount = "";
+    private String amount = "";
+
+
 }

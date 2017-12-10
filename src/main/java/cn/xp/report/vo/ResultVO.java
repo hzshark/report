@@ -12,7 +12,7 @@ public class ResultVO implements Serializable {
 
     private static final long serialVersionUID = -4361182696720848606L;
 
-    public static final int SUCCESS_CODE = 10000;
+    public static final int SUCCESS_CODE = 100000;
 
     public static final String SUCCESS_DEFAULT_MESSAGE = "success";
 

@@ -57,14 +57,6 @@ public class PageController extends BaseController{
     /**
      * 跳转到登录页面
      */
-    @RequestMapping(value = "/header", method = RequestMethod.GET)
-    public String Header() {
-        return "/public/header";
-    }
-
-    /**
-     * 跳转到登录页面
-     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Index() {
         return "/index";
@@ -88,14 +80,19 @@ public class PageController extends BaseController{
         return "main";
     }
 
-    @RequestMapping(value = "/table",method = RequestMethod.GET)
-    public String toTable(){
-        return "table";
+    @RequestMapping(value = "/navbar",method = RequestMethod.GET)
+    public String toNavbar(){
+        return "navbar";
     }
 
-    @RequestMapping(value = "/test",method = RequestMethod.GET)
-    public String toTest(){
-        return "test";
+    @RequestMapping(value = "/coinItem",method = RequestMethod.GET)
+    public String toCoinItem(){
+        return "coinItem";
+    }
+
+    @RequestMapping(value = "/machineItem",method = RequestMethod.GET)
+    public String toMachineItem(){
+        return "machineItem";
     }
 
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>机器列表</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+</head>
+
+<body>
+
+    <table class="layui-table" lay-data="{height:315, url:'table.json', page:true, id:'machineItem',height: 'full-25'}" lay-filter="machineItem" id="machineItem">
+        <thead>
+            <tr>
+                <th lay-data="{field:'machine_id', width:80, sort: true}">ID</th>
+                <th lay-data="{field:'machine_name', width:120}">机器名称</th>
+                <th lay-data="{field:'capacity', width:120, sort: true}">capacity</th>
+                <th lay-data="{field:'type', width:120}">type</th>
+                <th lay-data="{field:'describe', width:177}">describe</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script src="./plugins/layui/layui.js"></script>
+    <script>
+        layui.use('table', function() {
+            var table = layui.table;
+        });
+    </script>
+</body>
+
+</html>

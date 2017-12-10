@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper
 public interface SysLoginAccountMapper extends BaseMapper<SessionUser, Long> {
 
-    @Select("select * from u_account where id = #{0} and login_account=#{1}")
-    SessionUser selectByUserId(Long userId);
+    @Select("select * from u_account where id = #{0}")
+    SessionUser selectByUserId(String userId);
 
     @Select("select * from u_account where login_account=#{0} limit 1")
     SessionUser selectByAccount(String account);

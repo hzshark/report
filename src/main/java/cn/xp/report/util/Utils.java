@@ -25,6 +25,60 @@ public class Utils {
         return getDateTime(date, format);
     }
 
+	/**
+	 * isMail
+	 *
+	 * @param value
+	 * @return
+	 */
+	public static boolean isMail(final String value) {
+		if (isBlank(value)) {
+			return false;
+		}
+
+		int a = value.indexOf("@");
+		if (a <= 0) {
+			return false;
+		}
+		String[] items = value.split("@");
+		if (items.length != 2) {
+			return false;
+		}
+
+		String name = items[0];
+		Pattern pattern = Pattern.compile("[A-Za-z0-9_\\-\\.]+");
+		Matcher matcher = pattern.matcher(name);
+		if (!matcher.matches()) {
+			return false;
+		}
+
+		String domain = items[1];
+		if (!isDomain(domain)) {
+			return false;
+		}
+
+		return true;
+	}
+
+    public static boolean isUrl(final String value) {
+        String regex = "http(s)?://.+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(value);
+        return matcher.matches();
+    }
+
+
+	public static boolean isMaxLength(final String value, int maxLength) {
+		if (isBlank(value)) {
+			return false;
+		}
+		int length = value.length();
+		if(length > maxLength){
+			return true;
+		}
+		return false;
+	}
+
     public static String getDateTime(final Date date, final String format) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(date);

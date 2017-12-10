@@ -6,6 +6,8 @@ package cn.xp.report.model;
  */
 public class SessionUser {
 
+	private String token;
+
 	private String userId;
 
     private String login_name = "";
@@ -54,5 +56,14 @@ public class SessionUser {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

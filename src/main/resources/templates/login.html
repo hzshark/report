@@ -157,20 +157,23 @@
                     var loadIndex = layer.load(2, {
                         shade: [0.3, '#333']
                     });
-                    location.href = '/';
-                    // $.post(data.form.action, data.field, function(res) {
-                    //     if (!res.rel) {
-                    //         layer.msg(res.msg, {
-                    //             icon: 2
-                    //         });
-                    //         loadIndex && layer.close(loadIndex);
-                    //         $('#changeCode').click(); //刷新验证码
-                    //     } else {
-                    //         setTimeout(function() {
-                    //             location.href = '/'
-                    //         }, 1500);
-                    //     }
-                    // }, 'json');
+//                    location.href = '/';
+                    alert("-------------0");
+                     $.post(data.form.action, data.field, function(res) {
+                         alert("=====");
+                         if (!res.rel) {
+                             layer.msg(res.msg, {
+                                 icon: 2
+                             });
+                             loadIndex && layer.close(loadIndex);
+                             $('#changeCode').click(); //刷新验证码
+                         } else {
+                             alert("-------------");
+                             setTimeout(function() {
+                                 location.href = '/index'
+                             }, 1500);
+                         }
+                     }, 'json');
                     return false;
                 });
             }());

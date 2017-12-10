@@ -19,4 +19,10 @@ public class UserManageService {
         SessionUser account = loginAccountDao.selectByAccount(userName);
         return account;
     }
+
+    public SessionUser getUserInfo(String userid){
+
+        SessionUser account = loginAccountDao.selectByUserId(userid);
+        return account;
+    }
 }

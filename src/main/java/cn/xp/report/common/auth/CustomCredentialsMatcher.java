@@ -7,6 +7,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
+import org.springframework.context.annotation.Bean;
 
 /**
  * 自定义 密码验证类
