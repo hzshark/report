@@ -5,6 +5,7 @@ import cn.xp.report.common.annotation.SystemControllerLog;
 import cn.xp.report.common.exception.BizException;
 import cn.xp.report.common.rule.ParamsChecker;
 import cn.xp.report.controller.BaseController;
+import cn.xp.report.dao.SysLoginAccountMapper;
 import cn.xp.report.model.SessionUser;
 import cn.xp.report.service.UserManageService;
 import cn.xp.report.util.JwtHelper;
@@ -131,5 +132,31 @@ public class AccountController extends BaseController {
         logger.error("Logger Level ：ERROR");
         return "<h1>Welcome to das,欢迎使用</h1>";
     }
+    /*
+     短信验证码要换一个位置
+     */
+    @RequestMapping(value = "/smsvcode",method =RequestMethod.GET)
+    public void sendsmsvcode(String phone,int type)
+    {
 
+    }
+
+    /*
+     add by lxp
+     */
+    @RequestMapping(value = "/reg", method = RequestMethod.PUT)
+    public ResultVO  userReg(String phone,String pwd,String vrifyCode) throws BizException
+    {
+        if(StringUtils.isEmpty(vrifyCode)){
+            throw new BizException(120015, "验证码不能为空");
+        }
+      /*  if (!StringUtils.equalsIgnoreCase(imageCode, vrifyCode)) {
+            throw new BizException(120016, "验证码不正确");
+        }*/
+        boolean ret=userManageService.addUser(phone,pwd);
+        ResultVO resultVO=new ResultVO();
+        resultVO.setCode(200);
+        resultVO.setMessage("注册成功！");
+        return  resultVO;
+    }
 }

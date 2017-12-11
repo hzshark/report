@@ -25,4 +25,9 @@ public class UserManageService {
         SessionUser account = loginAccountDao.selectByUserId(userid);
         return account;
     }
+
+    public boolean addUser(String phone,String pwd)
+    {
+        return loginAccountDao.adduser(phone,pwd);
+    }
 }
