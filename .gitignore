@@ -1,3 +1,4 @@
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -10,3 +11,4 @@ target/
 mvnw.cmd
 mvnw
 .mvn/
+*.properties
