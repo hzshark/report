@@ -18,7 +18,13 @@ public class HomeController extends BaseController {
     @RequestMapping("/index")
     public String index(Model model){
         model.addAttribute("name","Ryan");
-        return "index";
+        return "home";
+    }
+
+    @RequestMapping("/login")
+    public String login(Model model){
+        model.addAttribute("name","Ryan");
+        return "home_login";
     }
 
     @RequestMapping(value = "/testlog", method = RequestMethod.GET)

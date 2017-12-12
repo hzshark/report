@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>登录 - 算力吧</title>
+    <link href="/pow8/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+﻿﻿﻿<link href="/pow8/coincommon_v1.css" type="text/css" rel="stylesheet">
+<div class="nav1 clear">
+    <div class="nav1-sub clearfix">
+        <div class="nav-quick1">  </div>
+        <!-- <ul style="padding-left:60px;">
+            <li class="price lightWhite"><span>最新成交价</span></li>
+            <li class="price"><span class="green1">BTC :</span> <span class="lightWhite">￥</span><span id="bannerBtcLast" class="lightWhite">3628.93</span></li>
+            <li class="price" style="color:#131517;padding-right:5px;">|</li>
+            <li class="price lightWhite" style="padding-left:10px;"><span>24小时成交量</span></li>
+            <li class="price"><span class="green1">BTC :</span> <span id="bannerBtcVol" class="lightWhite">60,831.93</span><span class="lightWhite">฿</span></li>
+           </ul>-->
+        <span id="showquotestop">﻿﻿<li class="price lightWhite"><span>[Zcash1711] 最新价 / 24小时成交量 : 0.000000 ฿ / 0 H</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&nbsp;&nbsp;</span></li></span>
+        <div class="nav-quick">
+            <div class="rightArea">
+                <div id="languageTypeStyle" class="lightWhite languageMessage" onmouseover="javascript:void(document.getElementById('languageTypeStyleId').style.display='block')" onmouseout="javascript:void(document.getElementById('languageTypeStyleId').style.display='none')"><span style="">Language</span><b class="caret"></b>
+                    <div style="display:none;" id="languageTypeStyleId" class="dropDown"> <span class="languageMessage gray" style="margin-right:0px;padding-left:8px;"><span style="">选择语言</span><b class="caretBlack"></b></span>
+                        <ul style="width:88px;">
+                            <li><a class="" id="languageEnglish" href="https://pow8.com/index.php?lang=en" onclick="">English</a></li>
+                            <li><a class="" id="languageChinese" href="https://pow8.com/index.php?lang=cn" onclick="">简体中文</a></li>
+                            <!--<li><a class="" id="languageEnglish" href="javascript:void(0);" onclick="">繁體中文</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+                <a class="loadMessage" href="/home/login.php">登录</a>         <!--<a class="loadMessage" href="javascript:showlogin(0);">登录</a> <a class="loadMessage" href="javascript:showlogin(1);">注册</a> </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav_bg2 clear" id="nav_bg2">
+    <div class="head wrap clear">
+        <div class="loaded-logo1"> <a href="https://pow8.com/index.php"> <img alt="比特币" src="/pow8/logo.png" width="201" height="81"> </a> </div>
+        ﻿
+        <div class="accountinfo1">
+            <div class="nav2-up1">
+                <div style="height:30px;float:right;">
+                    <ul>
+
+                        <li><span class="gray2 fontsize-12 dataTitle">可用</span></li>
+
+                        <li class="text"><span class="gray2">BTC:</span><span class="money gray2"></span></li>
+                        <li class="text"><a href="https://pow8.com/user_deposit_b.php" class=""><span class="finbutton">&nbsp;</span></a>&nbsp;&nbsp;&nbsp;<span class="gray2">CNY:</span><span class="money gray2"></span></li>
+
+                        <li class="text"><span class="gray2">ZEC:</span><span class="money gray2"></span></li>
+                        <li class="text"><span class="gray2">LTC:</span><span class="money gray2"></span></li>
+
+                        <li class="frozen"><span class="gray2 fontsize-12 dataTitle">冻结</span></li>
+
+                        <li class="text"><span class="gray2">BTC:</span><span class="money gray2"></span></li>
+                        <li class="text"><span class="gray2">CNY:</span><span class="money gray2"></span></li>
+                        <li class="text"><span class="gray2">ZEC:</span><span class="money gray2"></span></li>
+                        <li class="text"><span class="gray2">LTC:</span><span class="money gray2"></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nav2-center clear">
+                <div class="classDiv1">
+                    <div class="frozen">
+                        <span class="gray2 fl">净资产:</span><span class="gray2 clearMoney fl">฿</span>
+                        <span class="fl"> 
+		 	 <span class="fontsize-12 gray2 ">总资产:</span>
+			  <span class="money gray2">฿</span>
+		  </span>
+                        <a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">
+                            <span class="controlDown" id="controlUpDown"></span>
+                            <div id="totalAssetsTable" class="totalAssetsTable" style="display: none; width: 750px;">
+                                <table style="border-radius:5px 0 0 0;">
+                                    <tbody>
+                                    <tr>
+                                        <th width="130"></th>
+                                        <th width="620"></th>
+                                    </tr>
+                                    <tr style="height:40px;line-height:40px;background:#329ddc;">
+                                        <td class="center fontsize-22 white"></td>
+                                        <td class="white fontsize-14"><span>账户净资产:</span> <span class="bold">฿</span> <!-- <span style="padding-left:25px;">账户总资产:</span> <span class="bold">฿</span> --></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table class="fontsize-14" style="margin:5px auto;">
+                                    <tbody>
+                                    <tr>
+                                        <th width="130"></th>
+                                        <th width="180"></th>
+                                        <th width="180"></th>
+                                        <th width="180"></th>
+                                        <th width="180"></th>
+                                    </tr>
+                                    <tr>
+                                        <td class="title gray3"><span style="padding:0px 15px;"><img src="/pow8/circle.png"></span>可&nbsp;&nbsp;&nbsp;用</td>
+                                        <td><span class="gray3">CNY:</span> <span class="lightblue1"></span></td>
+                                        <td><span class="gray3">BTC:</span> <span class="lightblue1"></span></td>
+                                        <td><span class="gray3">ZEC:</span> <span class="lightblue1"></span></td>
+                                        <td><span class="gray3">LTC:</span> <span class="lightblue1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="title gray3"><span style="padding:0px 15px;"><img src="/pow8/circle.png"></span>冻&nbsp;&nbsp;&nbsp;结</td>
+                                        <td><span class="gray3">CNY:</span> <span class="lightgreen1"></span></td>
+                                        <td><span class="gray3">BTC:</span> <span class="lightgreen1"></span></td>
+                                        <td><span class="gray3">ZEC:</span> <span class="lightgreen1"></span></td>
+                                        <td><span class="gray3">LTC:</span> <span class="lightgreen1"></span></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="title lightorange3"><span style="padding:0px 15px;"><img src="/pow8/circle.png"></span>小&nbsp;&nbsp;&nbsp;计</td>
+                                        <td><span class="gray3">CNY:</span> <span class="lightblue1"></span></td>
+                                        <td><span class="gray3">BTC:</span> <span class="lightblue1"></span></td>
+                                        <td><span class="gray3">ZEC:</span> <span class="lightblue1"></span></td>
+                                        <td><span class="gray3">LTC:</span> <span class="lightblue1"></span></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="title gray3"><span style="padding:0px 15px;"><img src="/pow8/circle.png"></span>已借款</td>
+                                        <td><span class="gray3">CNY:</span> <span class="gray3"></span></td>
+                                        <td><span class="gray3">BTC:</span> <span class="gray3"></span></td>
+                                        <td><span class="gray3">ZEC:</span> <span class="gray3"></span></td>
+                                        <td><span class="gray3">LTC:</span> <span class="gray3"></span></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="title gray3"><span style="padding:0px 15px;"><img src="/pow8/circle.png"></span>算力</td>
+                                        <td><span class="gray3">BTC-A6:</span> <span class="gray3"></span></td>
+                                        <td><span class="gray3">BTC-A7:</span> <span class="gray3"></span></td>
+                                        <td><span class="gray3">BTC-S7:</span> <span class="gray3"></span></td>
+                                        <td><span class="gray3">LTC-A4:</span> <span class="gray3"></span></td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="title gray3"><span style="padding:0px 15px;"><img src="/pow8/circle.png"></span>算力</td>
+
+                                        <td><span class="gray3">ZCASH1711:</span> <span class="gray3"></span></td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </a></div><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">
+                </a></div><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">
+            </a></div><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">
+        </a></div><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">    </a><div class="accountinfo1"><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">
+    </a><div class="nav2-sub1 clear"><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">
+    </a><ul class="menu0"><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')">
+    </a><li><a id="totalAssets" class="totalAssets fl" onmouseover="javascript:void(document.getElementById('totalAssetsTable').style.display='block')" onmouseout="javascript:void(document.getElementById('totalAssetsTable').style.display='none')"></a><a href="https://pow8.com/user_my.php?id=2">我的账户</a> </li>
+        <li><a href="https://pow8.com/trade.php?v=BTC-A7">算力交易</a> </li>
+        <!-- <li><a href="exchangebtc.php">比特币兑换</a> </li>  -->
+
+
+        <!--<li><a href="#">矿机商城</a> </li>-->
+        <li><a href="https://pow8.com/referee.php">推广赠送</a> </li>
+        <li><a href="https://pow8.com/help.php">帮助中心</a> </li>
+
+
+        <!--<li><a href="#" onClick="window.external.addFavorite('http://www.pow88.com')">加入收藏</a> </li>-->
+    </ul>
+    </div>
+    </div>
+    </div>
+</div>
+<script src="/pow8/hm.js"></script><script type="text/javascript">
+    function showHintTop(strid)
+    {
+        var str='1';
+        var xmlhttp;
+        if (str.length==0)
+        {
+            document.getElementById("txtHint2").innerHTML="";
+            return;
+        }
+
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange=function ()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById(strid).innerHTML=xmlhttp.responseText;
+            }
+        };
+
+        var strtemp="GetQuotesTop.php?t="+Math.random();
+
+
+        xmlhttp.open("GET",strtemp,true);
+        xmlhttp.send();
+
+        //alert(strtemp); 
+    }
+
+    var int=self.setInterval("showHintTop('showquotestop')",5000);
+</script>
+<div class="ad1">
+    <div class="wrap"> <img src="/pow8/h_17.gif" width="1061"> </div>
+</div>
+﻿<div class="footer mt20 clearfix">
+    <div class="wrap">
+        <div class="wrap">
+            <div class="copyright clearfix f12">
+                <a href="https://pow8.com/aboutus.php" target="_blank">关于我们</a>|<a href="https://pow8.com/contactus.php" target="_blank">联系我们</a>|<a href="https://pow8.com/help.php" target="_blank">帮助中心</a>|<a href="https://pow8.com/service.php" target="_blank">用户协议</a>|<a href="https://pow8.com/law.php" target="_blank">法律声明</a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<img src="/pow8/wapstat.htm" width="0" height="0"><script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5b2653637c8b63b5e866b3a5f1124c5a";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<form action="/login.php" method="POST" id="login">
+    <div class="login_bg"></div>
+    <div class="login clearfix">
+        <a href="https://pow8.com/index.php" class="close"></a>
+        <img src="/pow8/c_03.gif">
+        <table class="login_tb">
+            <tbody><tr>
+                <td><input name="UserName" class="txt1" value="leslieshen@126.com" type="text"></td>
+            </tr>
+            <tr>
+                <td><input name="Password" class="txt2" type="password"></td>
+            </tr>
+            <tr>
+                <td align="right"><a href="https://pow8.com/forgetpwd.php">忘记密码?</a>&nbsp;&nbsp;<a href="https://pow8.com/index.php">返回主页</a></td>
+            </tr>
+            <tr>
+                <td><input value="登 录" class="btn" type="submit"><input name="type" value="1" type="hidden"></td>
+            </tr>
+            <tr>
+                <td class="f14 red">
+                </td>
+            </tr>
+            </tbody></table>
+    </div>
+
+</form>
+
+
+</body></html>
