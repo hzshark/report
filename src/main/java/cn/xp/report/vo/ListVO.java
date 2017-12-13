@@ -41,17 +41,56 @@ public class ListVO implements Serializable {
         return msg;
     }
 
-    public void setMsg(String msg) {
+    /*public void setMsg(String msg) {
         this.msg = msg;
     }
-
+*/
     public int getCode() {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setSucessMsg(String msg)
+    {
+        this.code=0;
+        this.msg=msg;
     }
+    public void setSucessMsg()
+    {
+        this.code=0;
+        this.msg="sucess";
+    }
+
+    public void setErrorMsg(String msg)
+    {
+        this.code=405;
+        this.msg=msg;
+    }
+    public void setErrorMsg()
+    {
+        this.code=405;
+        this.msg="error";
+    }
+
+    public void setSucessCode()
+    {
+        setSucessMsg();
+    }
+
+
+    public void setErrorCode(int code)
+    {
+        this.code=code;
+        setErrorMsg();
+    }
+    public void setErrorCode()
+    {
+        this.setErrorMsg();
+    }
+
+    /*
+    private void setCode(int code) {
+        this.code = code;
+    }*/
 
     public List getData() {
         return data;

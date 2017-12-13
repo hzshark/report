@@ -24,10 +24,8 @@ public class CoinManageService {
     @Autowired
     private WealthMapper mapper;
 
-    public PageInfo<CoinInfo> getMachineList(int pageNo, int pageSize){
+    public PageInfo<CoinInfo> getCoinList(int pageNo, int pageSize,int uid){
         PageHelper.startPage(pageNo, pageSize);
-        Subject currentUser = SecurityUtils.getSubject();
-        int uid= (Integer) currentUser.getPrincipal();
         List<CoinInfo> groupList = mapper.selectUserWealthList(uid);
         PageInfo<CoinInfo> pageInfo= new PageInfo<CoinInfo>(groupList);
         return pageInfo;

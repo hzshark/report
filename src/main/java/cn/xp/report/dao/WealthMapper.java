@@ -13,14 +13,14 @@ import java.util.List;
 @Mapper
 public interface WealthMapper extends BaseMapper<SessionUser, Integer> {
 
-    @Select("select * from u_wealth where userid= #{userId}")
-    List<CoinInfo> selectUserWealthList0(SessionUser user);
+/*    @Select("select * from u_wealth where userid= #{userId}")
+    List<CoinInfo> selectUserWealthList(SessionUser user);*/
 
-    @Select("select * from u_wealth where userid= #{0}")
+    @Select("call QUserCoins(#{0},null)")
     List<CoinInfo> selectUserWealthList(Integer uid);
 
-    @Select("SELECT c.name, w.amount FROM coin_item AS c ,u_wealth AS w where w.userid = #{userId} and c.ID = #{1}")
-    CoinInfo selectUserWealthByCoinId(SessionUser user,Integer conid);
+   /* @Select("SELECT c.name, w.amount FROM coin_item AS c ,u_wealth AS w where w.userid = #{userId} and c.ID = #{1}")
+    CoinInfo selectUserWealthByCoinId(SessionUser user,Integer conid);*/
 
 
     //INSERT replace `u_wealth` (`userid`, `coinid`, `amount`) VALUES ('100', '1', '0.0004')
@@ -34,8 +34,8 @@ public interface WealthMapper extends BaseMapper<SessionUser, Integer> {
     boolean AddUserCoinTransction(SessionUser usr,Integer coinId,Double amount);
 
 
-    @Select("select count(*) from u_wealth where coinid = #{0}")
-    Integer countUserCoinByCid(Integer coinid);
+    /*@Select("select count(*) from u_wealth where coinid = #{0}")
+    Integer countUserCoinByCid(Integer coinid);*/
 /*
     @Select("select * from machine_item")
     List<MachineInfo> selectList();

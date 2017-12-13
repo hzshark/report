@@ -27,13 +27,14 @@ public class MachineController extends BaseController {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @SystemControllerLog(description = "/machine/list")
-    public ResultVO toMachineItem(){
+    public ListVO ListUserMachineItem(){
         Object dd= SecurityUtils.getSubject().getPrincipal();
-        ResultVO resultVO=new ResultVO();
-        SessionUser user= AuthUtil.verfiy(resultVO,dd);
-        if (user==null)
-            return  resultVO;
         ListVO listVO = new ListVO();
+        SessionUser user= AuthUtil.verfiy(listVO,dd);
+        if (user==null) {
+            return listVO;
+        }
+
         try {
             PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(0, 10,user.getUserId());
             long count = 0;
@@ -41,19 +42,17 @@ public class MachineController extends BaseController {
                 //分页
                 count = pageInfo.getTotal();
                 //listVO.setList(pageInfo.getList());
+                listVO.setSucessMsg();
                 listVO.setData(pageInfo.getList());
             }
             listVO.setRel(true);
-            listVO.setCode(0);
             listVO.setCount(count);
-            resultVO.setResult(listVO);
         } catch (Exception e) {
             logger.error("获取用户列表异常",e);
-            //listVO.setMsg(e.getMessage());
-            resultVO.setFailRepmsg("获取用户列表异常");
+            listVO.setErrorMsg(e.getMessage());
             logger.warn(e.getMessage());
         }
-        return resultVO;
+        return listVO;
     }
 
 
