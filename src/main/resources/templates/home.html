@@ -695,6 +695,7 @@ $(function(){
 	if (b_info.status == 1) {
 		$.each(b_info.data,function(i,item) {
 				console.log(i,item)
+				a += '<li> <span class="ifs3 f14">'+i+'当前价格&nbsp;&nbsp;:BTC = ￥'+usdrate*item.last_usd+'</span> <span class="ifs3 f14">挖矿难度  ： 6294209.71</span> <span class="ifs4 f14">挖矿24小时收益：1H/S  = ZEC 0.000015,$0.005403</span></li>';
 		});
 		a += "</ul>";
 		$(".info1").html(a);
