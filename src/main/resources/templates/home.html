@@ -688,6 +688,20 @@ function clearNoNum(obj)
 }
 
 $(function(){
+	var b_info = '{"status":1,"msg":"","data":{"eth":{"high":"0.03992200","low":"0.03120100","buy":"0.03780256","sell":"0.03850000","last":"0.03750000","last_usd":618.75,"high_usd":658.713,"low_usd":514.8165,"buy_usd":623.74224,"sell_usd":635.25,"vol":1610.6673923},"etc":{"high":"0.00209999","low":"0.00165215","buy":"0.00177000","sell":"0.00185000","last":"0.00185000","last_usd":30.525,"high_usd":34.649835,"low_usd":27.260475,"buy_usd":29.205,"sell_usd":30.525,"vol":60801.99742466},"ltc":{"high":"0.02000000","low":"0.01229000","buy":"0.01700100","sell":"0.02000000","last":"0.02000000","last_usd":330,"high_usd":330,"low_usd":202.785,"buy_usd":280.5165,"sell_usd":330,"vol":175.688},"doge":{"high":"0.00000021","low":"0.00000015","buy":"0.00000020","sell":"0.00000020","last":"0.00000020","last_usd":0.0033,"high_usd":0.003465,"low_usd":0.002475,"buy_usd":0.0033,"sell_usd":0.0033,"vol":92002886.9476},"ybct":{"high":"0.00000597","low":"0.00000340","buy":"0.00000350","sell":"0.00000400","last":"0.00000400","last_usd":0.066,"high_usd":0.098505,"low_usd":0.0561,"buy_usd":0.05775,"sell_usd":0.066,"vol":43752.1},"bch":{"high":"0.09500000","low":"0.07914254","buy":"0.08487689","sell":"0.08900000","last":"0.08900000","last_usd":1468.5,"high_usd":1567.5,"low_usd":1305.85191,"buy_usd":1400.468685,"sell_usd":1468.5,"vol":3018.44150769}}}';
+	var usdrate = 6.6484;
+	var a = "<ul>";
+	b_info = JSON.parse(b_info);
+	if (b_info.status == 1) {
+		$.each(b_info.data,function(i,item) {
+				console.log(i,item)
+		});
+		a += "</ul>";
+		$(".info1").html(a);
+	}
+	console.log(b_info);
+
+
 	$.getJSON("/salelist/machines",function(json){
 		var html = "";
 		if (json.code == 0) {
