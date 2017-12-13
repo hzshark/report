@@ -30,7 +30,7 @@ public class CoinController extends BaseController {
 
     @RequestMapping(value = "/list",  method = RequestMethod.GET)
     @SystemControllerLog(description = "/coin/list" )
-    public ListVO ListUserCoinItem(@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ){
+    public ListVO ListUserCoinItem(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
         SessionUser user= AuthUtil.verfiy(listVO,dd);
@@ -40,11 +40,12 @@ public class CoinController extends BaseController {
         //ParamsChecker.checkNotBlank(userName, "用户名不能为空");
         //ParamsChecker.checkNotBlank(password, "登录密码不能为空");
 
-        int pNo=0,pSize=10;
+        int pNo=0,pSize=10,coinId=0;
+        coinId=StringUtil.toInt(pcoinid);
         pNo= StringUtil.toInt(page);
         pSize=Math.min(StringUtil.toInt(limit),10);
         try {
-            PageInfo<CoinInfo> pageInfo = service.getCoinList(pNo, pSize,user.getUserId());
+            PageInfo<CoinInfo> pageInfo = service.getCoinList(pNo, pSize,user.getUserId(),coinId);
             long count = 0;
             if(pageInfo != null){
                 //分页

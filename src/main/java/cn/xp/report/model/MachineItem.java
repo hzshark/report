@@ -11,4 +11,6 @@ public class MachineItem {
     String tradeid;
     String saledesc;
 
+
+
 }

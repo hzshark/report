@@ -30,18 +30,19 @@ public class MachineController extends BaseController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @SystemControllerLog(description = "/machine/list")
 
-    public ListVO ListUserMachineItem(@RequestParam(value = "page",required= false)  String page, @RequestParam(value = "limit",required= false) String limit){
+    public ListVO ListUserMachineItem(@RequestParam(value = "mid",required= false) String mid,@RequestParam(value = "page",required= false)  String page, @RequestParam(value = "limit",required= false) String limit){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
         SessionUser user= AuthUtil.verfiy(listVO,dd);
         if (user==null) {
             return listVO;
         }
-        int pNo=0,pSize=10;
+        int pNo=0,pSize=10,Mid=0;
         pNo=StringUtil.toInt(page);
+        Mid=StringUtil.toInt(mid);
         pSize=Math.min(StringUtil.toInt(limit),10);
         try {
-            PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(pNo,pSize,user.getUserId());
+            PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(pNo,pSize,user.getUserId(),Mid);
             long count = 0;
             if(pageInfo != null){
                 //分页

@@ -24,9 +24,13 @@ public class CoinManageService {
     @Autowired
     private WealthMapper mapper;
 
-    public PageInfo<CoinInfo> getCoinList(int pageNo, int pageSize,int uid){
+    public PageInfo<CoinInfo> getCoinList(int pageNo, int pageSize,int uid,int conid){
         PageHelper.startPage(pageNo, pageSize);
-        List<CoinInfo> groupList = mapper.selectUserWealthList(uid);
+        List<CoinInfo> groupList;
+        if (conid<=0)
+            groupList = mapper.selectUserWealthList(uid);
+        else
+            groupList = mapper.selectUserWealthListByCid(uid,conid);
         PageInfo<CoinInfo> pageInfo= new PageInfo<CoinInfo>(groupList);
         return pageInfo;
     }

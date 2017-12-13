@@ -19,9 +19,13 @@ public class MachineManageService {
     @Autowired
     private MachineMapper machineMapper;
 
-    public PageInfo<MachineInfo> getMachineList(int pageNo, int pageSize,int uid){
+    public PageInfo<MachineInfo> getMachineList(int pageNo, int pageSize,int uid,int mid){
         PageHelper.startPage(pageNo, pageSize);
-        List<MachineInfo> groupList = machineMapper.selectUserMachineList(uid);
+        List<MachineInfo> groupList;
+        if (mid>0)
+         groupList= machineMapper.selectUserMachineListByMid(uid,mid);
+        else
+            groupList=machineMapper.selectUserMachineList(uid);
         PageInfo<MachineInfo> pageInfo= new PageInfo<MachineInfo>(groupList);
         return pageInfo;
     }

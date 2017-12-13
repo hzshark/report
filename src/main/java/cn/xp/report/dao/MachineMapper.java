@@ -20,7 +20,7 @@ public interface MachineMapper extends BaseMapper<SessionUser, Long> {
     @Select("select count(1) from machine_item where machine_name=#{0}")
     int countByMachineName(String account);
 
-    @Select("CALL QuserMachines(#{0},#{1}) ")
+    @Select("CALL QuserMachines(#{arg0},#{arg1}) ")
     List<MachineInfo> selectUserMachineListByMid(int userId,int mid);
 
     @Select("CALL QuserMachines(#{0},null) ")

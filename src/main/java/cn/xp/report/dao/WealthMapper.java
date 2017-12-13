@@ -3,9 +3,7 @@ package cn.xp.report.dao;
 import cn.xp.report.model.CoinInfo;
 import cn.xp.report.model.MachineInfo;
 import cn.xp.report.model.SessionUser;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,8 +14,14 @@ public interface WealthMapper extends BaseMapper<SessionUser, Integer> {
 /*    @Select("select * from u_wealth where userid= #{userId}")
     List<CoinInfo> selectUserWealthList(SessionUser user);*/
 
-    @Select("call QUserCoins(#{0},null)")
+    @Select("call QUserCoins(#{0},null) ;")
     List<CoinInfo> selectUserWealthList(Integer uid);
+
+    //@Select("call QUserCoins(#{param1},#{param2}) ;")
+    @Select("call QUserCoins(#{arg0},#{arg1}) ;")
+    List<CoinInfo> selectUserWealthListByCid(int  uid,int  coind);
+    //@Select("select * from dual where 1=#{uid} and 2=#{cid}")
+    //List<CoinInfo> selectUserWealthListByCid(@Param("uid") int  uid,@Param("cid") long  coind);
 
    /* @Select("SELECT c.name, w.amount FROM coin_item AS c ,u_wealth AS w where w.userid = #{userId} and c.ID = #{1}")
     CoinInfo selectUserWealthByCoinId(SessionUser user,Integer conid);*/
