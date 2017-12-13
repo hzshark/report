@@ -2,6 +2,7 @@ package cn.xp.report.controller.home;
 
 import cn.xp.report.common.annotation.SystemControllerLog;
 import cn.xp.report.common.util.AuthUtil;
+import cn.xp.report.common.util.StringUtil;
 import cn.xp.report.controller.BaseController;
 import cn.xp.report.model.MachineInfo;
 import cn.xp.report.model.SessionUser;
@@ -12,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -28,7 +30,7 @@ public class MachineController extends BaseController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @SystemControllerLog(description = "/machine/list")
 
-    public ListVO ListUserMachineItem(int pageno,int limit){
+    public ListVO ListUserMachineItem(@RequestParam(value = "page",required= false)  String page, @RequestParam(value = "limit",required= false) String limit){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
         SessionUser user= AuthUtil.verfiy(listVO,dd);
@@ -36,10 +38,8 @@ public class MachineController extends BaseController {
             return listVO;
         }
         int pNo=0,pSize=10;
-        if (pageno<0)
-            pNo=0;
-        if (limit<0)
-            pSize=10;
+        pNo=StringUtil.toInt(page);
+        pSize=Math.min(StringUtil.toInt(limit),10);
         try {
             PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(pNo,pSize,user.getUserId());
             long count = 0;
