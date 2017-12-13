@@ -98,4 +98,10 @@ public class PageController extends BaseController{
         return "machineItem";
     }
 
+    @RequestMapping(value = "/home",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/home")
+    public String home(){
+        return "home";
+    }
+
 }
