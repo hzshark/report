@@ -1,14 +1,20 @@
 package cn.xp.report.model;
 
+import lombok.Data;
+
+import java.io.Serializable;
+
 /**
  * 用户登录信息封装
  * 
  */
-public class SessionUser {
+@Data
+public class SessionUser  implements Serializable{
 
 	private String token;
 
-	private String userId;
+
+	private int userId;
 
     private String login_name = "";
 
@@ -18,7 +24,7 @@ public class SessionUser {
 
     private String phone = "";
 
-	public String getUserId() {
+	/*public String getUserId() {
 		return userId;
 	}
 
@@ -65,5 +71,5 @@ public class SessionUser {
 
 	public void setToken(String token) {
 		this.token = token;
-	}
+	}*/
 }

@@ -20,7 +20,7 @@ public class UserManageService {
         return account;
     }
 
-    public SessionUser getUserInfo(String userid){
+    public SessionUser getUserInfo(int userid){
 
         SessionUser account = loginAccountDao.selectByUserId(userid);
         return account;

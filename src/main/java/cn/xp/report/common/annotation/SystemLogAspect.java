@@ -1,5 +1,6 @@
 package cn.xp.report.common.annotation;
 
+import cn.xp.report.model.SessionUser;
 import cn.xp.report.util.Utils;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.SecurityUtils;
@@ -45,7 +46,10 @@ public  class SystemLogAspect {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //读取session中的用户
-        String userId = (String) SecurityUtils.getSubject().getPrincipal();
+        Object dd=SecurityUtils.getSubject().getPrincipal();
+        String userId = "";
+        if (dd!=null && dd instanceof SessionUser)
+            userId=((SessionUser)dd).getLogin_name();
         String userAgent = request.getHeader("User-Agent");
         String referer = request.getHeader("Referer");
         String type = request.getMethod();
@@ -99,6 +103,7 @@ public  class SystemLogAspect {
                 }
             }
         }
+        logger.info("call:: "+description);
         return description;
     }
 }

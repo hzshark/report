@@ -125,7 +125,7 @@ public class ShiroConfiguration {
         //filterChainDefinitionMap.put("/add", "perms[权限添加]");
 
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了
-//        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/**", "anon");
         System.out.println("Shiro拦截器工厂类注入成功");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

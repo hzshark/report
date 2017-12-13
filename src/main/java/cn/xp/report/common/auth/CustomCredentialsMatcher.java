@@ -23,8 +23,9 @@ public class CustomCredentialsMatcher extends SimpleCredentialsMatcher {
 
         SimpleAuthenticationInfo authenticationInfo = (SimpleAuthenticationInfo)info;
         String authPassword = (String)authenticationInfo.getCredentials();
+        return  password.equalsIgnoreCase(authPassword);
         //将密码加密与系统加密后的密码校验，内容一致就返回true,不一致就返回false
-        return PasswordHash.validatePassword(password, authPassword);
+        //return PasswordHash.validatePassword(password, authPassword);
     }
 
 }

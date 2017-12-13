@@ -115,8 +115,7 @@ public class BaseController {
             }
             bizException = new BizException(100001,"userid:"+uid+ " " +ex.getMessage());
         }
-        resultVO.setCode(bizException.getCode());
-        resultVO.setMessage(bizException.getMessage());
+        resultVO.setFailRepmsg(bizException.getMessage());
         return resultVO;
     }
 

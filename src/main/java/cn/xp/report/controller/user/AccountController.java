@@ -4,6 +4,7 @@ import cn.xp.report.common.Constants;
 import cn.xp.report.common.annotation.SystemControllerLog;
 import cn.xp.report.common.exception.BizException;
 import cn.xp.report.common.rule.ParamsChecker;
+import cn.xp.report.common.util.StringUtil;
 import cn.xp.report.controller.BaseController;
 import cn.xp.report.dao.SysLoginAccountMapper;
 import cn.xp.report.model.SessionUser;
@@ -67,14 +68,19 @@ public class AccountController extends BaseController {
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.login(token);
         SecurityUtils.getSubject().getSession().setTimeout(Constants.USER_LOGIN_EXPIRE_SECONDS*1000);
-
-        String userId = (String)currentUser.getPrincipal();
+        Object object=currentUser.getPrincipal();
+        if (object==null || !(object instanceof  SessionUser) )
+        {
+            return resultVO;
+        }
         //用户登录信息设置到缓存，每次登录后重新设置
-        SessionUser sessionUser = userManageService.getUserInfo(userId);
+        //SessionUser sessionUser = userManageService.getUserInfo(Integer.parseInt(userId));
+        SessionUser sessionUser = (SessionUser) object;
 
-        String accessToken = JwtHelper.createJWT(userId, userId, applicationName,
+        String accessToken = JwtHelper.createJWT(""+sessionUser.getUserId(), sessionUser.getLogin_name(), applicationName,
                 Constants.USER_LOGIN_EXPIRE_SECONDS);
         sessionUser.setToken(accessToken);
+        resultVO.setSucessRepmsg();
         resultVO.setResult(sessionUser);
         return resultVO;
     }
@@ -155,8 +161,7 @@ public class AccountController extends BaseController {
         }*/
         boolean ret=userManageService.addUser(phone,pwd);
         ResultVO resultVO=new ResultVO();
-        resultVO.setCode(200);
-        resultVO.setMessage("注册成功！");
+        resultVO.setSucessRepmsg("注册成功！");
         return  resultVO;
     }
 }
