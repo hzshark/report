@@ -30,7 +30,7 @@ public class CoinController extends BaseController {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @SystemControllerLog(description = "/coin/list")
-    public ListVO ListUserCoinItem(int pageno,int pagesize){
+    public ListVO ListUserCoinItem(int pageno,int limit){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
         SessionUser user= AuthUtil.verfiy(listVO,dd);
@@ -39,12 +39,14 @@ public class CoinController extends BaseController {
         }
         //ParamsChecker.checkNotBlank(userName, "用户名不能为空");
         //ParamsChecker.checkNotBlank(password, "登录密码不能为空");
+        int pNo=0,pSize=10;
         if (pageno<0)
-           pageno=0;
-        if (pagesize<0)
-            pagesize=10;
+            pNo=0;
+        if (limit<0)
+            pSize=10;
+
         try {
-            PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(0, 10,user.getUserId());
+            PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(pNo, pSize,user.getUserId());
             long count = 0;
             if(pageInfo != null){
                 //分页

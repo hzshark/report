@@ -28,15 +28,20 @@ public class MachineController extends BaseController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @SystemControllerLog(description = "/machine/list")
 
-    public ListVO ListUserMachineItem(){
+    public ListVO ListUserMachineItem(int pageno,int limit){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
         SessionUser user= AuthUtil.verfiy(listVO,dd);
         if (user==null) {
             return listVO;
         }
+        int pNo=0,pSize=10;
+        if (pageno<0)
+            pNo=0;
+        if (limit<0)
+            pSize=10;
         try {
-            PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(0, 10,user.getUserId());
+            PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(pNo,pSize,user.getUserId());
             long count = 0;
             if(pageInfo != null){
                 //分页
