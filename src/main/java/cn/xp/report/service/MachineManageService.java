@@ -2,6 +2,7 @@ package cn.xp.report.service;
 
 import cn.xp.report.dao.MachineMapper;
 import cn.xp.report.model.MachineInfo;
+import cn.xp.report.model.MachineItem;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -25,5 +26,11 @@ public class MachineManageService {
         return pageInfo;
     }
 
+    public PageInfo<MachineItem> getSaleMachineList(int pageNo, int pageSize){
+        PageHelper.startPage(pageNo, pageSize);
+        List<MachineItem> groupList = machineMapper.selectSaleMachineList();
+        PageInfo<MachineItem> pageInfo= new PageInfo<MachineItem>(groupList);
+        return pageInfo;
+    }
 
 }
