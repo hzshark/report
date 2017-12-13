@@ -27,6 +27,7 @@ public class MachineController extends BaseController {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @SystemControllerLog(description = "/machine/list")
+
     public ListVO ListUserMachineItem(){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
@@ -34,7 +35,6 @@ public class MachineController extends BaseController {
         if (user==null) {
             return listVO;
         }
-
         try {
             PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(0, 10,user.getUserId());
             long count = 0;
