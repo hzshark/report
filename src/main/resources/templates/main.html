@@ -72,7 +72,7 @@
                 <div class="layui-tab layui-tab-card">
                   <ul class="layui-tab-title coin-nav">
                   </ul>
-                    <div class="layui-tab-content content-box" style="height: 100px;">
+                    <div class="layui-tab-content content-box">
                       </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
             console.log(json);
             if (json.code == 0) {
                 $.each(json.data, function(i,v) {
-                    content_box += '<div class="layui-tab-item box_'+v.coinid;
+                    content_box += '<div>当前收益: '+v.amount+'</div><div class="layui-tab-item box_'+v.coinid;
                     nav += "<li class='nav-item ";
                     if (i == 0){ 
                         first = v.coinid;
@@ -120,7 +120,7 @@
           function getcoinlog(id) {
                 $.getJSON("/coin/coinlog?coin="+id,function(json) {
                 if (json.code == 0) {
-                    var log = '<table class="layui-table">  <thead><tr><th>名称</th><th>价格</th><th>时间</th></tr> </thead>';
+                    var log = '<table class="layui-table">  <thead><tr><th>名称</th><th>收益</th><th>时间</th></tr> </thead>';
                     $.each(json.data, function(i,v) {
                         console.log(i,v);
                         log += "<tr><td>"+v.name+"</td><td>"+v.amount+"</td><td>"+v.time+"</td></tr>";
