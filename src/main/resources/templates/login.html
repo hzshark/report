@@ -161,6 +161,7 @@
                     alert("-------------0");
                      $.post(data.form.action, data.field, function(res) {
                          alert("=====");
+                         location.href = "/index"
                          if (!res.rel) {
                              layer.msg(res.msg, {
                                  icon: 2

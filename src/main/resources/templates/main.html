@@ -69,45 +69,72 @@
     <div class="layui-fluid main">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#00c0ef !important;color:white;"><i class="fa fa-ambulance" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">CPU Traffic</span>
-                        <span class="info-box-number">90%</span>
-                    </div>
+                <div class="layui-tab layui-tab-card">
+                  <ul class="layui-tab-title coin-nav">
+                    <li class="layui-this">网站设置</li>
+                    <li>用户管理</li>
+                    <li>权限分配</li>
+                    <li>商品管理</li>
+                    <li>订单管理</li>
+                  </ul>
+                    <div class="layui-tab-content content-box" style="height: 100px;">
+                        <div class="layui-tab-item layui-show">1</div>
+                        <div class="layui-tab-item">2</div>
+                        <div class="layui-tab-item">3</div>
+                        <div class="layui-tab-item">4</div>
+                        <div class="layui-tab-item">5</div>
+                        <div class="layui-tab-item">6</div>
+                      </div>
                 </div>
             </div>
-            <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#dd4b39 !important;color:white;"><i class="fa fa-google-plus" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Likes</span>
-                        <span class="info-box-number">25,412</span>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#00a65a !important;color:white;"><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Sales</span>
-                        <span class="info-box-number">654</span>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-col-md3">
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color:#f39c12 !important;color:white;"><i class="fa fa-users" aria-hidden="true"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">New Members</span>
-                        <span class="info-box-number">85</span>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
     <script src="./plugins/layui/layui.js"></script>
+    <script type="text/javascript">
 
+        layui.use('element', function(){
+          var $ = layui.jquery
+          ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+          $.getJSON("/coin/list",function(json) {
+            var nav = '',
+            content_box = '';
+            console.log(json);
+            if (json.code == 0) {
+                $.each(json.data, function(i,v) {
+                    content_box += '<div class="layui-tab-item" class="box_'+v.coinid;
+                    nav += "<li class='nav-item ";
+                    if (i == 0){ 
+                        nav += "layui-this";
+                        content_box += " layui-show";
+                    }
+                    content_box += '">1</div>';
+                    nav += "' id='"+v.coinid+"'>"+v.name+"</li>";
+                })
+            }
+            console.log(content_box);
+            $(".coin-nav").html(nav);
+            $(".content-box").html(content_box);
+            });
+
+          $(".coin-nav").on("click",".nav-item",function() {
+            var id = $(this).attr("id");
+            $.getJSON("/coin/coinlog?coin="+id,function(json) {
+                if (json.code == 0) {
+                    var log = '<table class="layui-table">';
+                    $.each(json.data, function(i,v) {
+                        console.log(i,v);
+                        log += "<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>";
+                    });
+                    log += "</table>";
+                    $(".box_"+id).html(log);
+                }
+                console.log(json)
+            })
+          });
+      });
+    </script>
 </body>
 
 </html>

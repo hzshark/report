@@ -104,4 +104,11 @@ public class PageController extends BaseController{
         return "home";
     }
 
+
+    @RequestMapping(value = "/account",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/account")
+    public String account(){
+        return "account";
+    }
+
 }
