@@ -10,7 +10,5 @@ public class MachineItem {
     int amount;
     String tradeid;
     String saledesc;
-
-
-
+    
 }

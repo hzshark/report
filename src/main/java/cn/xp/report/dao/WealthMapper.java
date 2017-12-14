@@ -1,6 +1,7 @@
 package cn.xp.report.dao;
 
 import cn.xp.report.model.CoinInfo;
+import cn.xp.report.model.CoinItem;
 import cn.xp.report.model.MachineInfo;
 import cn.xp.report.model.SessionUser;
 import org.apache.ibatis.annotations.*;
@@ -15,11 +16,25 @@ public interface WealthMapper extends BaseMapper<SessionUser, Integer> {
     List<CoinInfo> selectUserWealthList(SessionUser user);*/
 
     @Select("call QUserCoins(#{0},null) ;")
-    List<CoinInfo> selectUserWealthList(Integer uid);
+    List<CoinItem> selectUserWealthList(Integer uid);
 
     //@Select("call QUserCoins(#{param1},#{param2}) ;")
     @Select("call QUserCoins(#{arg0},#{arg1}) ;")
-    List<CoinInfo> selectUserWealthListByCid(int  uid,int  coind);
+    List<CoinItem> selectUserWealthListByCid(int  uid,int  coind);
+
+    @Select("SELECT * FROM coin_category  where id =#{1} and enable=1")
+    CoinInfo getConinInfo(int coinId);
+
+    @Select("SELECT * FROM coin_category  where  enable=1")
+    List<CoinInfo> getConinInfoList();
+
+    @Select("SELECT * FROM u_wealth_log where userid=#{arg0} and coinid=#{arg1} order by time desc ")
+    List<CoinItem> selectUserWealthLog(int  uid,int  coinId);
+
+
+    //selectUserWealthDetaLst
+
+      //      selectUserWealthDetaLstByCid
     //@Select("select * from dual where 1=#{uid} and 2=#{cid}")
     //List<CoinInfo> selectUserWealthListByCid(@Param("uid") int  uid,@Param("cid") long  coind);
 

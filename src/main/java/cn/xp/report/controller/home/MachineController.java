@@ -1,8 +1,9 @@
 package cn.xp.report.controller.home;
 
 import cn.xp.report.common.annotation.SystemControllerLog;
-import cn.xp.report.common.util.AuthUtil;
+import cn.xp.report.common.rule.ParamsChecker;
 import cn.xp.report.common.util.StringUtil;
+import cn.xp.report.common.util.AuthUtil;
 import cn.xp.report.controller.BaseController;
 import cn.xp.report.model.MachineInfo;
 import cn.xp.report.model.SessionUser;
@@ -38,9 +39,9 @@ public class MachineController extends BaseController {
             return listVO;
         }
         int pNo=0,pSize=10,Mid=0;
-        pNo=StringUtil.toInt(page);
-        Mid=StringUtil.toInt(mid);
-        pSize=Math.min(StringUtil.toInt(limit),10);
+        pNo= ParamsChecker.Conver2Int(page,0);
+        ParamsChecker.Conver2Int(mid,0);
+        pSize=Math.max(ParamsChecker.Conver2Int(limit,0),10);
         try {
             PageInfo<MachineInfo> pageInfo = machineManageService.getMachineList(pNo,pSize,user.getUserId(),Mid);
             long count = 0;
@@ -60,6 +61,36 @@ public class MachineController extends BaseController {
         }
         return listVO;
     }
+
+    public ResultVO BuyMachineItem(@RequestParam(value = "mid",required= false) String mid, @RequestParam(value = "aoumt",required= false) String amount){
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ResultVO result = new ResultVO();
+        result.setFailRepmsg();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        int Amount=0;
+        Amount= ParamsChecker.Conver2Int(amount,0);
+        if (Amount<1) {
+            result.setFailRepmsg("购买数量错误");
+            return result;
+        }
+        try {
+            boolean ret = machineManageService.BuyMachine(user.getUserId(),Amount);
+            long count = 0;
+            if(ret){
+                result.setSucessRepmsg();
+            }
+
+        } catch (Exception e) {
+            logger.error("获取用户列表异常",e);
+            result.setFailRepmsg(e.getMessage());
+            logger.warn(e.getMessage());
+        }
+        return result;
+    }
+
 
 
 

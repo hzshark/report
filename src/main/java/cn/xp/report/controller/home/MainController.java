@@ -1,17 +1,14 @@
 package cn.xp.report.controller.home;
 
 import cn.xp.report.common.annotation.SystemControllerLog;
-import cn.xp.report.common.util.AuthUtil;
 import cn.xp.report.common.util.StringUtil;
 import cn.xp.report.controller.BaseController;
 import cn.xp.report.model.CoinInfo;
 import cn.xp.report.model.MachineItem;
-import cn.xp.report.model.SessionUser;
 import cn.xp.report.service.CoinManageService;
 import cn.xp.report.service.MachineManageService;
 import cn.xp.report.vo.ListVO;
 import com.github.pagehelper.PageInfo;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

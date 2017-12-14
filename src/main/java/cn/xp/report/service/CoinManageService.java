@@ -3,6 +3,7 @@ package cn.xp.report.service;
 import cn.xp.report.dao.MachineMapper;
 import cn.xp.report.dao.WealthMapper;
 import cn.xp.report.model.CoinInfo;
+import cn.xp.report.model.CoinItem;
 import cn.xp.report.model.MachineInfo;
 import cn.xp.report.model.SessionUser;
 import com.github.pagehelper.PageHelper;
@@ -24,16 +25,34 @@ public class CoinManageService {
     @Autowired
     private WealthMapper mapper;
 
-    public PageInfo<CoinInfo> getCoinList(int pageNo, int pageSize,int uid,int conid){
+    public PageInfo<CoinItem> getCoinList(int pageNo, int pageSize,int uid,int coinId){
         PageHelper.startPage(pageNo, pageSize);
-        List<CoinInfo> groupList;
-        if (conid<=0)
+        List<CoinItem> groupList;
+        if (coinId<=0)
             groupList = mapper.selectUserWealthList(uid);
         else
-            groupList = mapper.selectUserWealthListByCid(uid,conid);
-        PageInfo<CoinInfo> pageInfo= new PageInfo<CoinInfo>(groupList);
+            groupList = mapper.selectUserWealthListByCid(uid,coinId);
+        PageInfo<CoinItem> pageInfo= new PageInfo<CoinItem>(groupList);
         return pageInfo;
     }
 
 
+    public PageInfo<CoinItem> getCoinLogs(int pNo, int pSize, int userId, int coinId) {
+        PageHelper.startPage(pNo, pSize);
+        List<CoinItem> groupList;
+        groupList = mapper.selectUserWealthLog(userId,coinId);
+        PageInfo<CoinItem> pageInfo= new PageInfo<CoinItem>(groupList);
+        return pageInfo;
+    }
+
+
+    private CoinInfo getConinfo(int coinId)
+    {
+        return mapper.getConinInfo(coinId);
+    }
+
+    private List<CoinInfo> getConinfoList()
+    {
+        return mapper.getConinInfoList();
+    }
 }

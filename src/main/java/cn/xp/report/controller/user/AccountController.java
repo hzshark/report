@@ -80,6 +80,7 @@ public class AccountController extends BaseController {
         String accessToken = JwtHelper.createJWT(""+sessionUser.getUserId(), sessionUser.getLogin_name(), applicationName,
                 Constants.USER_LOGIN_EXPIRE_SECONDS);
         sessionUser.setToken(accessToken);
+        logger.info(sessionUser.getLoginpwd()+" 登陆成功！！！");
         resultVO.setSucessRepmsg();
         resultVO.setResult(sessionUser);
         return resultVO;

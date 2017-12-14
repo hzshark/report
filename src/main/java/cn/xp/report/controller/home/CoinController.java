@@ -1,10 +1,12 @@
 package cn.xp.report.controller.home;
 
 import cn.xp.report.common.annotation.SystemControllerLog;
+import cn.xp.report.common.rule.ParamsChecker;
 import cn.xp.report.common.util.AuthUtil;
 import cn.xp.report.common.util.StringUtil;
 import cn.xp.report.controller.BaseController;
 import cn.xp.report.model.CoinInfo;
+import cn.xp.report.model.CoinItem;
 import cn.xp.report.model.MachineInfo;
 import cn.xp.report.model.SessionUser;
 import cn.xp.report.service.CoinManageService;
@@ -41,11 +43,11 @@ public class CoinController extends BaseController {
         //ParamsChecker.checkNotBlank(password, "登录密码不能为空");
 
         int pNo=0,pSize=10,coinId=0;
-        coinId=StringUtil.toInt(pcoinid);
-        pNo= StringUtil.toInt(page);
-        pSize=Math.min(StringUtil.toInt(limit),10);
+        coinId= ParamsChecker.Conver2Int(pcoinid,0);
+        pNo= ParamsChecker.Conver2Int(page,0);
+        pSize=Math.max(ParamsChecker.Conver2Int(limit,0),10);
         try {
-            PageInfo<CoinInfo> pageInfo = service.getCoinList(pNo, pSize,user.getUserId(),coinId);
+            PageInfo<CoinItem> pageInfo = service.getCoinList(pNo, pSize,user.getUserId(),coinId);
             long count = 0;
             if(pageInfo != null){
                 //分页
@@ -63,6 +65,37 @@ public class CoinController extends BaseController {
         return listVO;
     }
 
+    @RequestMapping(value = "/coinlog",  method = RequestMethod.GET)
+    @SystemControllerLog(description = "/coin/coinlog" )
+    public ListVO ListUserCoinLog(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ){
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ListVO result = new ListVO();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        int pNo=0,pSize=10,coinId=0;
+        coinId= ParamsChecker.Conver2Int(pcoinid,0);
+        pNo= ParamsChecker.Conver2Int(page,0);
+        pSize=Math.max(ParamsChecker.Conver2Int(limit,0),10);
+        try {
+            PageInfo<CoinItem> pageInfo = service.getCoinLogs(pNo, pSize,user.getUserId(),coinId);
+            long count = 0;
+            if(pageInfo != null){
+                //分页
+                count = pageInfo.getTotal();
+                // listVO.setList(pageInfo.getList());
+                result.setData(pageInfo.getList());
+                result.setSucessMsg();
+            }
+            result.setRel(true);
+            result.setCount(count);
+        } catch (Exception e) {
+            result.setErrorMsg("获取列表异常");
+            logger.error("获取列表异常",e);
+        }
+        return result;
+    }
 
 
 }

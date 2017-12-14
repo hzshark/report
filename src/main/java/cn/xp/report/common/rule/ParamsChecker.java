@@ -2,6 +2,7 @@ package cn.xp.report.common.rule;
 
 
 import cn.xp.report.common.exception.BizException;
+import cn.xp.report.common.util.StringUtil;
 
 import java.util.Map;
 
@@ -132,5 +133,16 @@ public class ParamsChecker {
 
     public static void checkIsMaxLength(String test, int maxLength, String errmsg) throws BizException {
         BizResult.ensureMaxLength(test, maxLength, errno, errmsg);
+    }
+
+    public static Integer Conver2Int(String param, int defvale)  {
+        if (StringUtil.isNumber(param))
+            return  Integer.parseInt(param);
+        return defvale;
+    }
+
+    public static Integer Conver2AbsInt(String param, int defvale)  {
+
+        return Math.abs(Conver2Int(param,defvale));
     }
 }

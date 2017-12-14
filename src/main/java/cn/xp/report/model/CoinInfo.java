@@ -15,7 +15,7 @@ public class CoinInfo {
 
 	private String name;
 
-    private int enable ;
+    //private int enable ;
 
-    private Double amount;
+    //private Double amount;
 }

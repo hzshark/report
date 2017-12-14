@@ -37,4 +37,7 @@ public class MachineManageService {
         return pageInfo;
     }
 
+    public boolean BuyMachine(int userId, int amount) {
+        return true;
+    }
 }
