@@ -28,7 +28,7 @@ public interface WealthMapper extends BaseMapper<SessionUser, Integer> {
     @Select("SELECT * FROM coin_category  where  enable=1")
     List<CoinInfo> getConinInfoList();
 
-    @Select("SELECT * FROM u_wealth_log where userid=#{arg0} and coinid=#{arg1} order by time desc ")
+    @Select("call QUserCoinLog(#{arg0},#{arg1})  ")
     List<CoinItem> selectUserWealthLog(int  uid,int  coinId);
 
 
