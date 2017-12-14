@@ -71,19 +71,8 @@
             <div class="layui-col-md3">
                 <div class="layui-tab layui-tab-card">
                   <ul class="layui-tab-title coin-nav">
-                    <li class="layui-this">网站设置</li>
-                    <li>用户管理</li>
-                    <li>权限分配</li>
-                    <li>商品管理</li>
-                    <li>订单管理</li>
                   </ul>
                     <div class="layui-tab-content content-box" style="height: 100px;">
-                        <div class="layui-tab-item layui-show">1</div>
-                        <div class="layui-tab-item">2</div>
-                        <div class="layui-tab-item">3</div>
-                        <div class="layui-tab-item">4</div>
-                        <div class="layui-tab-item">5</div>
-                        <div class="layui-tab-item">6</div>
                       </div>
                 </div>
             </div>
@@ -99,40 +88,49 @@
 
           $.getJSON("/coin/list",function(json) {
             var nav = '',
-            content_box = '';
+            content_box = '',
+            first = '';
             console.log(json);
             if (json.code == 0) {
                 $.each(json.data, function(i,v) {
-                    content_box += '<div class="layui-tab-item" class="box_'+v.coinid;
+                    content_box += '<div class="layui-tab-item box_'+v.coinid;
                     nav += "<li class='nav-item ";
                     if (i == 0){ 
+                        first = v.coinid;
                         nav += "layui-this";
                         content_box += " layui-show";
                     }
-                    content_box += '">1</div>';
+                    content_box += '"></div>';
                     nav += "' id='"+v.coinid+"'>"+v.name+"</li>";
-                })
+                });
             }
             console.log(content_box);
             $(".coin-nav").html(nav);
             $(".content-box").html(content_box);
-            });
+            if (first) {
+                getcoinlog(first);                
+            }
+        });
 
           $(".coin-nav").on("click",".nav-item",function() {
             var id = $(this).attr("id");
-            $.getJSON("/coin/coinlog?coin="+id,function(json) {
+            getcoinlog(id);
+          });
+
+          function getcoinlog(id) {
+                $.getJSON("/coin/coinlog?coin="+id,function(json) {
                 if (json.code == 0) {
-                    var log = '<table class="layui-table">';
+                    var log = '<table class="layui-table">  <thead><tr><th>名称</th><th>价格</th><th>时间</th></tr> </thead>';
                     $.each(json.data, function(i,v) {
                         console.log(i,v);
-                        log += "<tr><td>贤心</td><td>2016-11-29</td><td>人生就像是一场修行</td></tr>";
+                        log += "<tr><td>"+v.name+"</td><td>"+v.amount+"</td><td>"+v.time+"</td></tr>";
                     });
                     log += "</table>";
                     $(".box_"+id).html(log);
                 }
                 console.log(json)
             })
-          });
+          }
       });
     </script>
 </body>
