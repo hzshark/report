@@ -4,7 +4,7 @@ package cn.xp.report.vo;
 
 import java.io.Serializable;
 
-public class ResultVO  implements Serializable {
+public class ResultVO  extends BaseVO {
 
     private  String msg;
     private int code;
