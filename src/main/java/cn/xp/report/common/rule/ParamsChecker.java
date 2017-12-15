@@ -141,6 +141,12 @@ public class ParamsChecker {
         return defvale;
     }
 
+    public static Double Conver2Double(String param, Double defvale)  {
+        if (StringUtil.isNumber(param))
+            return  Double.parseDouble(param);
+        return defvale;
+    }
+
     public static Integer Conver2AbsInt(String param, int defvale)  {
 
         return Math.abs(Conver2Int(param,defvale));

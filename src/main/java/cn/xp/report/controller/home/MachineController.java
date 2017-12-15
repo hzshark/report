@@ -62,7 +62,10 @@ public class MachineController extends BaseController {
         return listVO;
     }
 
-    public ResultVO BuyMachineItem(@RequestParam(value = "mid",required= false) String mid, @RequestParam(value = "aoumt",required= false) String amount){
+
+    @RequestMapping(value = "/buy",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/machine/buy")
+    public ResultVO BuyMachineItem(@RequestParam(value = "mid",required= false) String pmid, @RequestParam(value = "amount",required= false) String amount){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();
         result.setFailRepmsg();
@@ -70,14 +73,15 @@ public class MachineController extends BaseController {
         if (user==null) {
             return result;
         }
-        int Amount=0;
-        Amount= ParamsChecker.Conver2Int(amount,0);
-        if (Amount<1) {
-            result.setFailRepmsg("购买数量错误");
+        Double Amount;
+        Amount= ParamsChecker.Conver2Double(amount, 0D);
+        int mid = ParamsChecker.Conver2AbsInt(pmid,0);
+        if (Amount<0 || mid<1) {
+            result.setFailRepmsg("购买数量或参数错误");
             return result;
         }
         try {
-            boolean ret = machineManageService.BuyMachine(user.getUserId(),Amount);
+            boolean ret = machineManageService.BuyMachine(user.getUserId(),mid,Amount);
             long count = 0;
             if(ret){
                 result.setSucessRepmsg();
