@@ -30,7 +30,6 @@ public class MachineController extends BaseController {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @SystemControllerLog(description = "/machine/list")
-
     public ListVO ListUserMachineItem(@RequestParam(value = "mid",required= false) String mid,@RequestParam(value = "page",required= false)  String page, @RequestParam(value = "limit",required= false) String limit){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
@@ -68,7 +67,7 @@ public class MachineController extends BaseController {
     public ResultVO BuyMachineItem(@RequestParam(value = "mid",required= false) String pmid, @RequestParam(value = "amount",required= false) String amount){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();
-        result.setFailRepmsg();
+        //result.setFailRepmsg();
         SessionUser user= AuthUtil.verfiy(result,dd);
         if (user==null) {
             return result;
@@ -82,10 +81,8 @@ public class MachineController extends BaseController {
         }
         try {
             boolean ret = machineManageService.BuyMachine(user.getUserId(),mid,Amount);
-            long count = 0;
-            if(ret){
+            if(ret)
                 result.setSucessRepmsg();
-            }
 
         } catch (Exception e) {
             logger.error("获取用户列表异常",e);

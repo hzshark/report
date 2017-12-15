@@ -6,18 +6,14 @@ import java.io.Serializable;
 
 public class ResultVO  implements Serializable {
 
-    private final String _state="state";
-    private final String _msg="msg";
-    private final String rspData="data";
-    private String repmsg;
-    private int repstate;
-    private final String _defSucessMsg="sucessed";
-    private final String _defFailMsg="failed";
-    //private LinkedHashMap<String,Object> linkedHashMap;
+    private  String msg;
+    private int code;
     private Object result;
 
     public ResultVO() {
         super();
+        msg="failed";
+
     }
 
 
@@ -26,29 +22,29 @@ public class ResultVO  implements Serializable {
     }*/
 
     public void setSucessRepmsg() {
-        this.repmsg = _defSucessMsg;
-        this.repstate=200;
+        this.msg = "sucessed";
+        this.code=200;
 
     }
 
     public void setFailRepmsg() {
-        this.repmsg = _defFailMsg;
-        this.repstate=400;
+        this.msg = "failed";
+        this.code=400;
     }
 
     public void setSucessRepmsg(String repmsg) {
-        this.repmsg = repmsg;
-        this.repstate=200;
+        this.msg = repmsg;
+        this.code=200;
 
     }
 
     public void setFailRepmsg(String repmsg) {
-        this.repmsg = repmsg;
-        this.repstate=400;
+        this.msg = repmsg;
+        this.code=400;
     }
 
     public void setRepstate(int repstate) {
-        this.repstate = repstate;
+        this.code = repstate;
     }
 
     /*public void setLinkedHashMap(LinkedHashMap<String, Object> linkedHashMap) {
@@ -59,8 +55,8 @@ public class ResultVO  implements Serializable {
             return result;
         }
 
-        public void setResult(Object result) {
-            this.result = result;
+        public void setResult(Object rst) {
+            this.result = rst;
         }
 
     /*public boolean complete(HttpServletResponse response, ZzResp resp) {
