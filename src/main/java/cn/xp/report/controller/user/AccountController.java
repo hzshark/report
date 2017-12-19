@@ -4,10 +4,12 @@ import cn.xp.report.common.Constants;
 import cn.xp.report.common.annotation.SystemControllerLog;
 import cn.xp.report.common.exception.BizException;
 import cn.xp.report.common.rule.ParamsChecker;
+import cn.xp.report.common.util.SequenceUtils;
 import cn.xp.report.common.util.StringUtil;
 import cn.xp.report.controller.BaseController;
 import cn.xp.report.dao.SysLoginAccountMapper;
 import cn.xp.report.model.SessionUser;
+import cn.xp.report.service.Interface.SmsService;
 import cn.xp.report.service.UserManageService;
 import cn.xp.report.util.JwtHelper;
 import cn.xp.report.vo.ResultVO;
@@ -34,6 +36,9 @@ public class AccountController extends BaseController {
 
     @Resource
     UserManageService userManageService;
+
+    @Resource
+    SmsService smsService;
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -94,7 +99,7 @@ public class AccountController extends BaseController {
     public void loginOut() {
 
 //        session.invalidate();
-
+           // session.setAttribute("vcode");
     }
     @RequestMapping("/json")
     @ResponseBody
@@ -106,7 +111,7 @@ public class AccountController extends BaseController {
         return map;
     }
 
-    @RequestMapping("/index/{name}")
+ /*   @RequestMapping("/index/{name}" )
     @ResponseBody
     public String index(@PathVariable String name) {
 
@@ -115,54 +120,70 @@ public class AccountController extends BaseController {
         }
 
         return "hello world " + name;
-    }
-
+    }*/
+/*
     @RequestMapping("/setsession/{age}")
     @ResponseBody
     public String TestSession(@PathVariable String age){
         session.setAttribute("age", age);
         return "set session age value:"+age;
-    }
+    }*/
 
-    @RequestMapping("/getsession")
+   /* @RequestMapping("/getsession")
     @ResponseBody
     public String TestSession(){
         String a = (String) session.getAttribute("age");
         return a;
     }
+*/
 
-
-    @RequestMapping(value = "/testlog", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/testlog", method = RequestMethod.GET)
     public String testLog(){
         logger.debug("Logger Level ：DEBUG");
         logger.info("Logger Level ：INFO");
         logger.error("Logger Level ：ERROR");
         return "<h1>Welcome to das,欢迎使用</h1>";
-    }
+    }*/
     /*
      短信验证码要换一个位置
      */
-    @RequestMapping(value = "/smsvcode",method =RequestMethod.GET)
-    public void sendsmsvcode(String phone,int type)
+    @RequestMapping(value = "/verifyPhone/{phone}",method =RequestMethod.GET)
+    public ResultVO sendsmsvcode(@PathVariable String phone)
     {
-
+       String vcode=  SequenceUtils.generateDigitalString(6);
+        ResultVO result=new ResultVO();
+       if (smsService.sendVode(phone,vcode))
+           result.setSucessRepmsg();
+       else
+           result.setFailRepmsg("发送短信失败,请稍后再试");
+       return result;
     }
 
     /*
      add by lxp
      */
-    @RequestMapping(value = "/reg", method = RequestMethod.PUT)
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
+    @SystemControllerLog(description = "/user/reg")
     public ResultVO  userReg(String phone,String pwd,String vrifyCode) throws BizException
     {
-        if(StringUtils.isEmpty(vrifyCode)){
-            throw new BizException(120015, "验证码不能为空");
-        }
-      /*  if (!StringUtils.equalsIgnoreCase(imageCode, vrifyCode)) {
-            throw new BizException(120016, "验证码不正确");
-        }*/
-        boolean ret=userManageService.addUser(phone,pwd);
         ResultVO resultVO=new ResultVO();
-        resultVO.setSucessRepmsg("注册成功！");
+        if(StringUtils.isEmpty(vrifyCode)){
+            resultVO.setFailRepmsg( "验证码不能为空");
+            return resultVO;
+        }
+         String imageCode = (String)session.getAttribute("vrifyCode");
+
+          /*if (!StringUtils.equalsIgnoreCase(imageCode, vrifyCode)) {
+                resultVO.setFailRepmsg("验证码不正确");
+                return resultVO;
+            }
+            session.removeAttribute("vrifyCode");
+          */
+          boolean ret=userManageService.addUser(phone,pwd);
+        if (ret)
+            resultVO.setSucessRepmsg("注册成功！");
+        else
+            resultVO.setFailRepmsg();
         return  resultVO;
     }
 }
