@@ -4,12 +4,14 @@ import cn.xp.report.common.Constants;
 import cn.xp.report.common.annotation.SystemControllerLog;
 import cn.xp.report.common.exception.BizException;
 import cn.xp.report.common.rule.ParamsChecker;
+import cn.xp.report.common.util.AuthUtil;
 import cn.xp.report.common.util.StringUtil;
 import cn.xp.report.controller.BaseController;
 import cn.xp.report.dao.SysLoginAccountMapper;
 import cn.xp.report.model.SessionUser;
 import cn.xp.report.service.UserManageService;
 import cn.xp.report.util.JwtHelper;
+import cn.xp.report.vo.ListVO;
 import cn.xp.report.vo.ResultVO;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
@@ -164,5 +166,12 @@ public class AccountController extends BaseController {
         ResultVO resultVO=new ResultVO();
         resultVO.setSucessRepmsg("注册成功！");
         return  resultVO;
+    }
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getUserInfo() {
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        return dd;
     }
 }

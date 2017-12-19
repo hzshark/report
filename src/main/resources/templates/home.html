@@ -716,6 +716,13 @@ $(function(){
 			alert(json.msg)
 		}
 	});
+
+	$.getJSON("/user/info",function(json) {
+		if (json.token) {
+			$(".loadMessage").html(json.login_name);
+			$(".loadMessage").attr("href","/index");
+		}
+	});
 })
 
 </script>

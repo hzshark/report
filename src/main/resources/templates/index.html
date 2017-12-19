@@ -17,8 +17,8 @@
             <div class="layui-logo">算力</div>
             <div class="layui-logo kit-logo-mobile">K</div>
             <ul class="layui-nav layui-layout-left kit-nav">
-                <li class="layui-nav-item"><a href="javascript:;">控制面板</a></li>
-                <li class="layui-nav-item"><a href="javascript:;">算力中心</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">账户信息</a></li>
+                <!-- <li class="layui-nav-item"><a href="javascript:;">算力中心</a></li> -->
             </ul>
             <ul class="layui-nav layui-layout-right kit-nav">
                 <li class="layui-nav-item">
@@ -36,12 +36,12 @@
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <img src="./build//images/0.jpg" class="layui-nav-img"> Van
+                        <img src="./build//images/0.jpg" class="layui-nav-img"> <span class="user_name"></span>
                     </a>
-                    <dl class="layui-nav-child">
+                   <!--  <dl class="layui-nav-child">
                         <dd><a href="javascript:;" kit-target data-options="{url:'basic.html',icon:'&#xe658;',title:'基本资料',id:'966'}"><span>基本资料</span></a></dd>
                         <dd><a href="javascript:;">安全设置</a></dd>
-                    </dl>
+                    </dl> -->
                 </li>
                 <li class="layui-nav-item"><a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
             </ul>
@@ -56,15 +56,14 @@
                         <a class="" href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 金币信息</span></a>
                         <dl class="layui-nav-child">
                             <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'account.html',icon:'&#xe6c6;',title:'账户信息',id:'1'}">
+                                <a href="/index">
                                     <i class="layui-icon">&#xe6c6;</i><span> 账户信息</span></a>
+<!--                                 <a href="javascript:;" kit-target data-options="{url:'index',icon:'&#xe6c6;',title:'账户信息',id:'1'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span> 账户信息</span></a> -->
                             </dd>
                             <dd>
                                 <a href="javascript:;" kit-target data-options="{url:'coinItem.html',icon:'&#xe6c6;',title:'金币列表',id:'1'}">
                                     <i class="layui-icon">&#xe6c6;</i><span> 金币列表</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'https://www.baidu.com',icon:'&#xe658;',title:'百度一下',id:'2'}"><i class="layui-icon">&#xe658;</i><span> 百度一下</span></a>
                             </dd>
                         </dl>
                     </li>
@@ -137,6 +136,13 @@
                     var skin = getSkinName();
                     switchSkin(skin === undefined ? 'default' : skin);
                 }();
+
+            $.getJSON("/user/info",function(json) {
+                if (json.token) {
+                    $(".user_name").html(json.login_name);
+                   // $(".loadMessage").attr("href","/index");
+                }
+            });
         });
     </script>
 </body>
