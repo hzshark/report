@@ -72,6 +72,11 @@ public class PageController extends BaseController{
         return "/login";
     }
 
+    @RequestMapping(value = "/reg", method = RequestMethod.GET)
+    public String toRegPage() {
+        return "/reg";
+    }
+
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String toIndex(){
         return "index";

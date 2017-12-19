@@ -158,23 +158,23 @@
                         shade: [0.3, '#333']
                     });
 //                    location.href = '/';
-                    alert("-------------0");
-                     $.post(data.form.action, data.field, function(res) {
-                         alert("=====");
-                         location.href = "/index"
-                         if (!res.rel) {
-                             layer.msg(res.msg, {
-                                 icon: 2
-                             });
-                             loadIndex && layer.close(loadIndex);
-                             $('#changeCode').click(); //刷新验证码
-                         } else {
-                             alert("-------------");
-                             setTimeout(function() {
-                                 location.href = '/index'
-                             }, 1500);
+                    $.ajax({
+                        type: "POST",
+                        url: data.form.action,
+                        data: data.field,
+                        statusCode: {
+                          200: function() {
+                             location.href = "/index"
+                            // doSomething();
+                           },
+                          400:function(res){
+                            console.log(res)
+                            alert(res.responseJSON.msg)
+                            loadIndex && layer.close(loadIndex);
+                            $('#changeCode').click();
+                           }
                          }
-                     }, 'json');
+                    });
                     return false;
                 });
             }());
