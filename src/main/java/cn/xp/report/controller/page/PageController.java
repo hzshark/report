@@ -77,6 +77,12 @@ public class PageController extends BaseController{
         return "/reg";
     }
 
+
+    @RequestMapping(value = "/crowdfunding", method = RequestMethod.GET)
+    public String toCrowdfunding() {
+        return "/crowdfunding";
+    }
+    
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String toIndex(){
         return "index";
@@ -107,6 +113,12 @@ public class PageController extends BaseController{
     @SystemControllerLog(description = "/home")
     public String home(){
         return "home";
+    }
+
+    @RequestMapping(value = "/buyMachine",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/buyMachine")
+    public String buyMachine(){
+        return "buyMachine";
     }
 
 
