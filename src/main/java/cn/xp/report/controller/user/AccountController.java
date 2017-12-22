@@ -193,6 +193,9 @@ public class AccountController extends BaseController {
     @ResponseBody
     public Object getUserInfo() {
         Object dd= SecurityUtils.getSubject().getPrincipal();
-        return dd;
+        if (dd != null)
+            return dd;
+        else
+            return new HashMap<>();
     }
 }
