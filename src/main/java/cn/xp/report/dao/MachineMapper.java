@@ -3,6 +3,7 @@ package cn.xp.report.dao;
 import cn.xp.report.model.MachineInfo;
 import cn.xp.report.model.MachineItem;
 import cn.xp.report.model.SessionUser;
+import cn.xp.report.model.UMachine;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -32,4 +33,7 @@ public interface MachineMapper extends BaseMapper<SessionUser, Long> {
 
     @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2} )")
     int BuyMachine(int userId, int mid, double amount);
+
+    @Select("SELECT * from u_machine")
+    List<UMachine> selectUMachine();
 }
