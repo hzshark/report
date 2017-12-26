@@ -142,9 +142,12 @@
                 }();
 
             $.getJSON("/user/info",function(json) {
-                if (json.token) {
+                console.log(json);
+                if (json && json.token) {
                     $(".user_name").html(json.login_name);
                    // $(".loadMessage").attr("href","/index");
+                }else{
+                    location.href = "/login";
                 }
             });
         });
