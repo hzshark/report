@@ -8,6 +8,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+
+	<repositories>
+		<repository>
+			<id>api-v1-client-java-mvn-repo</id>
+			<url>https://raw.githubusercontent.com/blockchain/api-v1-client-java/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<name>report</name>
 	<description>report project for Spring Boot</description>
 
@@ -17,6 +29,8 @@
 		<version>1.5.9.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -147,7 +161,18 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>info.blockchain</groupId>
+			<artifactId>api</artifactId>
+			<version>LATEST</version>
+		</dependency>
 
+
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -158,6 +183,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
 
 
 </project>

@@ -26,7 +26,7 @@ public interface MachineMapper extends BaseMapper<SessionUser, Long> {
     @Select("CALL QuserMachines(#{0},null) ")
     List<MachineInfo> selectUserMachineList(int uid);
 
-    @Select("SELECT c.machine_id,c.machine_name,t.amount,t.tradeid,t.saledesc FROM machine_item AS t, machine_category AS c" +
+    @Select("SELECT c.machine_id,c.machine_name,t.amount,t.trade_id,t.saledesc FROM machine_item AS t, machine_category AS c" +
             " WHERE t.enable = 1 AND c.enable=1 AND t.machine_id = c.machine_id")
     List<MachineItem> selectSaleMachineList();
 

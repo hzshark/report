@@ -21,13 +21,14 @@ public class MachineInfo {
     private String describe ;
     //功耗
     private String watt;
-    //合约期限
+  /*  //合约期限
     private  String contract_duration;
     //维护费
     private  String maintainfee;
     //支付方式
     private  String paytype;
+    */
 
-   // machine_category.`enable`
-
+  //挖掘币种
+    private int coin_type;
 }
