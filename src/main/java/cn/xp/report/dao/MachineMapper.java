@@ -31,7 +31,8 @@ public interface MachineMapper extends BaseMapper<SessionUser, Long> {
             " WHERE t.enable = 1 AND c.enable=1 AND t.machine_id = c.machine_id")
     List<MachineItem> selectSaleMachineList();
 
-    @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2} )")
+    //arg3 批次先不用
+    @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2},null )")
     int BuyMachine(int userId, int mid, double amount);
 
     @Select("SELECT * from u_machine")
