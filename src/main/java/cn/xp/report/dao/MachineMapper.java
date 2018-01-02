@@ -32,7 +32,7 @@ public interface MachineMapper extends BaseMapper<SessionUser, Long> {
     List<MachineItem> selectSaleMachineList();
 
     //arg3 批次先不用
-    @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2},null )")
+    @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2},0 )")
     int BuyMachine(int userId, int mid, double amount);
 
     @Select("SELECT * from u_machine")
