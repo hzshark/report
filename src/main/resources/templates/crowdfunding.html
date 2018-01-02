@@ -42,7 +42,7 @@
 
     <ul class="nav">
       <li class="navItem">
-      <a href="/home" class="nav_home">首页</a>
+      <a href="/index" class="nav_home">首页</a>
       </li>
 
     </ul>
@@ -50,22 +50,16 @@
 
     
     <a href="/account/investment#" class="accountNameBox">
-      <span class="accountName" id="j-login-account">yarhoo</span>
+      <span class="accountName" id="j-login-account"></span>
       <span class="i_accountDropArrow"></span>
     </a>
 
     <ul class="hd_dropMenu">
       <li class="dropMenuItem">
-      <a href="/account/reference">我的推荐</a>
+      <a href="/home">我的账户</a>
       </li>
       <li class="dropMenuItem">
-      <a href="/account/coupon">折扣券</a>
-      </li>
-      <li class="dropMenuItem">
-      <a href="/account/setting">安全中心</a>
-      </li>
-      <li class="dropMenuItem">
-      <a href="/account/logout">退出</a>
+      <a href="/logout">退出</a>
       </li>
     </ul>
     
@@ -178,6 +172,18 @@ $("#j-ltc-fixed-qrcode").qrcode({width: 130, height: 130, text: "LP6Srag8YhoEqVS
 <script>
 var _hmt = _hmt || [];
 (function() {
+
+
+  $.getJSON("/user/info",function(json) {
+      console.log(json);
+      if (json && json.token) {
+          $(".accountName").html(json.login_name);
+         // $(".loadMessage").attr("href","/index");
+      }else{
+          location.href = "/login";
+      }
+  });
+
   var hm = document.createElement("script");
   hm.src = "//hm.baidu.com/hm.js?964ea5c06c9d5581dd599cc92c16bca1";
   var s = document.getElementsByTagName("script")[0]; 

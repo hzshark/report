@@ -61,7 +61,7 @@ public class PageController extends BaseController{
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Index() {
-        return "/index";
+        return "/home";
     }
 
     /**
@@ -83,7 +83,7 @@ public class PageController extends BaseController{
         return "/crowdfunding";
     }
     
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    @RequestMapping(value = "/home",method = RequestMethod.GET)
     public String toIndex(){
         return "index";
     }
@@ -109,8 +109,8 @@ public class PageController extends BaseController{
         return "machineItem";
     }
 
-    @RequestMapping(value = "/home",method = RequestMethod.GET)
-    @SystemControllerLog(description = "/home")
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/index")
     public String home(){
         return "home";
     }
