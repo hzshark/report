@@ -80,10 +80,18 @@ public class MachineController extends BaseController {
             return result;
         }
         try {
-            boolean ret = machineManageService.BuyMachine(user.getUserId(),mid,Amount);
-            if(ret)
-                result.setSucessRepmsg();
-
+            int ret = machineManageService.BuyMachine(user.getUserId(),mid,Amount);
+            switch (ret) {
+                case 0:
+                    result.setSucessRepmsg();
+                    break;
+                case 1:
+                    result.setFailRepmsg("购买失败,清重试");
+                    break;
+                case 2:
+                    result.setFailRepmsg("没有足够的机器可以购买");
+                    break;
+            }
         } catch (Exception e) {
             logger.error("获取用户列表异常",e);
             result.setFailRepmsg(e.getMessage());

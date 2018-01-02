@@ -42,13 +42,13 @@ public class MachineManageService {
         return pageInfo;
     }
 
-    @Transactional
-    public boolean BuyMachine(int userId, int mid,double amount) {
+    //@Transactional
+    public int BuyMachine(int userId, int mid,double amount) {
         int ret = machineMapper.BuyMachine(userId,mid,amount);
 
         //String sp="Call SBuyMachine("+userId+","+mid+","+amount+")";
         //jdbcTemplate.execute(sp);
-        return ret==0;
+        return ret;
     }
 
 
