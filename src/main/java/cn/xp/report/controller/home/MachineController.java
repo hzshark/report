@@ -93,8 +93,8 @@ public class MachineController extends BaseController {
                     break;
             }
         } catch (Exception e) {
-            logger.error("获取用户列表异常",e);
-            result.setFailRepmsg(e.getMessage());
+            logger.error("购买失败",e);
+            result.setFailRepmsg("购买失败");
             logger.warn(e.getMessage());
         }
         return result;
