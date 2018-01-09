@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cn.xp</groupId>
-	<artifactId>report</artifactId>
+	<artifactId>hashpower</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -157,7 +157,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>RELEASE</version>
+			<version>1.16.10</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -173,6 +173,28 @@
 			<artifactId>core</artifactId>
 			<version>3.2.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.warrenstrange</groupId>
+			<artifactId>googleauth</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>wf.bitcoin</groupId>
+			<artifactId>JavaBitcoindRpcClient</artifactId>
+			<version>0.9.13</version>
+		</dependency>
+
+<!--
+		<dependency>
+			<groupId>wf.bitcoin</groupId>
+			<artifactId>JavaBitcoindRpcClient</artifactId>
+			<version>0.9.14</version>
+		</dependency>
+-->
+
+
 	</dependencies>
 
 	<build>
