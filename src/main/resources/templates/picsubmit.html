@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>支付宝截图上传</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div class="layui-fluid main">
+        <div class="layui-row">
+        	<form class="layui-form" action="">
+                <div class="layui-form-item">
+                <label class="layui-form-label">上传</label>
+                <div class="layui-input-block">
+                  <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="test1">上传图片</button>
+                    <div class="layui-upload-list">
+                      <img class="layui-upload-img" id="demo1">
+                      <p id="demoText"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                  <textarea name="remark" placeholder="请备注你提交的截图信息" class="layui-textarea">
+                  </textarea>
+                </div>
+              </div>
+                <div class="layui-form-item">
+                <div class="layui-input-block">
+                  <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                </div>
+              </div>
+            </form>
+	    </div>
+        <div class="layui-row" style="margin-top: 10px">
+            <p style="font-size: 16px">提交记录：</p>
+            <table class="layui-table" lay-data="{height:315, url:'coin/list', page:true, id:'coinItem',height: 'full-25'}" id="coinItem">
+            <thead>
+            <tr>
+                <th lay-data="{field:'id', width:300}">提现地址</th>
+                <th lay-data="{field:'name', width:120}">提现数量</th>
+                <th lay-data="{field:'amount', width:120}">最后更新</th>
+                <th lay-data="{field:'status', width:120}">处理状态</th>
+            </tr>
+            </thead>
+        </table>
+        </div>
+</body>
+<script src="./plugins/layui/layui.js"></script>
+<script>
+    layui.use('table', function() {
+        var table = layui.table;
+    });
+
+    layui.use("upload", function(){
+  var $ = layui.jquery
+  ,upload = layui.upload;
+      
+      //普通图片上传
+      var uploadInst = upload.render({
+        elem: '#test1'
+        ,url: '/upload/'
+        ,before: function(obj){
+          //预读本地文件示例，不支持ie8
+          obj.preview(function(index, file, result){
+            $('#demo1').attr('src', result); //图片链接（base64）
+          });
+        }
+        ,done: function(res){
+          //如果上传失败
+          if(res.code > 0){
+            return layer.msg('上传失败');
+          }
+          //上传成功
+        }
+        ,error: function(){
+          //演示失败状态，并实现重传
+          var demoText = $('#demoText');
+          demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+          demoText.find('.demo-reload').on('click', function(){
+            uploadInst.upload();
+          });
+        }
+      });
+    });
+</script>
+</html>

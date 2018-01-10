@@ -127,4 +127,23 @@ public class PageController extends BaseController{
         return "account";
     }
 
+
+    @RequestMapping(value = "/charge",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/charge")
+    public String charge(){
+        return "charge";
+    }
+
+
+    @RequestMapping(value = "/withdraw",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/withdraw")
+    public String withdraw(){
+        return "withdraw";
+    }
+
+    @RequestMapping(value = "/picsubmit",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/picsubmit")
+    public String picsubmit(){
+        return "picsubmit";
+    }
 }

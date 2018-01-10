@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>充值</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <style type="text/css">
+    	.box {
+    		background-color: #f9f7f7;
+    		height: 130px;
+    		padding: 20px;
+    	}
+    	.main {
+    		padding: 10px;
+    	}
+    </style>
+</head>
+<body>
+    <div class="layui-fluid main">
+        <div class="layui-row box">
+        	<div class="layui-col-xs3">
+        	<img src="data:image/png;base64,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">	
+	        </div>
+        	<div class="layui-col-xs9" style="font-size: 20px;">
+        	<strong>充值地址：	</strong>
+        	<p>3McDQrMvvFb8hYk6XVM5y1eSxyxz2QoaNN</p>
+	        </div>
+	    </div>
+	    <div class="layui-row" style="border: 1px #ddd solid; padding: 10px;    margin-top: 10px;">
+	    	<p>充值须知</p>
+	    	<p>1、使用BTC地址充值需要1个网络确认才能到账，使用站内账户间转账无需网络确认，可以实时到账。</p>
+			<p>2、因BTC交易量大网络确认时间长，为了您的交易更快被确认建议您增加网络手续费。</p>
+	    </div>
+        <div class="layui-row" style="margin-top: 10px">
+        	<p style="font-size: 16px">充值记录：</p>
+        	<table class="layui-table" lay-data="{height:315, url:'coin/list', page:true, id:'coinItem',height: 'full-25'}" id="coinItem">
+		    <thead>
+		    <tr>
+		        <th lay-data="{field:'id', width:300}">充值地址</th>
+		        <th lay-data="{field:'name', width:120}">充值数量</th>
+		        <th lay-data="{field:'amount', width:120}">最后更新</th>
+		        <th lay-data="{field:'status', width:120}">处理状态</th>
+		    </tr>
+		    </thead>
+		</table>
+        </div>
+</body>
+<script src="./plugins/layui/layui.js"></script>
+<script>
+    layui.use('table', function() {
+        var table = layui.table;
+    });
+</script>
+</html>
