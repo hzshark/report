@@ -8,6 +8,14 @@
 		http://www.springframework.org/schema/context/spring-context.xsd"
        default-lazy-init="true">
 
+    <!-- 多部分文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="maxUploadSize" value="10485760000" />
+        <property name="maxInMemorySize" value="40960" />
+    </bean>
+
     <bean id="customCredentialsMatcher" class="cn.xp.hashpower.common.auth.CustomCredentialsMatcher" />
 
     <!-- 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的ShiroDbRealm.java -->
