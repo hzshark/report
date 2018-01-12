@@ -28,7 +28,9 @@ import java.util.List;
 @ComponentScan
 @Configuration
 
-@ImportResource(locations={"classpath:mykaptcha.xml"})
+
+
+@ImportResource(locations={"classpath:mykaptcha.xml","classpath:mybatis-spring.xml"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Autowired

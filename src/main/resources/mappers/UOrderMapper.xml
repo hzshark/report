@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="cn.xp.hashpower.dao.UOrderMapper">
+
+    <resultMap id="BaseResultMap" type="cn.xp.hashpower.model.UOrder">
+        <id column="order_id" property="order_id" jdbcType="VARCHAR" />
+        <result column="userid" property="userid" jdbcType="INTEGER" />
+        <result column="pay_type" property="paytype" jdbcType="VARCHAR" />
+        <result column="pay_amount" property="payamount" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        pay_time,status`,order_id,userid,pay_type,pay_amount,capture_Set
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="order_id !='' and order_id !=null">
+                id  = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="userid !='' and userid !=null ">
+                and userid = #{userid,jdbcType=INTEGER}
+            </if>
+            <if test="status !='' and status !=null ">
+                and status = #{status,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </sql>
+
+
+    <select id="findByOid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from u_order
+       <!-- <include refid="searchBy"/>-->
+        where order_id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--<select id="listUorderByStatus" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from u_order
+        <include refid="searchBy"/>
+    </select>-->
+
+    <update id="updateOrderStatus" parameterType="cn.xp.hashpower.model.UOrder">
+		UPDATE u_order SET status = #{status ,jdbcType=INTEGER}
+        WHERE order_id = #{order_id ,jdbcType=INTEGER}
+    </update>
+
+
+
+    <delete id="deleteByPrimaryKey">
+    	delete from u_order where  order_id=#{id,jdbcType=INTEGER}
+    </delete>
+    
+    
+    <insert id="save" parameterType="cn.xp.hashpower.model.UOrder">
+        INSERT INTO u_order (`order_id`, `userid`, `pay_type`, `pay_amount`, `capture_Set`,`status`,`pay_time`) VALUES (#{order_id,jdbcType=VARCHAR},#{userid,jdbcType=INTEGER},#{pay_type,jdbcType=INTEGER},
+        #{pay_amount,jdbcType=VARCHAR},#{catture_set,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},#{pay_time,jdbcType=DATE})
+    </insert>
+
+    
+</mapper>

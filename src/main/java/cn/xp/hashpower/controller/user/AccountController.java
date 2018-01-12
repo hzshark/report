@@ -4,6 +4,7 @@ import cn.xp.hashpower.common.Constants;
 import cn.xp.hashpower.common.annotation.SystemControllerLog;
 import cn.xp.hashpower.common.exception.BizException;
 import cn.xp.hashpower.common.rule.ParamsChecker;
+import cn.xp.hashpower.common.util.AuthUtil;
 import cn.xp.hashpower.common.util.SequenceUtils;
 import cn.xp.hashpower.controller.BaseController;
 import cn.xp.hashpower.model.SessionUser;
@@ -21,6 +22,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,39 +111,31 @@ public class AccountController extends BaseController {
         return map;
     }
 
- /*   @RequestMapping("/index/{name}" )
-    @ResponseBody
-    public String index(@PathVariable String name) {
-
-        if (null == name) {
-            name = "boy";
+    @SuppressWarnings("unchecked")
+    @SystemControllerLog(description = "/user/modifyLoginPassword")
+    public ResultVO modifyPassword(@RequestParam(value = "oldpwd", required = false) String oldpwd ,@RequestParam(value = "pwd",required= false) String pwd) throws Exception{
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ResultVO result = new ResultVO();
+        //result.setFailRepmsg();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
         }
+        String oldPassword=user.getLoginpwd();
 
-        return "hello world " + name;
-    }*/
-/*
-    @RequestMapping("/setsession/{age}")
-    @ResponseBody
-    public String TestSession(@PathVariable String age){
-        session.setAttribute("age", age);
-        return "set session age value:"+age;
-    }*/
-
-   /* @RequestMapping("/getsession")
-    @ResponseBody
-    public String TestSession(){
-        String a = (String) session.getAttribute("age");
-        return a;
+        if (!oldPassword.equals(oldpwd)) {
+            result.setFailRepmsg( "原密码输入不正确");
+        } else if (pwd.equals(oldPassword)) {
+            result.setFailRepmsg("新密码不能和旧密码相同");
+        } else {
+            userManageService.modifyUserPwd(user.getUserId(),pwd);
+             result.setSucessRepmsg("密码修改成功");
+        }
+        return  result;
     }
-*/
 
-   /* @RequestMapping(value = "/testlog", method = RequestMethod.GET)
-    public String testLog(){
-        logger.debug("Logger Level ：DEBUG");
-        logger.info("Logger Level ：INFO");
-        logger.error("Logger Level ：ERROR");
-        return "<h1>Welcome to das,欢迎使用</h1>";
-    }*/
+
+
     /*
      短信验证码要换一个位置
      */
@@ -193,4 +188,6 @@ public class AccountController extends BaseController {
         else
             return new HashMap<>();
     }
+
+
 }

@@ -9,7 +9,7 @@
 <body>
     <div class="layui-fluid main">
         <div class="layui-row">
-        	<form class="layui-form" action="">
+        	<form class="layui-form" action=""  enctype="multipart/form-data">
                 <div class="layui-form-item">
                 <label class="layui-form-label">上传</label>
                 <div class="layui-input-block">
@@ -63,7 +63,7 @@
       //普通图片上传
       var uploadInst = upload.render({
         elem: '#test1'
-        ,url: '/upload/'
+        ,url: '/msic/upload/'
         ,before: function(obj){
           //预读本地文件示例，不支持ie8
           obj.preview(function(index, file, result){

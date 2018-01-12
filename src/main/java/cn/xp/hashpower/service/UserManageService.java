@@ -1,6 +1,7 @@
 package cn.xp.hashpower.service;
 
 import cn.xp.hashpower.dao.SysLoginAccountMapper;
+import cn.xp.hashpower.dao.UOrderMapper;
 import cn.xp.hashpower.model.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +15,12 @@ public class UserManageService {
     @Autowired
     private SysLoginAccountMapper loginAccountDao;
 
+    @Autowired
+    private UOrderMapper uOrderMapper;
+
     public SessionUser getUserByUserName(String userName){
 
+        uOrderMapper.findByOid(11);
         SessionUser account = loginAccountDao.selectByAccount(userName);
         return account;
     }
@@ -30,4 +35,10 @@ public class UserManageService {
     {
         return loginAccountDao.adduser(phone,pwd);
     }
+
+    public void modifyUserPwd(int userid,String pwd)
+    {
+         loginAccountDao.modifyUserPwd(userid,pwd);
+    }
+
 }

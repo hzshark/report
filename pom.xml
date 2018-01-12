@@ -20,7 +20,7 @@
 		</repository>
 	</repositories>
 
-	<name>report</name>
+	<name>hashpower</name>
 	<description>report project for Spring Boot</description>
 
 	<parent>
@@ -186,6 +186,22 @@
 			<version>0.9.13</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+	<!--	<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>RELEASE</version>
+		</dependency>-->
 <!--
 		<dependency>
 			<groupId>wf.bitcoin</groupId>

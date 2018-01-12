@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface MachineMapper extends BaseMapper<SessionUser, Long> {
+public interface MachineMapper extends BaseMapper{
 
     /*@Select("select * from machine_item where machine_id = #{0}")
     SessionUser selectByMachinerId(String userId);
