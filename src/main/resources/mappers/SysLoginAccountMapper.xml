@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xp.hashpower.dao.SysLoginAccountMapper" >
+    <resultMap id="BaseResultMap" type="cn.bestsign.ssqian.boss.domain.AdmRole" >
+        <id column="rol_no" property="rolNo" jdbcType="INTEGER" />
+        <result column="rol_name" property="rolName" jdbcType="VARCHAR" />
+        <result column="rol_nameen" property="rolNameen" jdbcType="VARCHAR" />
+        <result column="rol_description" property="rolDescription" jdbcType="VARCHAR" />
+        <result column="rol_group" property="rolGroup" jdbcType="VARCHAR" />
+        <result column="rol_flag" property="rolFlag" jdbcType="CHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        rol_no, rol_name, rol_nameen, rol_description, rol_group, rol_flag
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from adm_role
+        where rol_no = #{rolNo,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from adm_role
+        where rol_no = #{rolNo,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="cn.bestsign.ssqian.boss.domain.AdmRole" >
+        insert into adm_role (rol_no, rol_name, rol_nameen,
+        rol_description, rol_group, rol_flag
+        )
+        values (#{rolNo,jdbcType=INTEGER}, #{rolName,jdbcType=VARCHAR}, #{rolNameen,jdbcType=VARCHAR},
+        #{rolDescription,jdbcType=VARCHAR}, #{rolGroup,jdbcType=VARCHAR}, #{rolFlag,jdbcType=CHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="cn.bestsign.ssqian.boss.domain.AdmRole" >
+        insert into adm_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rolNo != null" >
+                rol_no,
+            </if>
+            <if test="rolName != null" >
+                rol_name,
+            </if>
+            <if test="rolNameen != null" >
+                rol_nameen,
+            </if>
+            <if test="rolDescription != null" >
+                rol_description,
+            </if>
+            <if test="rolGroup != null" >
+                rol_group,
+            </if>
+            <if test="rolFlag != null" >
+                rol_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rolNo != null" >
+                #{rolNo,jdbcType=INTEGER},
+            </if>
+            <if test="rolName != null" >
+                #{rolName,jdbcType=VARCHAR},
+            </if>
+            <if test="rolNameen != null" >
+                #{rolNameen,jdbcType=VARCHAR},
+            </if>
+            <if test="rolDescription != null" >
+                #{rolDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="rolGroup != null" >
+                #{rolGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="rolFlag != null" >
+                #{rolFlag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.bestsign.ssqian.boss.domain.AdmRole" >
+        update adm_role
+        <set >
+            <if test="rolName != null" >
+                rol_name = #{rolName,jdbcType=VARCHAR},
+            </if>
+            <if test="rolNameen != null" >
+                rol_nameen = #{rolNameen,jdbcType=VARCHAR},
+            </if>
+            <if test="rolDescription != null" >
+                rol_description = #{rolDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="rolGroup != null" >
+                rol_group = #{rolGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="rolFlag != null" >
+                rol_flag = #{rolFlag,jdbcType=CHAR},
+            </if>
+        </set>
+        where rol_no = #{rolNo,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.bestsign.ssqian.boss.domain.AdmRole" >
+        update adm_role
+        set rol_name = #{rolName,jdbcType=VARCHAR},
+        rol_nameen = #{rolNameen,jdbcType=VARCHAR},
+        rol_description = #{rolDescription,jdbcType=VARCHAR},
+        rol_group = #{rolGroup,jdbcType=VARCHAR},
+        rol_flag = #{rolFlag,jdbcType=CHAR}
+        where rol_no = #{rolNo,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectAdmRoleList" parameterType="cn.bestsign.ssqian.boss.model.AdmRoleModel" resultType="cn.bestsign.ssqian.boss.model.AdmRoleModel">
+        select
+        <include refid="Base_Column_List"/>
+        from adm_role
+        <where>
+            <if test="rolName != null and rolName != '' " >
+                AND rol_name = #{rolName,jdbcType=VARCHAR}
+            </if>
+            <if test="rolFlag != null and rolFlag != '' " >
+                AND rol_flag = #{rolFlag,jdbcType=CHAR}
+            </if>
+        </where>
+    </select>
+
+</mapper>

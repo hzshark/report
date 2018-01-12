@@ -20,7 +20,7 @@ public class UserManageService {
 
     public SessionUser getUserByUserName(String userName){
 
-        uOrderMapper.findByOid(11);
+        //uOrderMapper.findByOid(11);
         SessionUser account = loginAccountDao.selectByAccount(userName);
         return account;
     }

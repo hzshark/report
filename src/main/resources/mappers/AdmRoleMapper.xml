@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.bestsign.ssqian.boss.dao.AdmRoleMapper" >
+<mapper namespace="cn.xp.hashpower.dao.AdmRoleMapper" >
   <resultMap id="BaseResultMap" type="cn.bestsign.ssqian.boss.domain.AdmRole" >
     <id column="rol_no" property="rolNo" jdbcType="INTEGER" />
     <result column="rol_name" property="rolName" jdbcType="VARCHAR" />

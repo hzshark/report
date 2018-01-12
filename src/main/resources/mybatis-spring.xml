@@ -54,7 +54,7 @@
 
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="basisDataSource" ref="basisDataSource" />
+        <property name="DataSource" ref="DataSource" />
        <!-- <property name="configLocation" value="classpath:mybatis-spring.xml" />-->
         <!-- 自动扫描mapping.xml文件 -->
         <property name="mapperLocations" value="classpath:mappers/*.xml"></property>
@@ -68,7 +68,7 @@
 
     <!-- (事务管理)transaction manager -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="basisDataSource" />
+        <property name="dataSource" ref="DataSource" />
     </bean>
 
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
