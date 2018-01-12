@@ -54,6 +54,9 @@ public class BitcoinJSONRPCClientTest {
     public void CreateWalletTest() throws Exception {
         final String rpcuser ="RPCuser";
         final String rpcpassword ="RPCpwd";
+       // Short a =128;
+       // byte b =a;
+
 
         Authenticator.setDefault(new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
