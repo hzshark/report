@@ -269,8 +269,8 @@ public class AccountController extends BaseController {
     /*
    * 获取用户认证状态
    * */
-    @RequestMapping(value = "/authstat", method = RequestMethod.GET)
-    @SystemControllerLog(description = "/user/authstat")
+    @RequestMapping(value = "/authsatus", method = RequestMethod.GET)
+    @SystemControllerLog(description = "/user/authstatus")
     public ResultVO  userauthstat() throws BizException
     {
         Object dd= SecurityUtils.getSubject().getPrincipal();
