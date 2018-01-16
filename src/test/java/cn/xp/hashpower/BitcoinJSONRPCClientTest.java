@@ -11,6 +11,7 @@ import wf.bitcoin.krotjson.JSON;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -59,16 +60,16 @@ public class BitcoinJSONRPCClientTest {
         byte b = (byte)c;
 
 
-        Authenticator.setDefault(new Authenticator() {
+        /*Authenticator.setDefault(new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(rpcuser, rpcpassword.toCharArray());
             }
-        });
+        });*/
 
         //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@182.92.97.3:8333"));
        // Bitcoin bitcoin = new BitcoinJSONRPCClient();
         //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@192.168.2.66:8333"));
-        BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@127.0.0.1:8333"));
+        BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@127.0.0.1:8335"));
 
         //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://127.0.0.1:8333"));
 
@@ -76,8 +77,75 @@ public class BitcoinJSONRPCClientTest {
         // BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@127.0.0.1:8332"));
         //String address = bitcoin.getAccountAddress("9999999999999999999");
         BitcoindRpcClient.Info zz= bitcoin.getInfo();
+        System.out.println(zz);
+        String account=bitcoin.getAccountAddress("13355786900@qq.com");
+        System.out.println(account);
         return;
     }
+
+    public void getbalance(String address) throws Exception {
+        final String rpcuser ="RPCuser";
+        final String rpcpassword ="RPCpwd";
+
+
+        //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@182.92.97.3:8333"));
+        // Bitcoin bitcoin = new BitcoinJSONRPCClient();
+        //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@192.168.2.66:8333"));
+        BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@127.0.0.1:8335"));
+
+        //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://127.0.0.1:8333"));
+
+
+        // BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@127.0.0.1:8332"));
+        //String address = bitcoin.getAccountAddress("9999999999999999999");
+        /*BitcoindRpcClient.Info zz= bitcoin.getInfo();
+        System.out.println(zz);*/
+        ArrayList<String> accounts=new ArrayList<>();
+        accounts.add("13355786900");
+        accounts.add("lxp.hz@qq.com");
+        //String address;
+        for (String account:accounts) {
+             address = bitcoin.getAccountAddress(account);
+             System.out.println(address);
+        }
+        /*double balance = bitcoin.getBalance(account);
+        System.out.println(account + " balance: "+ balance);*/
+        return;
+    }
+
+
+    @Test
+    public void sendBtcoin(/*String from,String to,double amount,String common*/) throws Exception {
+        final String rpcuser ="RPCuser";
+        final String rpcpassword ="RPCpwd";
+
+
+        //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@182.92.97.3:8333"));
+        // Bitcoin bitcoin = new BitcoinJSONRPCClient();
+        //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@192.168.2.66:8333"));
+        BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@127.0.0.1:8335"));
+
+        //BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://127.0.0.1:8333"));
+
+
+        // BitcoinJSONRPCClient bitcoin  = new BitcoinJSONRPCClient(new URL("http://RPCuser:RPCpwd@127.0.0.1:8332"));
+        //String address = bitcoin.getAccountAddress("9999999999999999999");
+        /*BitcoindRpcClient.Info zz= bitcoin.getInfo();
+        System.out.println(zz);*/
+       /* ArrayList<String> accounts=new ArrayList<>();
+        accounts.add("13355786900");
+        accounts.add("lxp.hz@qq.com");
+        String address;
+        for (String account:accounts) {
+            address = bitcoin.getAccountAddress(account);
+            System.out.println(address);
+        }*/
+       String ret= bitcoin.sendFrom("n2GNHrZmethYoTpu77XztxotAthH2batf3","n3fFEpepxBbMCGUgLFgxuniemSGCXyxuwT",0.00001);
+        System.out.println(" sendFrom : "+ ret);
+        bitcoin.listAccounts();
+        return;
+    }
+
     @Test
     public void signRawTransactionTest() throws Exception {
         client = new MyClientTest(false, "signrawtransaction", null,

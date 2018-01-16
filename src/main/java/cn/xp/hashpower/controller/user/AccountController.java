@@ -8,10 +8,12 @@ import cn.xp.hashpower.common.util.AuthUtil;
 import cn.xp.hashpower.common.util.SequenceUtils;
 import cn.xp.hashpower.controller.BaseController;
 import cn.xp.hashpower.model.SessionUser;
+import cn.xp.hashpower.service.BitcoinClient;
 import cn.xp.hashpower.service.Interface.SmsService;
 import cn.xp.hashpower.service.UserManageService;
 import cn.xp.hashpower.util.JwtHelper;
 import cn.xp.hashpower.vo.ResultVO;
+import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -30,6 +32,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
+@Log4j
 public class AccountController extends BaseController {
 
     @Resource
@@ -40,6 +43,9 @@ public class AccountController extends BaseController {
 
     @Value("${spring.application.name}")
     private String applicationName;
+
+    @Resource
+    BitcoinClient bitcoinJSONRPCClient;
 
     /**
      * 用户登录
@@ -80,7 +86,7 @@ public class AccountController extends BaseController {
         //SessionUser sessionUser = userManageService.getUserInfo(Integer.parseInt(userId));
         SessionUser sessionUser = (SessionUser) object;
 
-        String accessToken = JwtHelper.createJWT(""+sessionUser.getUserId(), sessionUser.getLogin_name(), applicationName,
+        String accessToken = JwtHelper.createJWT(""+sessionUser.getUserId(), sessionUser.getPhone(), applicationName,
                 Constants.USER_LOGIN_EXPIRE_SECONDS);
         sessionUser.setToken(accessToken);
         logger.info(sessionUser.getLoginpwd()+" 登陆成功！！！");
@@ -191,14 +197,18 @@ public class AccountController extends BaseController {
      */
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     @SystemControllerLog(description = "/user/reg")
-    public ResultVO  userReg(String phone,String pwd,String vrifyCode) throws BizException
+    public ResultVO  userReg(String email,String pwd,String vrifyCode,String nickname) throws BizException
     {
         ResultVO resultVO=new ResultVO();
         if(StringUtils.isEmpty(vrifyCode)){
             resultVO.setFailRepmsg( "验证码不能为空");
             return resultVO;
         }
-         String imageCode = (String)session.getAttribute("vrifyCode");
+        ParamsChecker.checkIsMail(email,"邮件地址未填写");
+        ParamsChecker.checkNotEmpty(pwd,"登陆密码未填写");
+        ParamsChecker.checkNotEmpty(nickname,"昵称未填写");
+
+        String imageCode = (String)session.getAttribute("vrifyCode");
 
           /*if (!StringUtils.equalsIgnoreCase(imageCode, vrifyCode)) {
                 resultVO.setFailRepmsg("验证码不正确");
@@ -206,9 +216,31 @@ public class AccountController extends BaseController {
             }
             session.removeAttribute("vrifyCode");
           */
-          boolean ret=userManageService.addUser(phone,pwd);
-        if (ret)
+        boolean ret=false;
+        SessionUser user=userManageService.getUserByUserName(nickname);
+        if (user!=null)
+        {
+            resultVO.setFailRepmsg( "用户已存在");
+            return resultVO;
+        }
+        else {
+            user=new SessionUser();
+            user.setEmail(email);
+            user.setLoginpwd(pwd);
+            user.setNickname(nickname);
+            ret = userManageService.addUser(user);
+        }
+        if (ret && user.getUserId()>0) {
+            String  address = null;
+            try {
+                address =bitcoinJSONRPCClient.CreateWallet(email);
+                userManageService.setUserBtwallet(user.getUserId(),address);
+            }catch (Exception e) {
+                log.warn("cr btwallet fail :"+e.getMessage());
+            }
+
             resultVO.setSucessRepmsg("注册成功！");
+        }
         else
             resultVO.setFailRepmsg();
         return  resultVO;

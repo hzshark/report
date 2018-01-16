@@ -16,13 +16,13 @@ public class SessionUser  implements Serializable{
 
 	private int userId;
 
-    private String login_name = "";
+    private String nickname;
 
-    private String loginpwd = "";
+    private String loginpwd  ;
 
-    private String email = "";
+    private String email  ;
 
-    private String phone = "";
+    private String phone  ;
 
     private String paypwd;
 

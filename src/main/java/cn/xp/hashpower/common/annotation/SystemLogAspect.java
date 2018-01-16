@@ -48,7 +48,7 @@ public  class SystemLogAspect {
         Object dd=SecurityUtils.getSubject().getPrincipal();
         String userId = "";
         if (dd!=null && dd instanceof SessionUser)
-            userId=((SessionUser)dd).getLogin_name();
+            userId=((SessionUser)dd).getPhone();
         String userAgent = request.getHeader("User-Agent");
         String referer = request.getHeader("Referer");
         String type = request.getMethod();

@@ -117,7 +117,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/", "anon");
         //登录页不拦截
         filterChainDefinitionMap.put("/vrifyCode", "anon");
-
+        filterChainDefinitionMap.put("/user/reg", "anon");
         //登出拦截
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/misc", "authc");

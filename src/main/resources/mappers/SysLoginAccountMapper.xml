@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.xp.hashpower.dao.SysLoginAccountMapper" >
-    <resultMap id="BaseResultMap" type="cn.xp.hashpower.dao.SysLoginAccountMapper" >
+<mapper namespace="cn.xp.hashpower.dao.SysAccountMapper" >
+    <resultMap id="BaseResultMap" type="cn.xp.hashpower.dao.SysAccountMapper" >
         <id column="rol_no" property="rolNo" jdbcType="INTEGER" />
         <result column="rol_name" property="rolName" jdbcType="VARCHAR" />
         <result column="rol_nameen" property="rolNameen" jdbcType="VARCHAR" />
@@ -9,7 +9,7 @@
         <result column="rol_group" property="rolGroup" jdbcType="VARCHAR" />
         <result column="rol_flag" property="rolFlag" jdbcType="CHAR" />
     </resultMap>
-    <sql id="Base_Column_List" >
+    <!--<sql id="Base_Column_List" >
         rol_no, rol_name, rol_nameen, rol_description, rol_group, rol_flag
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -22,15 +22,15 @@
         delete from adm_role
         where rol_no = #{rolNo,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="cn.xp.hashpower.dao.SysLoginAccountMapper" >
+    <insert id="insert" parameterType="cn.xp.hashpower.dao.SysAccountMapper" >
         insert into adm_role (rol_no, rol_name, rol_nameen,
         rol_description, rol_group, rol_flag
         )
         values (#{rolNo,jdbcType=INTEGER}, #{rolName,jdbcType=VARCHAR}, #{rolNameen,jdbcType=VARCHAR},
         #{rolDescription,jdbcType=VARCHAR}, #{rolGroup,jdbcType=VARCHAR}, #{rolFlag,jdbcType=CHAR}
         )
-    </insert>
-    <insert id="insertSelective" parameterType="cn.xp.hashpower.dao.SysLoginAccountMapper" >
+    </insert>-->
+   <!-- <insert id="insertSelective" parameterType="cn.xp.hashpower.dao.SysAccountMapper" >
         insert into adm_role
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="rolNo != null" >
@@ -73,7 +73,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="cn.xp.hashpower.dao.SysLoginAccountMapper" >
+    <update id="updateByPrimaryKeySelective" parameterType="cn.xp.hashpower.dao.SysAccountMapper" >
         update adm_role
         <set >
             <if test="rolName != null" >
@@ -94,7 +94,7 @@
         </set>
         where rol_no = #{rolNo,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="cn.xp.hashpower.dao.SysLoginAccountMapper" >
+    <update id="updateByPrimaryKey" parameterType="cn.xp.hashpower.dao.SysAccountMapper" >
         update adm_role
         set rol_name = #{rolName,jdbcType=VARCHAR},
         rol_nameen = #{rolNameen,jdbcType=VARCHAR},
@@ -102,7 +102,7 @@
         rol_group = #{rolGroup,jdbcType=VARCHAR},
         rol_flag = #{rolFlag,jdbcType=CHAR}
         where rol_no = #{rolNo,jdbcType=INTEGER}
-    </update>
+    </update>-->
 
 
 
