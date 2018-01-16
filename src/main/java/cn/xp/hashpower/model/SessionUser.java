@@ -24,6 +24,8 @@ public class SessionUser  implements Serializable{
 
     private String phone = "";
 
+    private String paypwd;
+
 	/*public String getUserId() {
 		return userId;
 	}

@@ -21,8 +21,8 @@ public class UserManageService {
     public SessionUser getUserByUserName(String userName){
 
         //uOrderMapper.findByOid(11);
-        SessionUser account = loginAccountDao.selectByAccount(userName);
-        return account;
+    SessionUser account = loginAccountDao.selectByAccount(userName);
+    return account;
     }
 
     public SessionUser getUserInfo(int userid){
@@ -36,9 +36,14 @@ public class UserManageService {
         return loginAccountDao.adduser(phone,pwd);
     }
 
-    public void modifyUserPwd(int userid,String pwd)
+    public void modifyUserLoginPwd(int userid, String pwd)
     {
-         loginAccountDao.modifyUserPwd(userid,pwd);
+         loginAccountDao.modifyLoginUserPwd(userid,pwd);
+    }
+
+    public void modifyUserPayPwd(int userid, String pwd)
+    {
+        loginAccountDao.modifyPayUserPwd(userid,pwd);
     }
 
 }

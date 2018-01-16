@@ -38,7 +38,7 @@
         <property name="testOnReturn" value="false" />
 
         <!-- 配置密码需要加密 -->
-        <property name="connectionProperties" value="config.decrypt=true" />
+        <property name="connectionProperties" value="config.decrypt=false" />
 
         <!--配置监控统计拦截的filters, mergeStat: SQL合并配置的监控Filter, config: 数据库密码加密解密 -->
         <!-- <property name="filters" value="mergeStat,config" /> -->

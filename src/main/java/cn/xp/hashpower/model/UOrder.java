@@ -10,6 +10,6 @@ public class UOrder {
     int pay_type;
     String pay_amount;
     String catture_set;
-    int status;
+    //int status;
     Date pay_time;
 }

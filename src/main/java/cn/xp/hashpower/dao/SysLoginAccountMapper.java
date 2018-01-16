@@ -19,9 +19,14 @@ public interface SysLoginAccountMapper extends BaseMapper<SessionUser, Long> {
     int countByAccount(String account);
 
     @Update(" update u_account set loginpwd=#{arg1} where userid=#{arg1})  ")
-    void modifyUserPwd(int userId,String pwd);
+    void modifyLoginUserPwd(int userId, String pwd);
+
+    @Update(" update u_account set paypwd=#{arg1} where userid=#{arg1})  ")
+    void modifyPayUserPwd(int userId, String pwd);
 
    @Insert("insert into u_account(phone,loginpwd) values(#{arg0},#{arg1})")
    boolean adduser(String phone,String pwd);
+
+
 
 }

@@ -22,8 +22,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -113,7 +111,7 @@ public class AccountController extends BaseController {
 
     @SuppressWarnings("unchecked")
     @SystemControllerLog(description = "/user/modifyLoginPassword")
-    public ResultVO modifyPassword(@RequestParam(value = "oldpwd", required = false) String oldpwd ,@RequestParam(value = "pwd",required= false) String pwd) throws Exception{
+    public ResultVO modifyLoginPassword(@RequestParam(value = "oldpwd", required = false) String oldpwd ,@RequestParam(value = "pwd",required= false) String pwd) throws Exception{
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();
         //result.setFailRepmsg();
@@ -128,12 +126,49 @@ public class AccountController extends BaseController {
         } else if (pwd.equals(oldPassword)) {
             result.setFailRepmsg("新密码不能和旧密码相同");
         } else {
-            userManageService.modifyUserPwd(user.getUserId(),pwd);
+            userManageService.modifyUserLoginPwd(user.getUserId(),pwd);
              result.setSucessRepmsg("密码修改成功");
         }
         return  result;
     }
 
+    @SuppressWarnings("unchecked")
+    @SystemControllerLog(description = "/user/modifyPayPassword")
+    public ResultVO modifyPayPassword(@RequestParam(value = "oldpwd", required = false) String oldpwd ,@RequestParam(value = "pwd",required= false) String pwd) throws Exception{
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ResultVO result = new ResultVO();
+        //result.setFailRepmsg();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        String oldPassword=user.getPaypwd();
+
+        if (!oldPassword.equals(oldpwd)) {
+            result.setFailRepmsg( "原密码输入不正确");
+        } else if (pwd.equals(oldPassword)) {
+            result.setFailRepmsg("新密码不能和旧密码相同");
+        } else {
+            userManageService.modifyUserPayPwd(user.getUserId(),pwd);
+            result.setSucessRepmsg("密码修改成功");
+        }
+        return  result;
+    }
+
+  /*  private void modifyPassword(ResultVO result , SessionUser user,String oldpwd ,String pwd) throws Exception{
+
+        String oldPassword=user.getPaypwd();
+
+        if (!oldPassword.equals(oldpwd)) {
+            result.setFailRepmsg( "原密码输入不正确");
+        } else if (pwd.equals(oldPassword)) {
+            result.setFailRepmsg("新密码不能和旧密码相同");
+        } else {
+            userManageService.modifyUserLoginPwd(user.getUserId(),pwd);
+            result.setSucessRepmsg("密码修改成功");
+        }
+
+    }*/
 
 
     /*
