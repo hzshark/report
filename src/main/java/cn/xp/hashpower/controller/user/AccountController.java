@@ -271,7 +271,7 @@ public class AccountController extends BaseController {
    * */
     @RequestMapping(value = "/authsatus", method = RequestMethod.GET)
     @SystemControllerLog(description = "/user/authstatus")
-    public ResultVO  userauthstat() throws BizException
+    public ResultVO  QueryUserAuthstatus() throws BizException
     {
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();
