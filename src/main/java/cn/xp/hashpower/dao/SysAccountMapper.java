@@ -29,4 +29,9 @@ public interface SysAccountMapper extends BaseMapper<SessionUser, Long> {
     @Insert("INSERT INTO u_wallet (uid,wallet_address) VALUES (#{arg0},#{arg1})")
     boolean setUserBtwallet(int userid,String address);
 
+    @Select("select wallet_address from u_wallet where uid =#{arg0} and type=1)")
+    String getUserBtwallet(int userId);
+
+    @Select("select auth_status from u_account where userid = #{0}")
+    String getUserAuthStatus(int userId);
 }

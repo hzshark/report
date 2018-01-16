@@ -246,6 +246,46 @@ public class AccountController extends BaseController {
         return  resultVO;
     }
 
+    /*
+    * 获取用户BT钱包地址
+    * */
+    @RequestMapping(value = "/btwallet", method = RequestMethod.GET)
+    @SystemControllerLog(description = "/user/btwallet")
+    public ResultVO  userbtwallet() throws BizException
+    {
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ResultVO result = new ResultVO();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        String btaddress=userManageService.getUserBtwallet(user.getUserId());
+        ParamsChecker.checkNotBlank(btaddress,"未查到钱包");
+        result.setResult(btaddress);
+        result.setSucessRepmsg();
+        return  result;
+    }
+
+    /*
+   * 获取用户认证状态
+   * */
+    @RequestMapping(value = "/authstat", method = RequestMethod.GET)
+    @SystemControllerLog(description = "/user/authstat")
+    public ResultVO  userauthstat() throws BizException
+    {
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ResultVO result = new ResultVO();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        String ret=userManageService.getUserAuthStatus(user.getUserId());
+        ParamsChecker.checkNotBlank(ret,"未知认证状态");
+        result.setResult(ret);
+        result.setSucessRepmsg();
+        return  result;
+    }
+
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
     public Object getUserInfo() {

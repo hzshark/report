@@ -50,4 +50,12 @@ public class UserManageService {
     {
         AccountDao.setUserBtwallet(userid,address);
     }
+
+    public String getUserBtwallet(int userId) {
+        return  AccountDao.getUserBtwallet(userId);
+    }
+
+    public String getUserAuthStatus(int userId) {
+        return AccountDao.getUserAuthStatus(userId);
+    }
 }

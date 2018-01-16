@@ -62,6 +62,8 @@ public class CoinController extends BaseController {
         return listVO;
     }
 
+
+
     @RequestMapping(value = "/coinlog",  method = RequestMethod.GET)
     @SystemControllerLog(description = "/coin/coinlog" )
     public ListVO ListUserCoinLog(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ){
