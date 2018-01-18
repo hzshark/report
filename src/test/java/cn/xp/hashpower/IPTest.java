@@ -45,7 +45,21 @@ public class IPTest {
         return num > 0 && num <= 255;
     }
 
+    public abstract class MyClass {
+        public int constInt = 5;
+        //add code here
+abstract void  method(int a);
+public void method() {
+        }
+    }
 
+    public class OuterClass{
+        private float f=1.0f;
+        //插入代码到这里
+        /*class InnerClass{
+            public static float func(){return f;}
+        }*/
+    }
     public static void main(String[] args) {
         System.out.println(restoreIpAddresses("23343"));
     }

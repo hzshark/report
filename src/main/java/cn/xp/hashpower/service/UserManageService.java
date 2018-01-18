@@ -58,4 +58,9 @@ public class UserManageService {
     public String getUserAuthStatus(int userId) {
         return AccountDao.getUserAuthStatus(userId);
     }
+
+    public void setGoogleAuthSecret(int userId, String secret)
+    {
+         AccountDao.setGoogleAuthSecret(userId,secret);
+    }
 }

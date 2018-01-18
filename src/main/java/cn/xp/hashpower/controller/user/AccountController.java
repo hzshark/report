@@ -9,6 +9,7 @@ import cn.xp.hashpower.common.util.SequenceUtils;
 import cn.xp.hashpower.controller.BaseController;
 import cn.xp.hashpower.model.SessionUser;
 import cn.xp.hashpower.service.BitcoinClient;
+import cn.xp.hashpower.service.GoogleAuth;
 import cn.xp.hashpower.service.Interface.SmsService;
 import cn.xp.hashpower.service.UserManageService;
 import cn.xp.hashpower.util.JwtHelper;
@@ -18,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -44,8 +46,10 @@ public class AccountController extends BaseController {
     @Value("${spring.application.name}")
     private String applicationName;
 
-    @Resource
     BitcoinClient bitcoinJSONRPCClient;
+
+    GoogleAuth googleAuth;
+
 
     /**
      * 用户登录
@@ -283,6 +287,60 @@ public class AccountController extends BaseController {
         ParamsChecker.checkNotBlank(ret,"未知认证状态");
         result.setResult(ret);
         result.setSucessRepmsg();
+        return  result;
+    }
+
+
+    /*
+    * 获取用户googel认证信息
+    * */
+    @RequestMapping(value = "/applyGoogleAuth", method = RequestMethod.GET)
+    @SystemControllerLog(description = "/user/applyGoogleAuth")
+    public ResultVO  applyGoogelAuth() throws BizException
+    {
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ResultVO result = new ResultVO();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        Map ret=googleAuth.genSecret(user.getNickname());
+        if (ret==null)
+            result.setFailRepmsg();
+
+        else {
+            SecurityUtils.getSubject().getSession().setAttribute("gsecret" ,ret.get("secret"));
+            result.setResult(ret);
+            result.setSucessRepmsg();
+        }
+        return  result;
+    }
+
+
+    /*
+   * 获取用户googel认证信息
+   * */
+    @RequestMapping(value = "/applyGoogleAuth", method = RequestMethod.POST)
+    @SystemControllerLog(description = "/user/applyGoogleAuth")
+    public ResultVO  GoogelAuth(long code) throws BizException
+    {
+        ResultVO result = new ResultVO();
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        Session session= SecurityUtils.getSubject().getSession();
+        if (session==null)
+            return result;
+
+        String secret = (String) session.getAttribute("gsecret");
+        ParamsChecker.checkNotBlank(secret,"发生验证错误,请重试");
+        boolean ret=googleAuth.authentication(secret,code);
+        if (ret) {
+            result.setSucessRepmsg();
+            userManageService.setGoogleAuthSecret(user.getUserId(),secret);
+        }
         return  result;
     }
 
