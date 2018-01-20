@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +27,8 @@ public class CoinManageService {
             groupList = mapper.selectUserWealthList(uid);
         else
             groupList = mapper.selectUserWealthListByCid(uid,coinId);
+        if (groupList==null)
+            groupList=new ArrayList<>();
         PageInfo<CoinItem> pageInfo= new PageInfo<CoinItem>(groupList);
         return pageInfo;
     }

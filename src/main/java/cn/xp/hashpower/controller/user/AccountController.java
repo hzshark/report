@@ -264,9 +264,12 @@ public class AccountController extends BaseController {
             return result;
         }
         String btaddress=userManageService.getUserBtwallet(user.getUserId());
-        ParamsChecker.checkNotBlank(btaddress,"未查到钱包");
-        result.setResult(btaddress);
-        result.setSucessRepmsg();
+        if (btaddress==null)
+            result.setFailRepmsg();
+        else {
+            result.setResult(btaddress);
+            result.setSucessRepmsg();
+        }
         return  result;
     }
 
