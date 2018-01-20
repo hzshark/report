@@ -51,8 +51,12 @@ public class UserManageService {
         AccountDao.setUserBtwallet(userid,address);
     }
 
-    public String getUserBtwallet(int userId) {
-        return  AccountDao.getUserBtwallet(userId);
+    public String getUserBitCoinwalletAddress(int userId) {
+        return  AccountDao.getUserWalletAddress(userId,1);
+    }
+
+    public String getUserEtherwalletAddress(int userId) {
+        return  AccountDao.getUserWalletAddress(userId,2);
     }
 
     public String getUserAuthStatus(int userId) {

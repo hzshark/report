@@ -29,12 +29,14 @@ public interface SysAccountMapper extends BaseMapper<SessionUser, Long> {
     @Insert("INSERT INTO u_wallet (uid,wallet_address) VALUES (#{arg0},#{arg1}")
     boolean setUserBtwallet(int userid,String address);
 
-    @Select("select wallet_address from u_wallet where uid =#{arg0} and type=1")
-    String getUserBtwallet(int userId);
+    @Select("select wallet_address from u_wallet where uid =#{arg0} and type=#{arg1}")
+    String getUserWalletAddress(int userId, int i);
 
     @Select("select auth_status from u_account where userid = #{arg0}")
     String getUserAuthStatus(int userId);
 
     @Update(" update u_account set gauthsecret=#{arg1} where userid=#{arg0} ")
     void setGoogleAuthSecret(int userId, String secret);
+
+
 }

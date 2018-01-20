@@ -253,17 +253,21 @@ public class AccountController extends BaseController {
     /*
     * 获取用户BT钱包地址
     * */
-    @RequestMapping(value = "/btwallet", method = RequestMethod.GET)
-    @SystemControllerLog(description = "/user/btwallet")
-    public ResultVO  userbtwallet() throws BizException
+    @RequestMapping(value = "/walletaddress/{type}", method = RequestMethod.GET)
+    @SystemControllerLog(description = "/user/walletaddress/{type}")
+    public ResultVO  userbtwallet(@PathVariable String type ) throws BizException
     {
+        String btaddress=null;
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();
         SessionUser user= AuthUtil.verfiy(result,dd);
         if (user==null) {
             return result;
         }
-        String btaddress=userManageService.getUserBtwallet(user.getUserId());
+        if (type.equalsIgnoreCase("bitcoin"))
+            btaddress=userManageService.getUserBitCoinwalletAddress(user.getUserId());
+        if  (type.equalsIgnoreCase("ether"))
+            btaddress=userManageService.getUserEtherwalletAddress(user.getUserId());
         if (btaddress==null)
             result.setFailRepmsg();
         else {
