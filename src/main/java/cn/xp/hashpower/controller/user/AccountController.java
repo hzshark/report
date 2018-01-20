@@ -251,7 +251,7 @@ public class AccountController extends BaseController {
     }
 
     /*
-    * 获取用户BT钱包地址
+    * 获取用户BT 和 ether 钱包地址
     * */
     @RequestMapping(value = "/walletaddress/{type}", method = RequestMethod.GET)
     @SystemControllerLog(description = "/user/walletaddress/{type}")
