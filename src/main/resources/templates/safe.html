@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>充值</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <style type="text/css">
+        table {width:100%;
+        margin: 20px;
+    font-size: 16px;}
+    </style>
+</head>
+<body>
+<div class="layui-fluid main">
+    <div class="layui-row box">
+        <table>
+            <tr>
+                <td>登录密码</td>
+                <td></td>
+                <td><a class="modify_pwd" href="javascript:;">修改</a></td>
+            </tr>
+            <tr>
+                <td>身份认证</td>
+                <td>未完成</td>
+                <td><a class="modify_id" href="javascript:;">设置</a></td>
+            </tr>
+            <tr>
+                <td>手机验证</td>
+                <td>未完成</td>
+                <td><a class="modify_phone" href="javascript:;">设置</a></td>
+            </tr>
+            <tr>
+                <td>谷歌验证</td>
+                <td>未完成</td>
+                <td><a class="modify_google" href="javascript:;">设置</a></td>
+            </tr>
+        </table>
+        <!--<div class="layui-col-xs3">-->
+        <!--登录密码-->
+        <!--</div>-->
+        <!--<div class="layui-col-xs6"></div>-->
+        <!--<div class="layui-col-xs3">-->
+        <!--修改-->
+        <!--</div>-->
+    </div>
+
+</div>
+<div id="modify_pwd_box" style="display:none">
+    <input type="password" class="old_pwd" placeholder="输入旧密码"><p>
+    <input type="password" class="new_pwd" placeholder="输入新密码"><p>
+    <button class="submit_modify">提交</button>
+</div>
+<div id="modify_google_box" style="display:none">
+    秘钥为 <span class="google_secret"></span>
+    <dev class="google_qrcode"></dev>
+    <p><input type="text" class="google_code" placeholder="请输入谷歌验证码"></p>
+    <button class="submit_google">提交</button>
+</div>
+</body>
+<script src="./plugins/layui/layui.all.js"></script>
+<script>
+layui.use(["layer","jquery"],function(){
+    var layer = layui.layer;
+    var $ = layui.jquery;
+    $.getJSON("/user/authstatus", function(json){
+        if(json.code == 200) {
+
+        }
+    });
+
+    $(".modify_pwd").click(function(){
+        layer.open({
+          type: 1,
+          title: false,
+          closeBtn: 0,
+          area: '516px',
+          shadeClose: true,
+          content: $('#modify_pwd_box')
+        });
+    });
+    $(".submit_modify").click(function() {
+        $.post("/user/modifyLoginPassword",{oldpwd:$(".old_pwd").val(),"pwd":$(".new_pwd").val()},function(msg){
+            //if(msg.code != 200) {
+                alert(msg.msg)
+            //}
+        });
+    });
+
+    $(".modify_google").click(function() {
+        $.getJSON("/user/applyGoogleAuth",function(json){
+        if(json.code == 200) {
+            $(".google_secret").html(json.result.secret);
+        }
+        layer.open({
+          type: 1,
+          title: "谷歌认证",
+          closeBtn: 0,
+          area: '516px',
+          shadeClose: true,
+          content: $('#modify_google_box')
+        });
+            console.log(json);
+        });
+    });
+
+    $(".submit_google").click(function(){
+        $.post("/user/applyGoogleAuth",{code:$(".google_code").val()},function(json) {
+        if(json.code != 200) {
+            alert("设置失败");
+        }else
+            alert("设置成功");
+           // console(json);
+        });
+    });
+});
+
+
+</script>
+</html>

@@ -146,4 +146,10 @@ public class PageController extends BaseController{
     public String picsubmit(){
         return "picsubmit";
     }
+
+    @RequestMapping(value = "/safe",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/safe")
+    public String safe(){
+        return "safe";
+    }
 }

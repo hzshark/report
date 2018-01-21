@@ -21,6 +21,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,7 @@ public class AccountController extends BaseController {
 
     BitcoinClient bitcoinJSONRPCClient;
 
+    @Autowired
     GoogleAuth googleAuth;
 
 
@@ -121,6 +123,7 @@ public class AccountController extends BaseController {
 
     @SuppressWarnings("unchecked")
     @SystemControllerLog(description = "/user/modifyLoginPassword")
+    @RequestMapping(value = "/modifyLoginPassword", method = RequestMethod.POST)
     public ResultVO modifyLoginPassword(@RequestParam(value = "oldpwd", required = false) String oldpwd ,@RequestParam(value = "pwd",required= false) String pwd) throws Exception{
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();

@@ -14,7 +14,7 @@
 <body class="kit-theme">
     <div class="layui-layout layui-layout-admin kit-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">算力</div>
+            <div class="layui-logo">龙猫算力</div>
             <div class="layui-logo kit-logo-mobile">K</div>
             <ul class="layui-nav layui-layout-left kit-nav">
                 <li class="layui-nav-item"><a href="javascript:;">账户信息</a></li>
@@ -53,25 +53,18 @@
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
                     <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 金币信息</span></a>
+                        <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 我的账户</span></a>
                         <dl class="layui-nav-child">
-                            <dd>
-                                <a href="/home">
-                                    <i class="layui-icon">&#xe6c6;</i><span> 账户信息</span></a>
-<!--                                 <a href="javascript:;" kit-target data-options="{url:'index',icon:'&#xe6c6;',title:'账户信息',id:'1'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span> 账户信息</span></a> -->
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'coinItem.html',icon:'&#xe6c6;',title:'金币列表',id:'1'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span> 金币列表</span></a>
-                            </dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/account.html',icon:'&#xe658;',title:'我的账户',id:'1'}"><i class="layui-icon">&#xe658;</i><span> 我的账户</span></a></dd>
+                        </dl>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/safe.html',icon:'&#xe658;',title:'安全中心',id:'2'}"><i class="layui-icon">&#xe658;</i><span> 安全中心</span></a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed">
-                        <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 机器信息</span></a>
+                        <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 机器列表</span></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target data-options="{url:'/machineItem.html',icon:'&#xe658;',title:'机器列表',id:'3'}"><i class="layui-icon">&#xe658;</i><span> 机器列表</span></a></dd>
-
                         </dl>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target data-options="{url:'/buyMachine.html',icon:'&#xe658;',title:'机器购买',id:'4'}"><i class="layui-icon">&#xe658;</i><span> 机器购买</span></a></dd>
