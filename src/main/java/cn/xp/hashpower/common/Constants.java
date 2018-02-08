@@ -22,5 +22,15 @@ public class Constants {
 
     public static  final String ethcoinName="eth";
 
+    public static int getCoinId(String cointype)
+    {
+        if (cointype.equalsIgnoreCase(bitcoinName))
+            return btcoinId;
+        if (cointype.equalsIgnoreCase(ethcoinName))
+            return ethcoinId;
+        return -1;
+
+    }
+
 
 }

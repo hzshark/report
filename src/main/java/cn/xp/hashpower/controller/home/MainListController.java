@@ -6,7 +6,7 @@ import cn.xp.hashpower.common.exception.BizException;
 import cn.xp.hashpower.common.rule.ParamsChecker;
 import cn.xp.hashpower.common.util.StringUtil;
 import cn.xp.hashpower.controller.BaseController;
-import cn.xp.hashpower.model.InvestMentContract;
+import cn.xp.hashpower.model.InvestMentItem;
 import cn.xp.hashpower.model.MachineItem;
 import cn.xp.hashpower.service.InvestmentManageService;
 import cn.xp.hashpower.service.MachineManageService;
@@ -17,7 +17,6 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -82,7 +81,7 @@ public class MainListController extends BaseController {
             throw  new BizException(501,"unkonw coin type");*/
 
         try {
-            List<InvestMentContract> pageInfo = investmentManageService.SelectInvestmentContractBycoinId(coinid);
+            List<InvestMentItem> pageInfo = investmentManageService.SelectInvestmentContractBycoinId(coinid);
             listVO.setResult(pageInfo);
             listVO.setSucessRepmsg();
         } catch (Exception e) {

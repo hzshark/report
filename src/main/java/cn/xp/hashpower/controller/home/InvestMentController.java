@@ -6,15 +6,12 @@ import cn.xp.hashpower.common.exception.BizException;
 import cn.xp.hashpower.common.rule.ParamsChecker;
 import cn.xp.hashpower.common.util.AuthUtil;
 import cn.xp.hashpower.controller.BaseController;
-import cn.xp.hashpower.dao.InvestmentMapper;
-import cn.xp.hashpower.model.CoinItem;
-import cn.xp.hashpower.model.InvestMentContract;
 import cn.xp.hashpower.model.SessionUser;
 import cn.xp.hashpower.model.UInvestment;
-import cn.xp.hashpower.service.CoinManageService;
 import cn.xp.hashpower.service.InvestmentManageService;
 import cn.xp.hashpower.vo.ListVO;
 import cn.xp.hashpower.vo.ResultVO;
+import com.github.pagehelper.Constant;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/29.
@@ -87,8 +81,9 @@ public class InvestMentController extends BaseController {
 
 
     @RequestMapping(value = "/investment",  method = RequestMethod.GET)
-    @SystemControllerLog(description = "/investment/ log" )
-    public ListVO ListUserCoinLog(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ){
+    @SystemControllerLog(description = "/investment/list" )
+    public ListVO ListUserInvestment(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,
+                                     @RequestParam(value = "limit",required= false) String limit )  throws BizException {
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO result = new ListVO();
         SessionUser user= AuthUtil.verfiy(result,dd);
@@ -114,6 +109,60 @@ public class InvestMentController extends BaseController {
         } catch (Exception e) {
             result.setErrorMsg("获取列表异常");
             logger.error("获取列表异常",e);
+        }
+        return result;
+    }
+
+    /**
+     *  购买理财产品
+     *  需要完善 区块节点的 钱包转账的同步问题
+     * @param cointype
+     * @param amount
+     * @param trad_id
+     * @return
+     * @throws BizException
+     */
+
+    @RequestMapping(value = "/buy",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/investment/buy")
+    public ResultVO BuyInvestmentItem(@RequestParam(value = "cointype",required= true) String cointype,
+                                      @RequestParam(value = "amount",required= true) String amount,@RequestParam(value = "tradid") int trad_id ) throws BizException
+    {
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ResultVO result = new ResultVO();
+        //result.setFailRepmsg();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        Double Amount;
+        Amount= ParamsChecker.Conver2Double(amount, 0D);
+        //int mid = ParamsChecker.Conver2AbsInt(pmid,0);
+
+        int mid=Constants.getCoinId(cointype);
+        if (mid<0)
+            throw new  BizException(402,"unknow coin type");
+         if (Amount<0 || mid<1) {
+            result.setFailRepmsg("购买数量或参数错误");
+            return result;
+        }
+        try {
+            int ret = service.BuyInvestMnet(user.getUserId(),mid,Amount,trad_id);
+            switch (ret) {
+                case 0:
+                    result.setSucessRepmsg();
+                    break;
+                case 1:
+                    result.setFailRepmsg("购买失败,清重试");
+                    break;
+                case 2:
+                    result.setFailRepmsg("可用额度不足");
+                    break;
+            }
+        } catch (Exception e) {
+            logger.error("购买失败",e);
+            result.setFailRepmsg("购买失败");
+            logger.warn(e.getMessage());
         }
         return result;
     }

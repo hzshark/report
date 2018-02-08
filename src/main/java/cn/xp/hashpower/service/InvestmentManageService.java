@@ -1,10 +1,8 @@
 package cn.xp.hashpower.service;
 
-import cn.xp.hashpower.dao.InvestmentContractMapper;
-import cn.xp.hashpower.dao.InvestmentMapper;
-import cn.xp.hashpower.model.CoinInfo;
-import cn.xp.hashpower.model.CoinItem;
-import cn.xp.hashpower.model.InvestMentContract;
+import cn.xp.hashpower.dao.InvestmentItemMapper;
+import cn.xp.hashpower.dao.UInvestmentMapper;
+import cn.xp.hashpower.model.InvestMentItem;
 import cn.xp.hashpower.model.UInvestment;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -23,10 +21,10 @@ public class InvestmentManageService {
 
 
     @Autowired
-    private InvestmentMapper mapper;
+    private UInvestmentMapper mapper;
 
     @Autowired
-    private InvestmentContractMapper investmentContractMapper;
+    private InvestmentItemMapper investmentContractMapper;
 
     public PageInfo<UInvestment> getUserInvestMentList(int pageNo, int pageSize,int uid,int coinId){
         PageHelper.startPage(pageNo, pageSize);
@@ -42,15 +40,15 @@ public class InvestmentManageService {
     }
 
     @Cacheable(value = "localCache" )
-    public List<InvestMentContract> SelectInvestmentContractBycoinId(int coinid)
+    public List<InvestMentItem> SelectInvestmentContractBycoinId(int coinid)
     {
-            List<InvestMentContract> list =investmentContractMapper.selectInvestmentContract() ;
+            List<InvestMentItem> list =investmentContractMapper.selectInvestmentContract() ;
             int len=list.size();
-            InvestMentContract item;
+            InvestMentItem item;
             for ( int i=0;i<len;i++)
             {
                  item=list.get(i);
-                 if (item.getCoinId()!=coinid)
+                 if (item.getCointype()!=coinid)
                      list.remove(i);
             }
             return  list;
@@ -65,6 +63,11 @@ public class InvestmentManageService {
         return pageInfo;
     }
 
+
+    public int BuyInvestMnet(int userId, int mid, Double amount,int trad_id)
+    {
+        return mapper.BuyInvestMnet(userId,mid,amount,trad_id);
+    }
 
    /* private CoinInfo getConinfo(int coinId)
     {

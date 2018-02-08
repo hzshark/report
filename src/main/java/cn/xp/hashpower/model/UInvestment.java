@@ -10,7 +10,7 @@ public class UInvestment {
     //投资id
     private int investmentId;
     //理财合约id
-    private int contractId;
-    private BigDecimal amount;
-    private  InvestMentContract investMentContract;
+    private int tradeId;
+    private double amount;
+    private InvestMentItem investMentContract;
 }

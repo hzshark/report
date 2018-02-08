@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
-public interface InvestmentMapper extends BaseMapper{
+public interface UInvestmentMapper extends BaseMapper{
 
 
 
@@ -34,4 +34,7 @@ public interface InvestmentMapper extends BaseMapper{
 
     @Select("SELECT * from u_investment where uid= #{arg0} and ")
     List<UInvestment> selectUInvestmentByCid(int uid, int coinId);
+
+    @Select("Call SBuyInvestment(#{arg0},#{arg1},#{arg2},#{arg3} )")
+    int BuyInvestMnet(int userId, int mid, Double amount, int trad_id);
 }
