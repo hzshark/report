@@ -10,14 +10,12 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author jozdoo
- * @company 杭州尚尚签网络科技有限公司
- * @date 16/9/2
- * @since 3.0
  */
 @Service
 public class RedisService {
@@ -91,8 +89,25 @@ public class RedisService {
         return execute;
     }
 
-    public Set<Object> getList(String key){
-        return redisTemplate.opsForHash().keys(key);
+   public void mset(String key, Map<String,String> map , Integer expireTime) {
+        redisTemplate.execute((RedisCallback<Object>) redisConnection -> {
+            StringRedisConnection connection = (StringRedisConnection) redisConnection;
+            // TTL设置为0会报错
+            connection.hMSet(key, map); ;
+            connection.expire(key,expireTime);
+            return null;
+        });
     }
+
+    public String hget(String key, String sk) {
+            String execute = redisTemplate.execute(new RedisCallback<String>() {
+                @Override
+                public String doInRedis(RedisConnection redisConnection) throws DataAccessException {
+                    StringRedisConnection connection = (StringRedisConnection) redisConnection;
+                    return connection.hGet(key,sk);
+                }
+            });
+            return execute;
+        }
 
 }

@@ -6,43 +6,49 @@ import cn.xp.hashpower.common.exception.BizException;
 import cn.xp.hashpower.common.rule.ParamsChecker;
 import cn.xp.hashpower.common.util.AuthUtil;
 import cn.xp.hashpower.controller.BaseController;
+import cn.xp.hashpower.dao.InvestmentMapper;
 import cn.xp.hashpower.model.CoinItem;
+import cn.xp.hashpower.model.InvestMentContract;
 import cn.xp.hashpower.model.SessionUser;
-import cn.xp.hashpower.service.BitcoinClient;
+import cn.xp.hashpower.model.UInvestment;
 import cn.xp.hashpower.service.CoinManageService;
-import cn.xp.hashpower.service.UserManageService;
+import cn.xp.hashpower.service.InvestmentManageService;
 import cn.xp.hashpower.vo.ListVO;
 import cn.xp.hashpower.vo.ResultVO;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/29.
  */
 @RestController
-@RequestMapping("/coin")
-public class CoinController extends BaseController {
-
-    @Resource
-    CoinManageService service;
-
-    @Resource
-    BitcoinClient bitcoinClient;
-
-    @Resource
-    UserManageService userManageService;
+@RequestMapping("/investment")
+public class InvestMentController extends BaseController {
 
 
+    @Autowired
+    InvestmentManageService service;
 
-    /*
-     查询可用金额
+
+    /**
+     * 查询理财的订单
+     * @param page
+     * @param limit
+     * @return
+     * @throws BizException
      */
+
     @RequestMapping(value = "/list",  method = RequestMethod.GET)
-    @SystemControllerLog(description = "/coin/list" )
-    public ListVO ListUserCoinItem(@RequestParam(value = "coin",required= false) String cointype,@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ){
+    @SystemControllerLog(description = "/Investment/list" )
+    public ListVO ListUserInvestMent(@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ) throws BizException {
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
         SessionUser user= AuthUtil.verfiy(listVO,dd);
@@ -51,20 +57,13 @@ public class CoinController extends BaseController {
         }
         //ParamsChecker.checkNotBlank(userName, "用户名不能为空");
         //ParamsChecker.checkNotBlank(password, "登录密码不能为空");
-        int pcoinid=0;
-        if (cointype.equalsIgnoreCase(Constants.bitcoinName))
-            pcoinid=Constants.btcoinId;
-        if (cointype.equalsIgnoreCase(Constants.ethcoinName))
-            pcoinid=Constants.ethcoinId;
 
-        if (pcoinid==0)
-            return listVO;
         int pNo=0,pSize=10;
-        //coinId= ParamsChecker.Conver2Int(pcoinid,0);
+
         pNo= ParamsChecker.Conver2Int(page,0);
         pSize=Math.max(ParamsChecker.Conver2Int(limit,0),10);
         try {
-            PageInfo<CoinItem> pageInfo = service.getCoinList(pNo, pSize,user.getUserId(),pcoinid);
+            PageInfo<UInvestment> pageInfo = service.getUserInvestMentList(pNo, pSize,user.getUserId(),-1);
             long count = 0;
             if(pageInfo != null){
                 //分页
@@ -84,8 +83,11 @@ public class CoinController extends BaseController {
 
 
 
-    @RequestMapping(value = "/coinlog",  method = RequestMethod.GET)
-    @SystemControllerLog(description = "/coin/coinlog" )
+
+
+
+    @RequestMapping(value = "/investment",  method = RequestMethod.GET)
+    @SystemControllerLog(description = "/investment/ log" )
     public ListVO ListUserCoinLog(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ){
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO result = new ListVO();
@@ -98,7 +100,7 @@ public class CoinController extends BaseController {
         pNo= ParamsChecker.Conver2Int(page,0);
         pSize=Math.max(ParamsChecker.Conver2Int(limit,0),10);
         try {
-            PageInfo<CoinItem> pageInfo = service.getCoinLogs(pNo, pSize,user.getUserId(),coinId);
+            PageInfo<UInvestment> pageInfo = service.getUInvestments(pNo, pSize,user.getUserId(),coinId);
             long count = 0;
             if(pageInfo != null){
                 //分页
@@ -115,45 +117,6 @@ public class CoinController extends BaseController {
         }
         return result;
     }
-
-
-    /*
-    查用户的充值账户
-     */
-    @RequestMapping(value = "/walletbalance/{type}",  method = RequestMethod.GET)
-    @SystemControllerLog(description = "/coin/walletbalance/{type}" )
-    public ResultVO ListInvestMentContract(@PathVariable String type ) throws BizException {
-        Object dd= SecurityUtils.getSubject().getPrincipal();
-        ResultVO result = new ResultVO();
-        SessionUser user= AuthUtil.verfiy(result,dd);
-        if (user==null) {
-            return result;
-        }
-        ParamsChecker.checkNotBlank(type,"错误类型");
-        String address=null;
-      //  ParamsChecker.checkNotBlank(address,"获取钱包错误");
-        double amount=0;
-        try {
-            if (type.equalsIgnoreCase(Constants.bitcoinName)) {
-                address = userManageService.getUserBitCoinwalletAddress(user.getUserId());
-                amount = bitcoinClient.getbalance(address);
-            }
-            if (type.equalsIgnoreCase(Constants.ethcoinName)) {
-                address = userManageService.getUserEtherwalletAddress(user.getUserId());
-                //增加eth 接口
-            }
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("address",address);
-            jsonObject.put("amount",amount);
-            result.setSucessRepmsg();
-            result.setResult(jsonObject);
-        } catch (Exception e) {
-            result.setFailRepmsg("获取列表异常");
-            logger.error("获取列表异常",e);
-        }
-        return result;
-    }
-
 
 
 }

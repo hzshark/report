@@ -18,7 +18,8 @@ public interface WealthMapper extends BaseMapper<SessionUser, Integer> {
     List<CoinItem> selectUserWealthList(Integer uid);
 
     //@Select("call QUserCoins(#{param1},#{param2}) ;")
-    @Select("call QUserCoins(#{arg0},#{arg1}) ;")
+   // @Select("call QUserCoins(#{arg0},#{arg1}) ;")
+    @Select("SELECT coinid,amount FROM u_wealth where userid=#{arg0} and coinid=#{arg1}")
     List<CoinItem> selectUserWealthListByCid(int  uid,int  coind);
 
     @Select("SELECT * FROM coin_category  where id =#{1} and enable=1")

@@ -30,7 +30,7 @@ import java.util.List;
 
 
 
-@ImportResource(locations={"classpath:mykaptcha.xml"/*,"classpath:mybatis-spring.xml"*/})
+@ImportResource(locations={"classpath:mykaptcha.xml"/*,"classpath:mybatis-spring.xml"*/,"classpath:spring-cache.xml"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Autowired

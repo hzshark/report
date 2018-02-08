@@ -3,6 +3,7 @@ package cn.xp.hashpower.config;
 
 import cn.xp.hashpower.common.auth.CustomCredentialsMatcher;
 import cn.xp.hashpower.common.auth.CustomShiroRealm;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -13,9 +14,11 @@ import org.apache.shiro.web.session.mgt.ServletContainerSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,6 +33,10 @@ public class ShiroConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class);
 
+
+    @Autowired
+    MemoryConstrainedCacheManager cacheManager;
+
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
@@ -42,9 +49,12 @@ public class ShiroConfiguration {
         return  customShiroRealm;
     }
 
-    @Bean(name = "cacheManager")
+   //@Bean(name = "cacheManager")
     public MemoryConstrainedCacheManager cacheManager(){
-        return new MemoryConstrainedCacheManager();
+       ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-cache.xml");
+        MemoryConstrainedCacheManager cacheManager=ctx.getBean("ShiroCache",MemoryConstrainedCacheManager.class);
+       return cacheManager;
+        //return new MemoryConstrainedCacheManager();
     }
 
     @Bean(name = "sessionManager")
@@ -64,7 +74,7 @@ public class ShiroConfiguration {
     public DefaultWebSecurityManager defaultWebSecurityManager(){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setSessionManager(servletContainerSessionManager());
-        securityManager.setCacheManager(cacheManager());
+        securityManager.setCacheManager(cacheManager);
         securityManager.setRealm(customShiroRealm());
         return securityManager;
     }
@@ -120,7 +130,8 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/user/reg", "anon");
         //登出拦截
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/misc", "authc");
+        filterChainDefinitionMap.put("/investment/**", "anon");
+       // filterChainDefinitionMap.put("/misc", "authc");
         //特殊权限
         //filterChainDefinitionMap.put("/add", "perms[权限添加]");
 

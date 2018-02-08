@@ -23,9 +23,9 @@ public class CoinManageService {
     public PageInfo<CoinItem> getCoinList(int pageNo, int pageSize,int uid,int coinId){
         PageHelper.startPage(pageNo, pageSize);
         List<CoinItem> groupList;
-        if (coinId<=0)
+        /*if (coinId<=0)
             groupList = mapper.selectUserWealthList(uid);
-        else
+        else*/
             groupList = mapper.selectUserWealthListByCid(uid,coinId);
         if (groupList==null)
             groupList=new ArrayList<>();

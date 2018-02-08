@@ -15,7 +15,7 @@ public class ShareBenefit {
     private ShareBenefitService shareBenefitService;
 
     public final static long ONE_Minute =  60 * 1000;
-    @Scheduled(fixedDelay=ONE_Minute)
+    //@Scheduled(fixedDelay=ONE_Minute)
     public void fixedDelayJob(){
         List<UMachine> list = shareBenefitService.getUMachine();
 
@@ -25,12 +25,12 @@ public class ShareBenefit {
         }
     }
 
-    @Scheduled(fixedRate=ONE_Minute)
+    //@Scheduled(fixedRate=ONE_Minute)
     public void fixedRateJob(){
-        System.out.println(new Date()+"test2");
+        //System.out.println(new Date()+"test2");
     }
 
-    @Scheduled(cron="0 15 3 * * ?")
+    //@Scheduled(cron="0 15 3 * * ?")
     public void cronJob(){
         System.out.println(new Date()+"test3");
     }

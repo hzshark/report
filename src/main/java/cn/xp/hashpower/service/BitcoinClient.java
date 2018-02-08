@@ -3,6 +3,7 @@ package cn.xp.hashpower.service;
 import cn.xp.hashpower.util.Utils;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import wf.bitcoin.javabitcoindrpcclient.BitcoinJSONRPCClient;
@@ -10,6 +11,7 @@ import wf.bitcoin.javabitcoindrpcclient.BitcoinRpcException;
 import wf.bitcoin.javabitcoindrpcclient.BitcoindRpcClient;
 import wf.bitcoin.krotjson.JSON;
 
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,8 +28,12 @@ import java.util.ResourceBundle;
 public class BitcoinClient {
 
     BitcoinJSONRPCClient bitcoin;
+
     @Value("${btcoin.rpc.url}")
     String url;
+
+    @Value("${btcoin.sys.wallet}")
+    String systemBtcWalletAddress;
    // private static ResourceBundle resb = ResourceBundle.getBundle("app");
     public BitcoinClient()  {
         String defurl="http://RPCuser:RPCpwd@127.0.0.1:8335";
@@ -51,6 +57,7 @@ public class BitcoinClient {
         return account;
     }
 
+    @Cacheable(value = "localCache")
     public double getbalance(String address) throws Exception {
 
         double balance = bitcoin.getBalance(address);
@@ -63,6 +70,11 @@ public class BitcoinClient {
         String ret= bitcoin.sendFrom(from,to,amount);
         log.info(" sendBtcoin from from -->"+to);
         return ret;
+    }
+
+    public String sendBtcoinToSysWallet(String from,float amount) throws Exception
+    {
+        return  sendBtcoin(from,systemBtcWalletAddress,amount);
     }
 
 

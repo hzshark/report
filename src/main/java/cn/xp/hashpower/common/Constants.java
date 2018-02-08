@@ -13,4 +13,14 @@ public class Constants {
 
     public static final int USER_LOGIN_EXPIRE_SECONDS = 4*60*60;//登录信息保存4小时
 
+
+    public static final int btcoinId=100;
+
+    public static final int ethcoinId=200;
+
+    public static  final String bitcoinName="btc";
+
+    public static  final String ethcoinName="eth";
+
+
 }

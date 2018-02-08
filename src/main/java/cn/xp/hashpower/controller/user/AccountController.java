@@ -11,7 +11,9 @@ import cn.xp.hashpower.model.SessionUser;
 import cn.xp.hashpower.service.BitcoinClient;
 import cn.xp.hashpower.service.GoogleAuth;
 import cn.xp.hashpower.service.Interface.SmsService;
+import cn.xp.hashpower.service.RedisService;
 import cn.xp.hashpower.service.UserManageService;
+import cn.xp.hashpower.util.EmailService;
 import cn.xp.hashpower.util.JwtHelper;
 import cn.xp.hashpower.vo.ResultVO;
 import lombok.extern.log4j.Log4j;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -42,6 +45,12 @@ public class AccountController extends BaseController {
 
     @Resource
     SmsService smsService;
+
+    @Resource
+    EmailService emailService;
+
+    @Resource
+    RedisService redisService;
 
     @Value("${spring.application.name}")
     private String applicationName;
@@ -299,7 +308,7 @@ public class AccountController extends BaseController {
 
 
     /*
-    * 获取用户googel认证信息
+    * 调用谷歌认证 生成secret
     * */
     @RequestMapping(value = "/applyGoogleAuth", method = RequestMethod.GET)
     @SystemControllerLog(description = "/user/applyGoogleAuth")
@@ -325,7 +334,7 @@ public class AccountController extends BaseController {
 
 
     /*
-   * 获取用户googel认证信息
+   * 校验谷歌认证结果
    * */
     @RequestMapping(value = "/applyGoogleAuth", method = RequestMethod.POST)
     @SystemControllerLog(description = "/user/applyGoogleAuth")
@@ -347,6 +356,60 @@ public class AccountController extends BaseController {
         if (ret) {
             result.setSucessRepmsg();
             userManageService.setGoogleAuthSecret(user.getUserId(),secret);
+        }
+        return  result;
+    }
+
+    @RequestMapping(value = "/verifyemail/{email}", method = RequestMethod.POST)
+    @SystemControllerLog(description = "/user/verifyemail")
+    public ResultVO  sendmail(@PathVariable String email ) throws BizException
+    {
+        ResultVO result = new ResultVO();
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        Session session= SecurityUtils.getSubject().getSession();
+        if (session==null)
+            return result;
+        String key= SequenceUtils.generateMixString(8);
+        try {
+
+             Map<String ,String> map=new LinkedHashMap<>();
+             map.put("email",email);
+             map.put("uid","1111");
+            emailService.sendeVerifymail(email,key);
+            redisService.mset(key,map,24*3600);
+            result.setSucessRepmsg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  result;
+    }
+
+    @RequestMapping(value = "/verifyemail/", method = RequestMethod.GET)
+    @SystemControllerLog(description = "/user/verifyemail")
+    public ResultVO  verify(String validateCode,String email ) throws BizException
+    {
+        ResultVO result = new ResultVO();
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        SessionUser user= AuthUtil.verfiy(result,dd);
+        if (user==null) {
+            return result;
+        }
+        Session session= SecurityUtils.getSubject().getSession();
+        if (session==null)
+            return result;
+        boolean ret=false;
+        try {
+            String em =    redisService.hget(validateCode,"email");
+            if (em.equalsIgnoreCase(email)) {
+                ret = true;
+                result.setSucessRepmsg();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return  result;
     }

@@ -1,5 +1,6 @@
 package cn.xp.hashpower.service;
 
+import cn.xp.hashpower.common.Constants;
 import cn.xp.hashpower.dao.SysAccountMapper;
 import cn.xp.hashpower.dao.UOrderMapper;
 import cn.xp.hashpower.model.SessionUser;
@@ -52,11 +53,11 @@ public class UserManageService {
     }
 
     public String getUserBitCoinwalletAddress(int userId) {
-        return  AccountDao.getUserWalletAddress(userId,1);
+        return  AccountDao.getUserWalletAddress(userId, Constants.btcoinId);
     }
 
     public String getUserEtherwalletAddress(int userId) {
-        return  AccountDao.getUserWalletAddress(userId,2);
+        return  AccountDao.getUserWalletAddress(userId,Constants.ethcoinId);
     }
 
     public String getUserAuthStatus(int userId) {
