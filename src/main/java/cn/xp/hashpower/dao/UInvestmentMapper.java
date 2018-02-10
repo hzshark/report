@@ -35,6 +35,6 @@ public interface UInvestmentMapper extends BaseMapper{
     @Select("SELECT * from u_investment where uid= #{arg0} and ")
     List<UInvestment> selectUInvestmentByCid(int uid, int coinId);
 
-    @Select("Call SBuyInvestment(#{arg0},#{arg1},#{arg2},#{arg3} )")
-    int BuyInvestMnet(int userId, int mid, Double amount, int trad_id);
+    @Select("Call SBuyInvestment(#{arg0},#{arg1},#{arg2} )")
+    int BuyInvestMnet(int userId,  Double amount, int trad_id);
 }

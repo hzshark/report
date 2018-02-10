@@ -116,7 +116,6 @@ public class InvestMentController extends BaseController {
     /**
      *  购买理财产品
      *  需要完善 区块节点的 钱包转账的同步问题
-     * @param cointype
      * @param amount
      * @param trad_id
      * @return
@@ -125,8 +124,7 @@ public class InvestMentController extends BaseController {
 
     @RequestMapping(value = "/buy",method = RequestMethod.GET)
     @SystemControllerLog(description = "/investment/buy")
-    public ResultVO BuyInvestmentItem(@RequestParam(value = "cointype",required= true) String cointype,
-                                      @RequestParam(value = "amount",required= true) String amount,@RequestParam(value = "tradid") int trad_id ) throws BizException
+    public ResultVO BuyInvestmentItem(@RequestParam(value = "amount",required= true) String amount,@RequestParam(value = "tradid") int trad_id ) throws BizException
     {
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();
@@ -139,15 +137,15 @@ public class InvestMentController extends BaseController {
         Amount= ParamsChecker.Conver2Double(amount, 0D);
         //int mid = ParamsChecker.Conver2AbsInt(pmid,0);
 
-        int mid=Constants.getCoinId(cointype);
+        /*int mid=Constants.getCoinId(cointype);
         if (mid<0)
             throw new  BizException(402,"unknow coin type");
          if (Amount<0 || mid<1) {
             result.setFailRepmsg("购买数量或参数错误");
             return result;
-        }
+        }*/
         try {
-            int ret = service.BuyInvestMnet(user.getUserId(),mid,Amount,trad_id);
+            int ret = service.BuyInvestMnet(user.getUserId(),Amount,trad_id);
             switch (ret) {
                 case 0:
                     result.setSucessRepmsg();
