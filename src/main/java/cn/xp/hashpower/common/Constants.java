@@ -24,6 +24,8 @@ public class Constants {
 
     public static int getCoinId(String cointype)
     {
+        if (cointype==null)
+            return -1;
         if (cointype.equalsIgnoreCase(bitcoinName))
             return btcoinId;
         if (cointype.equalsIgnoreCase(ethcoinName))

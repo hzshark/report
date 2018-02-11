@@ -15,10 +15,7 @@ import com.github.pagehelper.Constant;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Administrator on 2017/10/29.
@@ -40,24 +37,27 @@ public class InvestMentController extends BaseController {
      * @throws BizException
      */
 
-    @RequestMapping(value = "/list",  method = RequestMethod.GET)
-    @SystemControllerLog(description = "/Investment/list" )
-    public ListVO ListUserInvestMent(@RequestParam(value = "page",required= false)  String page,@RequestParam(value = "limit",required= false) String limit ) throws BizException {
+    @RequestMapping(value = "/list/{type}",  method = RequestMethod.GET)
+    @SystemControllerLog(description = "/investment/list/{type}" )
+    public ListVO ListUserInvestMent(@PathVariable(required= false) String type  , @RequestParam(value = "page",required= false)  String page,
+                                     @RequestParam(value = "limit",required= false) String limit ) throws BizException {
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();
         SessionUser user= AuthUtil.verfiy(listVO,dd);
         if (user==null) {
             return listVO;
         }
-        //ParamsChecker.checkNotBlank(userName, "用户名不能为空");
+        //ParamsChecker.checkNotBlank(type, "");
         //ParamsChecker.checkNotBlank(password, "登录密码不能为空");
 
-        int pNo=0,pSize=10;
+        int pNo=0,pSize=10,coinId;
 
+
+        coinId=Constants.getCoinId(type);
         pNo= ParamsChecker.Conver2Int(page,0);
         pSize=Math.max(ParamsChecker.Conver2Int(limit,0),10);
         try {
-            PageInfo<UInvestment> pageInfo = service.getUserInvestMentList(pNo, pSize,user.getUserId(),-1);
+            PageInfo<UInvestment> pageInfo = service.getUserInvestMentList(pNo, pSize,user.getUserId(),coinId);
             long count = 0;
             if(pageInfo != null){
                 //分页
@@ -83,7 +83,7 @@ public class InvestMentController extends BaseController {
      */
 
     @RequestMapping(value = "/summary",  method = RequestMethod.GET)
-    @SystemControllerLog(description = "/Investment/summary" )
+    @SystemControllerLog(description = "/investment/summary" )
     public ListVO SummaryUserInvestMent( ) throws BizException {
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ListVO listVO = new ListVO();

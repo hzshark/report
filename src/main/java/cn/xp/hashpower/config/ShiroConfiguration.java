@@ -130,7 +130,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/user/reg", "anon");
         //登出拦截
         filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/investment/**", "anon");
+        //filterChainDefinitionMap.put("/investment/**", "anon");
         //显示模块
         filterChainDefinitionMap.put("/salelist/**", "anon");
        // filterChainDefinitionMap.put("/misc", "authc");

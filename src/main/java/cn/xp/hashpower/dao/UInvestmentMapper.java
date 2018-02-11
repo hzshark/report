@@ -18,8 +18,6 @@ public interface UInvestmentMapper extends BaseMapper{
  /*   @Select("CALL QuserInvestMentItem(#{arg0},#{arg1}) ")
     List<UInvestment> selectUserInvestmentListByConid(int userId, int coninid);*/
 
-    @Select("CALL QuserI(#{0},null) ")
-    List<UInvestment> selectUserMachineList(int uid);
 
     @Select("SELECT c.id,c.name,t.amount,t.trade_id,t.saledesc FROM investment_item AS t, investment_category AS c" +
             " WHERE t.enable = 1 AND c.enable=1 AND t.id = c.id")
@@ -29,12 +27,14 @@ public interface UInvestmentMapper extends BaseMapper{
     @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2},0 )")
     int BuyInvestment(int userId, int mid, BigDecimal amount);*/
 
-    @Select("SELECT * from u_investment where uid= #{arg0}")
+    @Select("SELECT u.amount,u.tradeid,it.tradeId,u.invest_date,u.end_date,u.`status`,it.cointype,it.`enable` FROM investment_item AS it ,u_investment AS u " +
+            " WHERE it.tradeId = u.tradeid AND u.userid= #{arg0}")
     List<UInvestment> selectUInvestment(int uid);
 
+    /*
     @Select("SELECT * from u_investment where uid= #{arg0} and ")
     List<UInvestment> selectUInvestmentByCid(int uid, int coinId);
-
+    */
     @Select("Call SBuyInvestment(#{arg0},#{arg1},#{arg2} )")
     int BuyInvestMnet(int userId,  Double amount, int trad_id);
 }
