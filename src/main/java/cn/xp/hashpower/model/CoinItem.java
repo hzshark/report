@@ -17,6 +17,6 @@ public class CoinItem {
 
 	private double amount;
 
-	private String name;
+	private int type;
 
 }

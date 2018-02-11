@@ -79,7 +79,7 @@ public class InvestMentController extends BaseController {
 
 
 
-
+/*
     @RequestMapping(value = "/investment",  method = RequestMethod.GET)
     @SystemControllerLog(description = "/investment/list" )
     public ListVO ListUserInvestment(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,
@@ -111,7 +111,7 @@ public class InvestMentController extends BaseController {
             logger.error("获取列表异常",e);
         }
         return result;
-    }
+    }*/
 
     /**
      *  购买理财产品
