@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://www.oxbtc.com/account/investment -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="icon" href="https://www.oxbtc.com/static/img/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="./OXBTC_files/global.css">
+    <link rel="stylesheet" type="text/css" href="./OXBTC_files/ac.css">
+
+    <script type="text/javascript" async="" src="./OXBTC_files/analytics.js"></script><script src="./OXBTC_files/hm.js"></script><script type="text/javascript" src="./OXBTC_files/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./OXBTC_files/global.js"></script>
+    <script type="text/javascript" src="./OXBTC_files/common.js"></script>
+    <title>理财</title>
+
+    <script async="" src="./OXBTC_files/js"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-113021981-2');
+</script>
+
+
+
+    <link rel="stylesheet" type="text/css" href="./OXBTC_files/inner.css">
+
+</head>
+
+<body class="page_inner page_investment" lang="cn">
+
+
+<div class="f_hd">
+    <div class="f_wrapper">
+        <a href="https://www.oxbtc.com/" class="logo"></a>
+
+
+        <ul class="rateList">
+            <li>BTC: <span id="btc-balance">0</span></li>
+            <li>ETH: <span id="ltc-balance">0</span></li>
+            <li>ZEC: <span id="zcash-balance">0</span></li>
+            <li>ETH: <span id="eth-balance">0</span></li>
+            <li>GHS: <span id="ghs-balance">0</span></li>
+            <li>ETH-MHS: <span id="ltc-mhs-balance">0</span></li>
+            <li>ZEC-HS: <span id="zec-host01-balance">0</span></li>
+            <li>ETH-MHS: <span id="eth-mhs-balance">0</span></li>
+        </ul>
+
+
+        <ul class="nav">
+            <li class="navItem">
+                <a href="https://www.oxbtc.com/default/index" class="nav_home">首页</a>
+            </li>
+            <li class="navItem">
+                <a href="https://www.oxbtc.com/default/shop" class="nav_hash">算力</a>
+            </li>
+            <li class="navItem">
+                <a href="https://www.oxbtc.com/account/investment" class="nav_investment navItem_current">理财</a>
+            </li>
+            <li class="navItem">
+                <a href="https://www.oxbtc.com/account/myassets" class="nav_account">账户</a>
+            </li>
+
+            <li class="navItem">
+                <a href="http://news-zh.oxbtc.com/" class="nav_news">新闻</a>
+            </li>
+
+            <li class="navItem">
+                <a href="https://www.oxbtc.com/zendesk/zendesklogin" class="nav_faq">帮助中心</a>
+            </li>
+        </ul>
+        <a href="https://www.oxbtc.com/account/setlanguage/?language=en&amp;callback=%2faccount%2finvestment" class="languageSwitch">
+            <span class="ico_language i_language_en"></span>
+            English
+        </a>
+
+
+        <a href="https://www.oxbtc.com/account/investment#" class="accountNameBox">
+            <span class="accountName" id="j-login-account">nantmpeter</span>
+            <span class="i_accountDropArrow"></span>
+        </a>
+
+        <ul class="hd_dropMenu">
+
+            <li class="dropMenuItem">
+                <a href="https://www.oxbtc.com/account/coupon">折扣券</a>
+            </li>
+            <li class="dropMenuItem">
+                <a href="https://www.oxbtc.com/account/setting">安全中心</a>
+            </li>
+            <li class="dropMenuItem">
+                <a href="https://www.oxbtc.com/account/logout">退出</a>
+            </li>
+        </ul>
+
+
+    </div>
+</div>
+
+
+
+
+
+<div class="f_bd">
+    <div class="f_wrapper">
+        <h2 class="pageTitle">理财</h2>
+        <div class="contentBox contentBox_asset">
+            <h3 class="boxTitle">账户资产</h3>
+            <ul class="assetsList">
+                <li class="assetsListItem">
+                    <p class="title">存币总额</p>
+                    <div class="digits digitsTotal">
+                        <div class="digitItem">
+                            <p class="number btc_amount">0</p>
+                            <p class="unit">BTC</p>
+                        </div>
+                        <div class="digitItem">
+                            <p class="number eth_amount">0</p>
+                            <p class="unit">ETH</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="assetsListItem">
+                    <p class="title">可用金额</p>
+                    <div class="digits">
+                        <div class="digitItem">
+                            <p class="number">0</p>
+                            <p class="unit">BTC</p>
+                        </div>
+                        <div class="digitItem">
+                            <p class="number">0</p>
+                            <p class="unit">ETH</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="assetsListItem">
+                    <p class="title">月度理财</p>
+                    <div class="digits">
+                        <div class="digitItem">
+                            <p class="number">0</p>
+                            <p class="unit">BTC</p>
+                        </div>
+                        <div class="digitItem">
+                            <p class="number">0</p>
+                            <p class="unit">ETH</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="segmentControl" style="width: 400px;">
+            <a href="javascript:void(0)" class="segmentItem segmentItem1 segmentItem_selected" id="j-btc-invest-btn">BTC理财</a>
+            <a href="javascript:void(0)" class="segmentItem segmentItem2" id="j-ltc-invest-btn">ETH理财</a>
+
+        </div>
+        <div class="mod_investData" id="j-btc-invest-data" style="display: block;">
+            <div class="investDataWrap">
+
+                <div class="investDataItem investDataItem2">
+                    <div class="contentBox contentBox_deposit">
+                        <h3 class="boxTitle"><span class="i_investIcon i_monthlyInvest"></span>月度理财</h3>
+                        <ul class="depositList">
+                            <li class="depositListItem">
+                                <p class="title">预计年利率</p>
+                                <div class="digits digitsTotal">
+                                    <div class="digitItem">
+                                        <p class="number number_b">5.0%</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="depositListItem">
+                                <p class="title">已存入</p>
+                                <div class="digits">
+                                    <div class="digitItem">
+                                        <p class="number">0</p>
+                                        <p class="unit">BTC</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="investListBox">
+                    <h3 class="tableTitle">存款清单</h3>
+                    <div class="m_tableWrap">
+                        <table class="m_table investListTable" id="j-btc-save-list">
+                            <tbody><tr class="titleRow">
+                                <td>存款日</td>
+                                <td>数量</td>
+                                <td>到期日</td>
+                                <td>预期收益</td>
+                                <td>操作</td>
+                            </tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr>
+
+
+
+
+
+
+                            </tbody></table>
+                        <div class="m_page">
+                            <a href="javascript:void(0)" class="btn_page disable" id="j-btc-save-prev">上一页</a>
+                            <span class="handler"><input type="text" class="pageInput" id="j-btc-save-curr"> / <span id="j-btc-save-total">1</span></span>
+                            <a href="javascript:void(0)" class="btn_page disable" id="j-btc-save-next">下一页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mod_investData" id="j-ltc-invest-data" style="display: none;">
+            <div class="investDataWrap">
+
+                <div class="investDataItem investDataItem2">
+                    <div class="contentBox contentBox_deposit">
+                        <h3 class="boxTitle"><span class="i_investIcon i_monthlyInvest"></span>月度理财</h3>
+                        <ul class="depositList">
+                            <li class="depositListItem">
+                                <p class="title">预计年利率</p>
+                                <div class="digits digitsTotal">
+                                    <div class="digitItem">
+                                        <p class="number number_b">5.0%</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="depositListItem">
+                                <p class="title">已存入</p>
+                                <div class="digits">
+                                    <div class="digitItem">
+                                        <p class="number">0</p>
+                                        <p class="unit">ETH</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="investListBox">
+                    <h3 class="tableTitle">存款清单</h3>
+                    <div class="m_tableWrap">
+                        <table class="m_table investListTable" id="j-ltc-save-list">
+                            <tbody><tr class="titleRow">
+                                <td>存款日</td>
+                                <td>数量</td>
+                                <td>到期日</td>
+                                <td>预期收益</td>
+                                <td>操作</td>
+                            </tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr>
+
+
+
+
+
+
+                            </tbody></table>
+                        <div class="m_page">
+                            <a href="javascript:void(0)" class="btn_page disable" id="j-ltc-save-prev">上一页</a>
+                            <span class="handler"><input type="text" class="pageInput" id="j-ltc-save-curr"> / <span id="j-ltc-save-total">1</span></span>
+                            <a href="javascript:void(0)" class="btn_page disable" id="j-ltc-save-next">下一页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mod_investData" id="j-eth-invest-data" style="display:none">
+            <div class="investDataWrap">
+                <div class="investDataItem investDataItem1">
+                    <div class="contentBox contentBox_deposit">
+                        <h3 class="boxTitle"><span class="i_investIcon i_dailyInvest"></span>活期理财</h3>
+                        <ul class="depositList">
+                            <li class="depositListItem">
+                                <p class="title">预计日利率</p>
+                                <div class="digits digitsTotal">
+                                    <div class="digitItem">
+                                        <p class="number number_b">0.01%</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="depositListItem">
+                                <p class="title">已存入</p>
+                                <div class="digits">
+                                    <div class="digitItem">
+                                        <p class="number">0</p>
+                                        <p class="unit">ETH</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="p_pop p_popBox_save hide" id="j-btc-short-save">
+    <h2>BTC活期地址存入</h2>
+    <div class="mod_topUp">
+        <span class="qrcodeScanTips">扫码充值</span>
+        <span class="or">或者</span>
+        <span class="inputAddressTips">BTC充值地址</span>
+        <div class="qrcode" id="j-btc-short-qrcode"><canvas width="130" height="130"></canvas></div>
+        <div class="inputAddressWrap">
+            <input type="text" value="1LDMucBr45cgynQSkCrDenVegxovC4VRG5" id="j-btc-short-addr" readonly="readonly">
+        </div>
+        <a href="javascript:void(0)" class="btn_copy" id="j-btc-short-copy">复制</a>
+    </div>
+    <a href="javascript:void(0)" class="close" id="j-btc-short-save-close">关闭</a>
+</div>
+
+<div class="p_pop p_popBox_save hide" id="j-ltc-short-save">
+    <h2>ETH活期地址存入</h2>
+    <div class="mod_topUp">
+        <span class="qrcodeScanTips">扫码充值</span>
+        <span class="or">或者</span>
+        <span class="inputAddressTips">ETH充值地址</span>
+        <div class="qrcode" id="j-ltc-short-qrcode"><canvas width="130" height="130"></canvas></div>
+        <div class="inputAddressWrap">
+            <input type="text" value="LSmTouukRSaKLbnGUw5CxNx7GDKwf5YjUA" id="j-ltc-short-addr" readonly="readonly">
+        </div>
+        <a href="javascript:void(0)" class="btn_copy" id="j-ltc-short-copy">复制</a>
+    </div>
+    <a href="javascript:void(0)" class="close" id="j-ltc-short-save-close">关闭</a>
+</div>
+
+<div class="p_pop p_popBox_save hide" id="j-eth-short-save">
+    <h2>ETH活期地址存入</h2>
+    <div class="mod_topUp">
+        <span class="qrcodeScanTips">扫码充值</span>
+        <span class="or">或者</span>
+        <span class="inputAddressTips">ETH充值地址</span>
+        <div class="qrcode" id="j-eth-short-qrcode"><canvas width="130" height="130"></canvas></div>
+        <div class="inputAddressWrap">
+            <input type="text" value="0xdde1293b987f3ed0f84dcc4561e2875667d5f839" id="j-eth-short-addr" readonly="readonly">
+        </div>
+        <a href="javascript:void(0)" class="btn_copy" id="j-eth-short-copy">复制</a>
+    </div>
+    <a href="javascript:void(0)" class="close" id="j-eth-short-save-close">关闭</a>
+</div>
+
+<div class="p_pop p_popBox_save hide" id="j-btc-fixed-save">
+    <h2>BTC 30天定期理财存入</h2>
+    <ul class="m_tabbar">
+        <li class="tabbarItem tabbarItem_current">
+            <a href="javascript:void(0)" class="j-fund-coin-tab">存币充值</a>
+        </li>
+        <li class="tabbarItem">
+            <a href="javascript:void(0)" class="j-turn-coin-tab">活期转定期</a>
+        </li>
+    </ul>
+    <div class="mod_topUp">
+        <span class="qrcodeScanTips">扫码充值</span>
+        <span class="or">或者</span>
+        <span class="inputAddressTips">BTC充值地址</span>
+        <div class="qrcode" id="j-btc-fixed-qrcode"><canvas width="130" height="130"></canvas></div>
+        <div class="inputAddressWrap">
+            <input type="text" value="1KHiAtBMpCqqFjMBSLHDy9Mkqjfi1dgPLp" id="j-btc-fixed-addr" readonly="readonly">
+        </div>
+        <a href="javascript:void(0)" class="btn_copy" id="j-btc-fixed-copy">复制</a>
+    </div>
+    <div class="mod_demandToRegular" style="display:none">
+
+
+        <div class="mod_setCode">
+            <span class="i_popError"></span>
+            <p class="tips">请先设置资金密码</p>
+            <a href="https://www.oxbtc.com/account/setting" class="b_btn b_btn1 btn_confirm">好的</a>
+        </div>
+
+
+
+    </div>
+    <a href="javascript:void(0)" class="close" id="j-btc-fixed-save-close">关闭</a>
+</div>
+
+<div class="p_pop p_popBox_save hide" id="j-ltc-fixed-save">
+    <h2>ETH 30天定期理财存入</h2>
+    <ul class="m_tabbar">
+        <li class="tabbarItem tabbarItem_current">
+            <a href="javascript:void(0)" class="j-fund-coin-tab">存币充值</a>
+        </li>
+        <li class="tabbarItem">
+            <a href="javascript:void(0)" class="j-turn-coin-tab">活期转定期</a>
+        </li>
+    </ul>
+    <div class="mod_topUp">
+        <span class="qrcodeScanTips">扫码充值</span>
+        <span class="or">或者</span>
+        <span class="inputAddressTips">ETH充值地址</span>
+        <div class="qrcode" id="j-ltc-fixed-qrcode"><canvas width="130" height="130"></canvas></div>
+        <div class="inputAddressWrap">
+            <input type="text" value="LdDXdZdhvTkfVxevMsX1ibmiBiw34uYHUv" id="j-ltc-fixed-addr" readonly="readonly">
+        </div>
+        <a href="javascript:void(0)" class="btn_copy" id="j-ltc-fixed-copy">复制</a>
+    </div>
+    <div class="mod_demandToRegular" style="display:none">
+
+
+        <div class="mod_setCode">
+            <span class="i_popError"></span>
+            <p class="tips">请先设置资金密码</p>
+            <a href="https://www.oxbtc.com/account/setting" class="b_btn b_btn1 btn_confirm">好的</a>
+        </div>
+
+
+
+
+    </div>
+    <a href="javascript:void(0)" class="close" id="j-ltc-fixed-save-close">关闭</a>
+</div>
+
+<div class="p_pop p_pop_result hide" id="j-trans-success">
+    <span class="i_mPopSuccess"></span>
+    <h2 class="resultTitle">成功!</h2>
+    <p class="resultTips">您已成功将活期理财转为定期理财！</p>
+    <a href="javascript:void(0)" class="b_btn b_btn1 btn_confirm" id="j-trans-success-ok">好的</a>
+    <a href="javascript:void(0)" class="close" id="j-trans-success-close">关闭</a>
+</div>
+
+<div class="p_pop p_popBox_regularToDemand hide" id="j-fixed-to-short-box">
+    <h2>提前定期转活期</h2>
+    <p class="currentProperty">该笔定期理财额度为: <strong id="j-fixed-save-amount"></strong></p>
+    <div class="tipsBox">
+        <p>转为活期部分的利息按照活期利息计算</p>
+    </div>
+    <div class="inputWrap inputWrap_withdraw">
+        <span class="title">转入额度</span>
+        <div class="m_inputBox">
+            <input class="value" type="text" value="" id="j-fixed-to-short-amount">
+            <span class="unit" id="j-fixed-to-short-unit"></span>
+        </div>
+    </div>
+    <div class="inputWrap inputWrap_pwd">
+        <span class="title">资金密码</span>
+        <div class="m_inputBox5">
+            <input type="password" placeholder="" id="j-fixed-to-short-pass">
+        </div>
+    </div>
+    <p class="pwdForgot_p"><a href="https://www.oxbtc.com/account/setting" class="">忘记密码</a></p>
+    <a href="javascript:void(0)" class="b_btn b_btn1 btn_confirm" id="j-fixed-to-short-confirm">确认</a>
+    <a href="javascript:void(0)" class="close" id="j-fixed-to-short-close">关闭</a>
+</div>
+
+<div class="p_pop p_pop_result hide" id="j-fixed-to-short-success">
+    <span class="i_mPopSuccess"></span>
+    <h2 class="resultTitle">成功!</h2>
+    <p class="resultTips">您已成功将活期理财转为定期理财！</p>
+    <a href="javascript:void(0)" class="b_btn b_btn1 btn_confirm" id="j-fixed-to-short-success-ok">好的</a>
+    <a href="javascript:void(0)" class="close" id="j-fixed-to-short-success-close">关闭</a>
+</div>
+
+
+
+
+<div class="f_ft">
+    <div class="f_wrapper">
+        <div class="cpBox">
+            <p class="copyRight">CopyRight © 2016 OXBTC.com All Rights Reserved</p>
+            <p class="links">
+                <a href="https://www.oxbtc.com/account/setlanguage/?language=en&amp;callback=%2faccount%2finvestment" class="languageSwitch">
+                    <span class="ico_language i_language_en"></span>
+                    English
+                </a>
+                <span class="sep">|</span>
+                <a href="https://www.oxbtc.com/default/agreement">使用条款</a>
+            </p>
+        </div>
+        <div class="linksMenu siteLinks">
+            <p class="title">链接</p>
+            <a href="https://www.oxbtc.com/default/index">首页</a>
+            <a href="https://www.oxbtc.com/default/shop">算力</a>
+            <a href="https://www.oxbtc.com/account/investment">理财</a>
+            <a href="https://www.oxbtc.com/account/myassets">账户</a>
+            <a href="http://news-zh.oxbtc.com/">新闻</a>
+            <a href="https://www.oxbtc.com/default/about">关于</a>
+            <a href="https://www.oxbtc.com/default/faq">FAQ</a>
+        </div>
+        <div class="linksMenu contactLinks">
+            <p class="title">联系我们</p>
+
+            <a class="shareLink link_qqGroup" target="_blank">
+                <span class="linkT">QQ群</span>
+                <span class="linkV">530445326</span>
+            </a>
+            <a class="shareLink link_weibo" href="http://weibo.com/OXBTC" target="_blank">
+                <span class="linkT">微博</span>
+                <span class="linkV">@OXBTC牛比特</span>
+            </a>
+            <a class="shareLink link_mail" href="mailto:support@oxbtc.com">
+                <span class="linkT">Email</span>
+                <span class="linkV">support@oxbtc.com</span>
+            </a>
+        </div>
+        <div class="linksMenu priceList">
+            <p class="title">价格</p>
+
+            <p class="priceItem">BTC: $8250.1</p>
+
+
+            <p class="priceItem">ETH: $146.278</p>
+
+
+            <p class="priceItem">ETH: $824.464</p>
+
+
+        </div>
+        <p class="friendLink">友情链接:
+            <a target="_blank" href="http://www.btc123.com/">BTC123</a>
+            ｜<a target="_blank" href="http://www.sosobtc.com/">sosobtc</a>
+            ｜<a target="_blank" href="http://www.8btc.com/">巴比特</a>
+            ｜<a target="_blank" href="https://www.wabi.com/">挖币网</a>
+            ｜<a target="_blank" href="http://www.bitcoin86.com/">比特币资讯网</a>
+            ｜<a target="_blank" href="http://www.btcside.com/">比特帮</a>
+            ｜<a target="_blank" href="http://www.wanbizu.com/">玩币族</a>
+            ｜<a target="_blank" href="http://www.yobtc.com/">优比特</a>
+
+
+        </p>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="./OXBTC_files/jquery.zclip.js"></script>
+<script type="text/javascript" src="./OXBTC_files/jquery.qrcode.min.js"></script>
+<script>
+$(document).ready(function() {
+    $(".nav_investment").addClass("navItem_current");
+});
+$("#j-btc-short-qrcode").qrcode({width: 130, height: 130, text: "1LDMucBr45cgynQSkCrDenVegxovC4VRG5"});
+$("#j-ltc-short-qrcode").qrcode({width: 130, height: 130, text: "LSmTouukRSaKLbnGUw5CxNx7GDKwf5YjUA"});
+$("#j-eth-short-qrcode").qrcode({width: 130, height: 130, text: "0xdde1293b987f3ed0f84dcc4561e2875667d5f839"});
+$("#j-btc-fixed-qrcode").qrcode({width: 130, height: 130, text: "1KHiAtBMpCqqFjMBSLHDy9Mkqjfi1dgPLp"});
+$("#j-ltc-fixed-qrcode").qrcode({width: 130, height: 130, text: "LdDXdZdhvTkfVxevMsX1ibmiBiw34uYHUv"});
+</script>
+<script type="text/javascript" src="./OXBTC_files/investment.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?964ea5c06c9d5581dd599cc92c16bca1";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+$(function(){
+    $.getJSON("/investment/list",function(json) {
+        console.log(json)
+    });
+
+    $.getJSON("/coin/list",{coin:"btc"},function(json) {
+        $(".btc_amount").html(json.data.amount)
+        console.log(json)
+    });
+});
+</script>
+
+
+
+
+
+
+
+</body></html>

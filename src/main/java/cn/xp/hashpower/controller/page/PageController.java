@@ -152,4 +152,10 @@ public class PageController extends BaseController{
     public String safe(){
         return "safe";
     }
+
+    @RequestMapping(value = "/finance",method = RequestMethod.GET)
+    @SystemControllerLog(description = "/finance")
+    public String finance(){
+        return "finance";
+    }
 }

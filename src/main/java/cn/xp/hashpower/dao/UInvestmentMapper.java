@@ -29,10 +29,10 @@ public interface UInvestmentMapper extends BaseMapper{
     @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2},0 )")
     int BuyInvestment(int userId, int mid, BigDecimal amount);*/
 
-    @Select("SELECT * from u_investment where uid= #{arg0}")
+    @Select("SELECT * from u_investment where userid= #{arg0}")
     List<UInvestment> selectUInvestment(int uid);
 
-    @Select("SELECT * from u_investment where uid= #{arg0} and ")
+    @Select("SELECT * from u_investment where userid= #{arg0} and ")
     List<UInvestment> selectUInvestmentByCid(int uid, int coinId);
 
     @Select("Call SBuyInvestment(#{arg0},#{arg1},#{arg2},#{arg3} )")
