@@ -64,9 +64,9 @@ public class InvestmentManageService {
     }
 
 
-    public int BuyInvestMnet(int userId, int mid, Double amount,int trad_id)
+    public int BuyInvestMnet(int userId, Double amount,int trad_id)
     {
-        return mapper.BuyInvestMnet(userId,mid,amount,trad_id);
+        return mapper.BuyInvestMnet(userId,amount,trad_id);
     }
 
    /* private CoinInfo getConinfo(int coinId)

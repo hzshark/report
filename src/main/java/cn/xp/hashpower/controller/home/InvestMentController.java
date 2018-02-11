@@ -76,10 +76,45 @@ public class InvestMentController extends BaseController {
     }
 
 
+    /**
+     * 查询理财的订单
+     * @return
+     * @throws BizException
+     */
+
+    @RequestMapping(value = "/summary",  method = RequestMethod.GET)
+    @SystemControllerLog(description = "/Investment/summary" )
+    public ListVO SummaryUserInvestMent( ) throws BizException {
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ListVO listVO = new ListVO();
+        SessionUser user= AuthUtil.verfiy(listVO,dd);
+        if (user==null) {
+            return listVO;
+        }
+        //ParamsChecker.checkNotBlank(userName, "用户名不能为空");
+        //ParamsChecker.checkNotBlank(password, "登录密码不能为空");
+
+        /*try {
+            PageInfo<UInvestment> pageInfo = service.getUserInvestMentList(pNo, pSize,user.getUserId(),-1);
+            long count = 0;
+            if(pageInfo != null){
+                //分页
+                count = pageInfo.getTotal();
+                // listVO.setList(pageInfo.getList());
+                listVO.setData(pageInfo.getList());
+                listVO.setSucessMsg();
+            }
+            listVO.setRel(true);
+            listVO.setCount(count);
+        } catch (Exception e) {
+            listVO.setErrorMsg("获取列表异常");
+            logger.error("获取列表异常",e);
+        }*/
+        return listVO;
+    }
 
 
-
-
+/*
     @RequestMapping(value = "/investment",  method = RequestMethod.GET)
     @SystemControllerLog(description = "/investment/list" )
     public ListVO ListUserInvestment(@RequestParam(value = "coin",required= false) String pcoinid,@RequestParam(value = "page",required= false)  String page,
@@ -111,12 +146,11 @@ public class InvestMentController extends BaseController {
             logger.error("获取列表异常",e);
         }
         return result;
-    }
+    }*/
 
     /**
      *  购买理财产品
      *  需要完善 区块节点的 钱包转账的同步问题
-     * @param cointype
      * @param amount
      * @param trad_id
      * @return
@@ -125,8 +159,7 @@ public class InvestMentController extends BaseController {
 
     @RequestMapping(value = "/buy",method = RequestMethod.GET)
     @SystemControllerLog(description = "/investment/buy")
-    public ResultVO BuyInvestmentItem(@RequestParam(value = "cointype",required= true) String cointype,
-                                      @RequestParam(value = "amount",required= true) String amount,@RequestParam(value = "tradid") int trad_id ) throws BizException
+    public ResultVO BuyInvestmentItem(@RequestParam(value = "amount",required= true) String amount,@RequestParam(value = "tradid") int trad_id ) throws BizException
     {
         Object dd= SecurityUtils.getSubject().getPrincipal();
         ResultVO result = new ResultVO();
@@ -139,15 +172,15 @@ public class InvestMentController extends BaseController {
         Amount= ParamsChecker.Conver2Double(amount, 0D);
         //int mid = ParamsChecker.Conver2AbsInt(pmid,0);
 
-        int mid=Constants.getCoinId(cointype);
+        /*int mid=Constants.getCoinId(cointype);
         if (mid<0)
             throw new  BizException(402,"unknow coin type");
          if (Amount<0 || mid<1) {
             result.setFailRepmsg("购买数量或参数错误");
             return result;
-        }
+        }*/
         try {
-            int ret = service.BuyInvestMnet(user.getUserId(),mid,Amount,trad_id);
+            int ret = service.BuyInvestMnet(user.getUserId(),Amount,trad_id);
             switch (ret) {
                 case 0:
                     result.setSucessRepmsg();
