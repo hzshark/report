@@ -76,7 +76,42 @@ public class InvestMentController extends BaseController {
     }
 
 
+    /**
+     * 查询理财的订单
+     * @return
+     * @throws BizException
+     */
 
+    @RequestMapping(value = "/summary",  method = RequestMethod.GET)
+    @SystemControllerLog(description = "/Investment/summary" )
+    public ListVO SummaryUserInvestMent( ) throws BizException {
+        Object dd= SecurityUtils.getSubject().getPrincipal();
+        ListVO listVO = new ListVO();
+        SessionUser user= AuthUtil.verfiy(listVO,dd);
+        if (user==null) {
+            return listVO;
+        }
+        //ParamsChecker.checkNotBlank(userName, "用户名不能为空");
+        //ParamsChecker.checkNotBlank(password, "登录密码不能为空");
+
+        /*try {
+            PageInfo<UInvestment> pageInfo = service.getUserInvestMentList(pNo, pSize,user.getUserId(),-1);
+            long count = 0;
+            if(pageInfo != null){
+                //分页
+                count = pageInfo.getTotal();
+                // listVO.setList(pageInfo.getList());
+                listVO.setData(pageInfo.getList());
+                listVO.setSucessMsg();
+            }
+            listVO.setRel(true);
+            listVO.setCount(count);
+        } catch (Exception e) {
+            listVO.setErrorMsg("获取列表异常");
+            logger.error("获取列表异常",e);
+        }*/
+        return listVO;
+    }
 
 
 /*
