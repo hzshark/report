@@ -65,7 +65,7 @@ public class MainListController extends BaseController {
     /*
     可售理财列表
      */
-    @RequestMapping(value = "/Investmen",  method = RequestMethod.GET)
+    @RequestMapping(value = "/Investmen/{type}",  method = RequestMethod.GET)
     @SystemControllerLog(description = "/salelist/Investmen/{type}" )
     public ResultVO ListInvestMentContract(@PathVariable String type ) throws BizException {
         Object dd= SecurityUtils.getSubject().getPrincipal();

@@ -22,7 +22,7 @@ public interface InvestmentItemMapper extends BaseMapper{
     @Select(" SELECT ic.contractId, ic.`name`, ic.duration,ic.interest,ic.coinId FROM coin_category AS cc , investment_item AS it" +
             " WHERE cc.`enable` = 1 AND ic.`enable` = 1  AND cc.ID = ic.coinId ")*/
     @Select("SELECT  cc.`name`, it.saledesc,it.tradeId,it.amount,it.limited,it.duration,it.interest,it.cointype FROM coin_category AS cc , investment_item AS it"
-            + "WHERE cc.`enable` = 1 AND it.`enable` = 1  AND cc.ID = it.cointype")
+            + " WHERE cc.`enable` = 1 AND it.`enable` = 1  AND cc.ID = it.cointype")
     List<InvestMentItem> selectInvestmentContract();
 
  /*   //arg3 批次先不用

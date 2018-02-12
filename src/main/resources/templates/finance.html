@@ -126,11 +126,11 @@
                     <p class="title">可用金额</p>
                     <div class="digits">
                         <div class="digitItem">
-                            <p class="number">0</p>
+                            <p class="number btc_use_amount">0</p>
                             <p class="unit">BTC</p>
                         </div>
                         <div class="digitItem">
-                            <p class="number">0</p>
+                            <p class="number eth_use_amount">0</p>
                             <p class="unit">ETH</p>
                         </div>
                     </div>
@@ -139,11 +139,11 @@
                     <p class="title">月度理财</p>
                     <div class="digits">
                         <div class="digitItem">
-                            <p class="number">0</p>
+                            <p class="number btc_finance_amount">0</p>
                             <p class="unit">BTC</p>
                         </div>
                         <div class="digitItem">
-                            <p class="number">0</p>
+                            <p class="number eth_finance_amount">0</p>
                             <p class="unit">ETH</p>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                                 <p class="title">预计年利率</p>
                                 <div class="digits digitsTotal">
                                     <div class="digitItem">
-                                        <p class="number number_b">5.0%</p>
+                                        <p class="number number_b btc_inerest">5.0%</p>
                                     </div>
                                 </div>
                             </li>
@@ -174,7 +174,7 @@
                                 <p class="title">已存入</p>
                                 <div class="digits">
                                     <div class="digitItem">
-                                        <p class="number">0</p>
+                                        <p class="number btc_finance_amount">0</p>
                                         <p class="unit">BTC</p>
                                     </div>
                                 </div>
@@ -275,7 +275,7 @@
                                 <p class="title">预计日利率</p>
                                 <div class="digits digitsTotal">
                                     <div class="digitItem">
-                                        <p class="number number_b">0.01%</p>
+                                        <p class="number number_b eth_inerest">0.01%</p>
                                     </div>
                                 </div>
                             </li>
@@ -283,7 +283,7 @@
                                 <p class="title">已存入</p>
                                 <div class="digits">
                                     <div class="digitItem">
-                                        <p class="number">0</p>
+                                        <p class="number eth_finance_amount">0</p>
                                         <p class="unit">ETH</p>
                                     </div>
                                 </div>
@@ -554,10 +554,37 @@ $(function(){
     $.getJSON("/investment/list",function(json) {
         console.log(json)
     });
-
+    var btc_use_amount = 0,
+        eth_use_amount = 0,
+        btc_finance_amount = 0,
+        eth_finance_amount = 0;
     $.getJSON("/coin/list",{coin:"btc"},function(json) {
-        $(".btc_amount").html(json.data.amount)
-        console.log(json)
+        btc_use_amount = json.data[0].amount;
+        $(".btc_use_amount").html(json.data[0].amount);
+        $.getJSON("/investment/summary",function(json) {
+            var summary = 1;
+            $(".btc_finance_amount").html(summary);
+            $(".btc_amount").html(btc_use_amount+summary);
+            // console.log(json)            
+        });
+    });
+
+    $.getJSON("/coin/list",{coin:"eth"},function(json) {
+        eth_use_amount = json.data[0].amount;
+        $(".eth_use_amount").html(json.data[0].amount)
+        $.getJSON("/investment/summary",function(json) {
+            var summary = 1;
+            $(".eth_finance_amount").html(summary);
+            $(".eth_amount").html(eth_use_amount+summary);           
+        });
+    });
+
+    $.getJSON("/salelist/Investmen/btc",function(json) {
+        $(".btc_inerest").html(json.result[0].inerest+"%")
+    });
+
+    $.getJSON("/salelist/Investmen/eth",function(json) {
+        $(".eth_inerest").html(json.result[0].inerest+"%")
     });
 });
 </script>
