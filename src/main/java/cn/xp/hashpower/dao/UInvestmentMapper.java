@@ -27,7 +27,7 @@ public interface UInvestmentMapper extends BaseMapper{
     @Select("Call SBuyMachine(#{arg0},#{arg1},#{arg2},0 )")
     int BuyInvestment(int userId, int mid, BigDecimal amount);*/
 
-    @Select("SELECT u.amount,u.tradeid,it.tradeId,u.invest_date,u.end_date,u.`status`,it.cointype,it.`enable` FROM investment_item AS it ,u_investment AS u " +
+    @Select("SELECT u.amount,u.tradeid,it.tradeId,u.invest_date,u.end_date,u.`status`,it.cointype,it.`enable`,it.interest FROM investment_item AS it ,u_investment AS u " +
             " WHERE it.tradeId = u.tradeid AND u.userid= #{arg0}")
     List<UInvestment> selectUInvestment(int uid);
 

@@ -8,7 +8,7 @@ public class InvestMentItem {
     private  String saledesc;
     private int duration;
     //年化收益
-    private int  interest;
+    private double  interest;
     private int cointype;
 
     private double limited;

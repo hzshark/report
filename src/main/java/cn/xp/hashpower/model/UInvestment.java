@@ -19,5 +19,8 @@ public class UInvestment {
     private String end_date;
 
     private int cointype;
+
+    //收益
+    private double interest;
     //private InvestMentItem investMentContract;
 }
